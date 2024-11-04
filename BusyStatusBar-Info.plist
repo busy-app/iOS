@@ -10,6 +10,8 @@
 	<array>
 		<string>JetBrainsMono-Regular.ttf</string>
 		<string>PPNeueMontreal-Regular.ttf</string>
+		<string>PPNeueMontreal-Medium.ttf</string>
+		<string>PPNeueMontreal-SemiBold.ttf</string>
 	</array>
 	<key>UIBackgroundModes</key>
 	<array>
