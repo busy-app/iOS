@@ -154,7 +154,7 @@ struct DeviceView: View {
                                 VStack(alignment: .leading, spacing: 4) {
                                     Text("WIFI")
                                         .font(.ppNeueMontrealRegular(size: 10))
-                                        .foregroundStyle(.invertBlack)
+                                        .foregroundStyle(.blackInvert)
 
                                     Text(wifiStateText)
                                         .lineLimit(1)
@@ -162,7 +162,7 @@ struct DeviceView: View {
                                         .font(.ppNeueMontrealRegular(size: 14))
                                         .foregroundStyle(
                                             wifiState == .connected
-                                            ? .wiFiPrimary
+                                            ? .wifiPrimary
                                             : .neutralTertiary
                                         )
                                 }
@@ -196,7 +196,7 @@ struct DeviceView: View {
                                 VStack(alignment: .leading, spacing: 4) {
                                     Text("BLUETOOTH")
                                         .font(.ppNeueMontrealRegular(size: 10))
-                                        .foregroundStyle(.invertBlack)
+                                        .foregroundStyle(.blackInvert)
 
                                     Text(bluetoothStateText)
                                         .lineLimit(1)
@@ -246,7 +246,7 @@ struct DeviceView: View {
                 .padding(.top, 26)
                 .padding(.horizontal, 14)
             }
-            .background(.invertWhite)
+            .background(.whiteInvert)
             .navigationDestination(for: Destination.self) { destination in
                 switch destination {
                 case .settings: SettingsView()
@@ -288,7 +288,7 @@ struct DeviceView: View {
             var body: some View {
                 HStack {
                     Text(name)
-                        .foregroundStyle(.invertBlack)
+                        .foregroundStyle(.blackInvert)
                     Spacer()
                     Text(value)
                         .foregroundStyle(.neutralSecondary)

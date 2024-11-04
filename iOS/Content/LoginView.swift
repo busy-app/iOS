@@ -76,7 +76,7 @@ struct LoginView: View {
             .padding(.vertical, 46)
         }
         .padding(.horizontal, 24)
-        .background(.invertWhite)
+        .background(.whiteInvert)
     }
 
     struct HorizontalLine: View {
@@ -95,7 +95,7 @@ struct LoginView: View {
             }
             .frame(minHeight: 60)
             .frame(maxWidth: .infinity)
-            .background(.blackTertiary)
+            .background(.transparentBlackInvertQuaternary)
             .cornerRadius(4)
         }
     }
@@ -134,11 +134,11 @@ private extension View {
             .font(.jetBrainsMonoRegular(size: 16))
             .padding(.horizontal, 12)
             .padding(.vertical, 14)
-            .background(.blackQuaternary)
+            .background(.neutralSeptenary)
             .cornerRadius(8)
             .overlay {
                 RoundedRectangle(cornerRadius: 8)
-                    .stroke(.blackSecondary)
+                    .stroke(.neutralQuinary)
             }
     }
 }

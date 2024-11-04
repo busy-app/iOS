@@ -12,7 +12,7 @@ struct ConnectView: View {
                 .renderingMode(.template)
                 .resizable()
                 .scaledToFit()
-                .foregroundStyle(.invertBlack)
+                .foregroundStyle(.blackInvert)
                 .padding(44)
 
             VStack {

@@ -71,7 +71,7 @@ struct SettingsView: View {
             }
             .padding(12)
             .font(.jetBrainsMonoRegular(size: 16))
-            .foregroundStyle(.invertBlack)
+            .foregroundStyle(.blackInvert)
         }
     }
 }

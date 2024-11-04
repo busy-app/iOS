@@ -55,7 +55,7 @@ struct AppsView: View {
             .padding(.horizontal, 14)
             .padding(.bottom, 40)
         }
-        .background(.invertWhite)
+        .background(.whiteInvert)
     }
 
     struct Row: View {
@@ -75,10 +75,10 @@ struct AppsView: View {
                 HStack {
                     Image(icon)
                         .renderingMode(.template)
-                        .foregroundColor(.invertBlack)
+                        .foregroundColor(.blackInvert)
 
                     Text(name)
-                        .foregroundColor(.invertBlack)
+                        .foregroundColor(.blackInvert)
                         .font(.ppNeueMontrealRegular(size: 18))
 
                     Spacer()

@@ -22,7 +22,7 @@ struct FilledButton<Label: View>: View {
                 Spacer()
                 label()
                     .font(.ppNeueMontrealRegular(size: 16))
-                    .foregroundColor(.onColorWhite)
+                    .foregroundColor(.whiteOnContent)
                     .padding(.vertical, 14)
                 Spacer()
             }

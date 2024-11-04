@@ -20,12 +20,12 @@ struct GrayButton<Label: View>: View {
                 Spacer(minLength: 0)
                 label()
                     .font(.ppNeueMontrealRegular(size: 18))
-                    .foregroundColor(.invertBlack)
+                    .foregroundColor(.blackInvert)
                     .padding(.horizontal, 8)
                 Spacer(minLength: 0)
             }
             .frame(minHeight: 56)
-            .background(.blackQuaternary)
+            .background(.transparentBlackInvertQuaternary)
             .cornerRadius(8)
         }
     }

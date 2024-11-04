@@ -40,7 +40,7 @@ struct MainView: View {
                     .tag(Tab.apps)
             }
             .padding(.top, 4)
-            .toolbarBackground(.backgroundTertiary, for: .tabBar)
+            .toolbarBackground(.neutralSenary, for: .tabBar)
             .toolbarBackground(.visible, for: .tabBar)
         }
         .accentColor(.primary)
