@@ -4,27 +4,15 @@ import ManagedSettings
 import FamilyControls
 
 struct BusyApp: View {
-    @State var isOnToggle: Bool = false
-    @AppStorage("isOn") var isOn: Bool = false
+    var authorizationCenter: AuthorizationCenter { .shared }
+    var managedSettingsStore: ManagedSettingsStore { .init() }
 
-    @State var authorizationCenter = AuthorizationCenter.shared
     var isAuthorized: Bool {
         authorizationCenter.authorizationStatus == .approved
     }
 
-    var managedSettingsStore: ManagedSettingsStore { .init() }
-
-    @State var isChoosingApps: Bool = false
-    @State var selection = FamilyActivitySelection()
-
-    @AppStorage("applications")
-    var applications: Set<ApplicationToken> = .init()
-
-    @AppStorage("categories")
-    var categories: Set<ActivityCategoryToken> = .init()
-
-    @AppStorage("domains")
-    var domains: Set<WebDomainToken> = .init()
+    @State var isOnToggle: Bool = false
+    @AppStorage("isOn") var isOn: Bool = false
 
     var body: some View {
         VStack(spacing: 40) {
@@ -43,29 +31,7 @@ struct BusyApp: View {
                 }
 
                 isOn = newValue
-
                 isOn ? enableShield() : disableShield()
-            }
-
-            Button("Authorize") {
-                authorize()
-            }
-
-            Button("Select Apps") {
-                isChoosingApps = true
-            }
-            .familyActivityPicker(
-                isPresented: $isChoosingApps,
-                selection: $selection
-            )
-            .onChange(of: selection) { newSelection in
-                self.applications = selection.applicationTokens
-                self.categories = selection.categoryTokens
-                self.domains = selection.webDomainTokens
-
-                if isOn {
-                    enableShield()
-                }
             }
         }
         .padding(.horizontal, 24)
@@ -74,27 +40,27 @@ struct BusyApp: View {
             if !isAuthorized {
                 authorize()
             }
+            if isOn {
+                enableShield()
+            }
         }
     }
 
     func authorize() {
         Task {
             do {
-                try await authorizationCenter
+                try await AuthorizationCenter
+                    .shared
                     .requestAuthorization(for: .individual)
             } catch {
-                print(error)
+                print("authorization error: \(error)")
             }
         }
     }
 
     func enableShield() {
-        managedSettingsStore.shield.applications = applications
-        managedSettingsStore.shield.applicationCategories =
-            .specific(categories, except: [])
-        managedSettingsStore.shield.webDomains = domains
-        managedSettingsStore.shield.webDomainCategories =
-            .specific(categories, except: [])
+        managedSettingsStore.shield.applicationCategories = .all(except: [])
+        managedSettingsStore.shield.webDomainCategories = .all(except: [])
     }
 
     func disableShield() {
