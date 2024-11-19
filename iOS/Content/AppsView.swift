@@ -59,7 +59,7 @@ struct AppsView: View {
     }
 
     struct Row: View {
-        let id: BusyApp
+        let id: SelectedApp
         let icon: String
         let name: String
         let image: String
@@ -68,7 +68,7 @@ struct AppsView: View {
 
         @Environment(\.dismiss) var dismiss
 
-        @AppStorage("selectedApp") private var selectedApp: BusyApp = .busy
+        @AppStorage("selectedApp") private var selectedApp: SelectedApp = .busy
 
         var body: some View {
             VStack(spacing: 20) {
