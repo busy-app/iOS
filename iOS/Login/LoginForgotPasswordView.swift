@@ -7,7 +7,6 @@ extension LoginFlow {
         @State private var code = ["", "", "", "", "", ""]
 
         let email: String
-        let timeLeft: String
 
         private var actionText: String {
             switch codeFieldState {
@@ -36,15 +35,17 @@ extension LoginFlow {
 
                 CodeField(
                     code: $code,
-                    timeLeft: timeLeft,
+                    timeLeft: "9:55",
                     label: "Password reset code:",
                     forceOpenKeyboard: true
                 )
                 .frame(height: 100)
                 .padding(.top, 16)
 
-                FilledButton(actionText, action: {})
-                    .padding(.top, 16)
+                FilledButton(actionText) {
+                    // TODO: navigation
+                }
+                .padding(.top, 16)
 
                 VStack(alignment: .leading, spacing: 0) {
                     VStack(alignment: .leading, spacing: 2) {
@@ -91,16 +92,12 @@ extension LoginFlow {
 struct LoginForgotPassword_Previews: PreviewProvider {
     static var previews: some View {
         @State var email: String = "user.email@gmail.com"
-        @State var timeLeft: String = "9:55"
 
         Group {
             ForEach(CodeFieldState.allCases, id: \.self) { codeFieldState in
                 ForEach(ButtonState.allCases, id: \.self) { buttonState in
                     NavigationStack {
-                        LoginFlow.LoginForgotPasswordView(
-                            email: email,
-                            timeLeft: timeLeft
-                        )
+                        LoginFlow.LoginForgotPasswordView(email: email)
                     }
                     .environment(\.codeFieldState, codeFieldState)
                     .environment(\.buttonState, buttonState)

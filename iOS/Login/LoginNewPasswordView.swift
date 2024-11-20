@@ -58,8 +58,10 @@ extension LoginFlow {
                     .submitLabel(.done)
                 }
 
-                FilledButton("Submit", action: {})
-                    .padding(.top, 16)
+                FilledButton("Submit") {
+                    // TODO: navigation
+                }
+                .padding(.top, 16)
 
                 Text("Back to login")
                     .font(.labelPrimary)

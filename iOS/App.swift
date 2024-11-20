@@ -4,12 +4,16 @@ import SwiftUI
 struct App: SwiftUI.App {
     var body: some Scene {
         WindowGroup {
-            BusyApp()
+            if isDevBuild {
+                LoginFlow()
+            } else {
+                BusyApp()
+            }
         }
     }
 }
 
-var isDemoBuild: Bool {
+var isDevBuild: Bool {
     #if DEBUG
     true
     #else
