@@ -33,14 +33,10 @@ extension LoginFlow {
                 Spacer()
             }
             .padding(16)
-            .navAppearance {
-                LeadingToolbarItems {
-                    NavBarBack(action: {})
-                }
+            .topBar {
+                NavigationBackButton()
 
-                PrincipalToolbarItems {
-                    NavBarTitle("Create Account?")
-                }
+                NavigationTitle("Create Account?")
             }
         }
     }
