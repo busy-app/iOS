@@ -30,7 +30,7 @@ struct LoadingAnimation: View {
                 )
             )
             .rotationEffect(.degrees(degree))
-            .onAppear{
+            .onAppear {
                 withAnimation(rotateAnimation) {
                     degree += 360
                 }

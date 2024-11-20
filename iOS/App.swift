@@ -5,7 +5,7 @@ struct App: SwiftUI.App {
     var body: some Scene {
         WindowGroup {
             if isDevBuild {
-                Text("Dev build")
+                LoginFlow()
             } else {
                 RootView()
             }
