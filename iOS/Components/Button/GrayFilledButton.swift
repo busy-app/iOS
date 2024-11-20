@@ -68,7 +68,7 @@ extension GrayFilledButton where Label == EmptyView {
     ) {
         self.action = action
         self.icon = icon
-        self.label = {  EmptyView() }
+        self.label = { EmptyView() }
     }
 }
 
@@ -86,7 +86,7 @@ struct GrayFilledButton_Preview: PreviewProvider {
                         icon: .googleLogo,
                         "Continue with Google"
                     ) {}
-                        .frame(width: 300)
+                    .frame(width: 300)
 
                     GrayFilledButton(
                         icon: .appleLogo
