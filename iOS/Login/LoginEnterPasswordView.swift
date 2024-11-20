@@ -43,8 +43,10 @@ extension LoginFlow {
                     .onSubmit { focusState = nil }
                 }
 
-                FilledButton("Log In", action: {})
-                    .padding(.top, 16)
+                FilledButton("Log In") {
+                    // TODO: navigation
+                }
+                .padding(.top, 16)
 
                 Text("Forgot password?")
                     .font(.labelPrimary)

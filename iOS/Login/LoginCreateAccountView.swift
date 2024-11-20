@@ -2,6 +2,8 @@ import SwiftUI
 
 extension LoginFlow {
     struct LoginCreateAccountView: View {
+        @Environment(\.path) private var path
+
         let email: String
 
         var body: some View {
@@ -27,8 +29,10 @@ extension LoginFlow {
                 }
                 .frame(height: 260)
 
-                FilledButton("Create Account", action: {})
-                    .padding(.top, 32)
+                FilledButton("Create Account") {
+                    path.append(Destination.createPassword(email: email))
+                }
+                .padding(.top, 32)
 
                 Spacer()
             }

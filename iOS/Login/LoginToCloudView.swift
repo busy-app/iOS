@@ -2,6 +2,8 @@ import SwiftUI
 
 extension LoginFlow {
     struct LoginToCloudView: View {
+        @Environment(\.path) private var path
+
         @State private var email = ""
 
         var body: some View {
@@ -27,12 +29,27 @@ extension LoginFlow {
                     placeholder: "Email",
                     icon: .avatar,
                     caption: .none,
-                    type: UIKeyboardType.emailAddress
+                    type: .emailAddress
                 )
                 .padding(.top, 16)
 
-                FilledButton("Continue with email", action: {})
-                    .padding(.top, 32)
+                FilledButton("Continue with email") {
+                    switch email {
+                    case "1":
+                        path.append(Destination.createPassword(email: email))
+                    case "2":
+                        path.append(Destination.enterPassword(email: email))
+                    case "3":
+                        path.append(Destination.forgotPassword(email: email))
+                    case "4":
+                        path.append(Destination.newPassword(email: email))
+                    case "5":
+                        path.append(Destination.verifyEmail(email: email))
+                    default:
+                        path.append(Destination.createAccount(email: "@me.com"))
+                    }
+                }
+                .padding(.top, 32)
 
                 HStack {
                     Rectangle()

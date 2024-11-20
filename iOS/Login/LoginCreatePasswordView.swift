@@ -2,6 +2,9 @@ import SwiftUI
 
 extension LoginFlow {
     struct LoginCreatePasswordView: View {
+        @Environment(\.path) private var path
+        @Environment(\.dismiss) private var dismiss
+
         @FocusState private var focusState: Field?
 
         @State private var password = ""
@@ -58,14 +61,20 @@ extension LoginFlow {
                     .submitLabel(.done)
                 }
 
-                FilledButton("Submit", action: {})
-                    .padding(.top, 16)
+                FilledButton("Submit") {
+                    path.append(Destination.verifyEmail(email: email))
+                }
+                .padding(.top, 16)
 
-                Text("Back to login")
-                    .font(.labelPrimary)
-                    .foregroundColor(.brandPrimary)
-                    .frame(maxWidth: .infinity, alignment: .trailing)
-                    .padding(.top, 40)
+                Button {
+                    dismiss()
+                } label: {
+                    Text("Back to login")
+                        .font(.labelPrimary)
+                        .foregroundColor(.brandPrimary)
+                        .frame(maxWidth: .infinity, alignment: .trailing)
+                        .padding(.top, 40)
+                }
 
                 Spacer()
             }
