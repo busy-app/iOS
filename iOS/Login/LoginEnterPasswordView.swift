@@ -57,14 +57,10 @@ extension LoginFlow {
             .ignoresSafeArea(.keyboard)
             .onAppear { focusState = .password}
             .padding(16)
-            .navAppearance {
-                LeadingToolbarItems {
-                    NavBarBack(action: {})
-                }
+            .topBar {
+                NavigationBackButton()
 
-                PrincipalToolbarItems {
-                    NavBarTitle("Enter password")
-                }
+                NavigationTitle("Enter password")
             }
         }
     }

@@ -79,14 +79,10 @@ extension LoginFlow {
                 .opacity(codeFieldState == .expired ? 0 : 1)
             }
             .padding(16)
-            .navAppearance {
-                LeadingToolbarItems {
-                    NavBarBack(action: {})
-                }
+            .topBar {
+                NavigationBackButton()
 
-                PrincipalToolbarItems {
-                    NavBarTitle("Verify your email")
-                }
+                NavigationTitle("Verify your email")
             }
         }
     }
