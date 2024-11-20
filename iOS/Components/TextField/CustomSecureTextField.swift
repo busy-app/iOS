@@ -47,8 +47,7 @@ struct CustomSecureTextField: View {
                                 .font(.labelPrimary)
                                 .foregroundColor(.neutralTertiary)
                         )
-                    }
-                    else {
+                    } else {
                         SecureField(
                             "",
                             text: $text,

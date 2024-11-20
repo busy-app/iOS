@@ -77,7 +77,6 @@ struct SymbolField: UIViewRepresentable {
         return toolbar
     }
 
-
     class Coordinator: NSObject, UITextFieldDelegate {
         let parent: SymbolField
 

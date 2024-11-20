@@ -1,13 +1,13 @@
 import SwiftUI
 
 extension LoginFlow {
-    struct LoginForgotPassword: View {
+    struct LoginForgotPasswordView: View {
         @Environment(\.codeFieldState) private var codeFieldState
 
         @State private var code = ["", "", "", "", "", ""]
 
         let email: String
-        let leftTime: String
+        let timeLeft: String
 
         private var actionText: String {
             switch codeFieldState {
@@ -36,7 +36,7 @@ extension LoginFlow {
 
                 CodeField(
                     code: $code,
-                    leftTime: leftTime,
+                    timeLeft: timeLeft,
                     label: "Password reset code:",
                     forceOpenKeyboard: true
                 )
@@ -95,15 +95,15 @@ extension LoginFlow {
 struct LoginForgotPassword_Previews: PreviewProvider {
     static var previews: some View {
         @State var email: String = "user.email@gmail.com"
-        @State var leftTime: String = "9:55"
+        @State var timeLeft: String = "9:55"
 
         Group {
             ForEach(CodeFieldState.allCases, id: \.self) { codeFieldState in
                 ForEach(ButtonState.allCases, id: \.self) { buttonState in
                     NavigationStack {
-                        LoginFlow.LoginForgotPassword(
+                        LoginFlow.LoginForgotPasswordView(
                             email: email,
-                            leftTime: leftTime
+                            timeLeft: timeLeft
                         )
                     }
                     .environment(\.codeFieldState, codeFieldState)

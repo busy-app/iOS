@@ -7,7 +7,7 @@ extension LoginFlow {
         @State private var code = ["", "", "", "", "", ""]
 
         let email: String
-        let leftTime: String
+        let timeLeft: String
 
         private var actionText: String {
             switch codeFieldState {
@@ -36,7 +36,7 @@ extension LoginFlow {
 
                 CodeField(
                     code: $code,
-                    leftTime: leftTime,
+                    timeLeft: timeLeft,
                     label: "Verification code:",
                     forceOpenKeyboard: true
                 )
@@ -95,7 +95,7 @@ extension LoginFlow {
 struct LoginVerifyEmail_Previews: PreviewProvider {
     static var previews: some View {
         @State var email: String = "user.email@gmail.com"
-        @State var leftTime: String = "9:55"
+        @State var timeLeft: String = "9:55"
 
         Group {
             ForEach(CodeFieldState.allCases, id: \.self) { codeFieldState in
@@ -103,7 +103,7 @@ struct LoginVerifyEmail_Previews: PreviewProvider {
                     NavigationStack {
                         LoginFlow.LoginVerifyEmailView(
                             email: email,
-                            leftTime: leftTime
+                            timeLeft: timeLeft
                         )
                     }
                     .environment(\.codeFieldState, codeFieldState)

@@ -6,18 +6,18 @@ struct CodeField: View {
     @FocusState private var focusState: Int?
 
     @Binding var code: [String]
-    let leftTime: String // NOTE: Maybe use TimeInterval here
+    let timeLeft: String // NOTE: Maybe use TimeInterval here
     let label: String
     let forceOpenKeyboard: Bool // NOTE: Not sure if this is necessary
 
     init(
         code: Binding<[String]>,
-        leftTime: String,
+        timeLeft: String,
         label: String,
         forceOpenKeyboard: Bool = false
     ) {
         self._code = code
-        self.leftTime = leftTime
+        self.timeLeft = timeLeft
         self.label = label
         self.forceOpenKeyboard = forceOpenKeyboard
     }
@@ -38,7 +38,7 @@ struct CodeField: View {
 
                     Spacer()
 
-                    Text("Expires in \(leftTime)")
+                    Text("Expires in \(timeLeft)")
                 }
                 .font(.labelSecondary)
                 .foregroundColor(.blackInvert)
@@ -80,7 +80,7 @@ struct CodeField_Previews: PreviewProvider {
             ForEach(CodeFieldState.allCases, id: \.self) { state in
                 CodeField(
                     code: $code,
-                    leftTime: "9:59",
+                    timeLeft: "9:59",
                     label: "Verification code"
                 )
                 .frame(height: 100)

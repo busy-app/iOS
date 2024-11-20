@@ -12,7 +12,7 @@ extension View {
 
     func navAppearance<Content>(
         @ToolbarContentBuilder toolbar: () -> Content
-    ) -> some View where Content : ToolbarContent {
+    ) -> some View where Content: ToolbarContent {
         self
             .navAppearance()
             .toolbar(content: toolbar)
