@@ -8,18 +8,22 @@ class ShieldConfigurationExtension: ShieldConfigurationDataSource {
     ) -> ShieldConfiguration {
         .init(
             backgroundBlurStyle: nil,
-            backgroundColor: nil,
-            icon: nil,
+            backgroundColor: .background,
+            icon: .blocked,
             title: .init(
-                text: "\(name) locked by Busy App",
-                color: .red
+                text: "Blocked by BUSY",
+                color: .label
             ),
             subtitle: .init(
-                text: "Disable Busy Mode to unlock",
-                color: .white
+                text:
+                    """
+                    You can’t use \(name) while BUSY is active. 
+                    To unblock: open BUSY app ➔ press ‘STOP’.
+                    """,
+                color: .label
             ),
-            primaryButtonLabel: nil,
-            primaryButtonBackgroundColor: nil,
+            primaryButtonLabel: .init(text: "OK", color: .white),
+            primaryButtonBackgroundColor: .buttonBackground,
             secondaryButtonLabel: nil
         )
     }
@@ -34,7 +38,7 @@ class ShieldConfigurationExtension: ShieldConfigurationDataSource {
         shielding application: Application,
         in category: ActivityCategory
     ) -> ShieldConfiguration {
-        configuration(shielding: category.name)
+        configuration(shielding: application.name)
     }
 
     override func configuration(
