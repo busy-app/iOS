@@ -8,6 +8,7 @@
 	<false/>
 	<key>UIAppFonts</key>
 	<array>
+		<string>pragmatica-next_vf.ttf</string>
 		<string>JetBrainsMono-Regular.ttf</string>
 		<string>PPNeueMontreal-Regular.ttf</string>
 		<string>PPNeueMontreal-Medium.ttf</string>
