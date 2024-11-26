@@ -40,10 +40,15 @@ struct BusyApp: View {
 
                 VStack(spacing: 0) {
                     ZStack {
+                        if isOn {
+                            ActiveTimer(timer: $timer)
+                        }
+
                         TimePicker(
                             minute: $minute,
                             second: $second
                         )
+                        .opacity(!isOn ? 1 : 0)
                     }
                     .font(.pragmaticaNextVF(size: 100))
                     .frame(maxHeight: .infinity)
