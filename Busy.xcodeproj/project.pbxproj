@@ -9,9 +9,9 @@
 /* Begin PBXBuildFile section */
 		8B5AB1422CEC085200211DA5 /* ManagedSettings.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B5AB1412CEC085100211DA5 /* ManagedSettings.framework */; };
 		8B5AB1442CEC085200211DA5 /* ManagedSettingsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B5AB1432CEC085200211DA5 /* ManagedSettingsUI.framework */; };
-		8B5AB14C2CEC085200211DA5 /* BusyAppShield.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 8B5AB13F2CEC085100211DA5 /* BusyAppShield.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		8B5AB14C2CEC085200211DA5 /* BusyShield.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 8B5AB13F2CEC085100211DA5 /* BusyShield.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		8B5AB1572CEC0BD000211DA5 /* ManagedSettings.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B5AB1412CEC085100211DA5 /* ManagedSettings.framework */; };
-		8B5AB15F2CEC0BD000211DA5 /* BusyAppShieldAction.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 8B5AB1562CEC0BD000211DA5 /* BusyAppShieldAction.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		8B5AB15F2CEC0BD000211DA5 /* BusyShieldAction.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 8B5AB1562CEC0BD000211DA5 /* BusyShieldAction.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -20,28 +20,28 @@
 			containerPortal = 8B638DC62C610E9400C3458C /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 8B5AB13E2CEC085100211DA5;
-			remoteInfo = BusyAppShield;
+			remoteInfo = BusyShield;
 		};
 		8B5AB15D2CEC0BD000211DA5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 8B638DC62C610E9400C3458C /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 8B5AB1552CEC0BD000211DA5;
-			remoteInfo = BusyAppShieldAction;
+			remoteInfo = BusyShieldAction;
 		};
 		8B638DDF2C610E9500C3458C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 8B638DC62C610E9400C3458C /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 8B638DCD2C610E9400C3458C;
-			remoteInfo = BusyStatusBar;
+			remoteInfo = Busy;
 		};
 		8B638DE92C610E9500C3458C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 8B638DC62C610E9400C3458C /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 8B638DCD2C610E9400C3458C;
-			remoteInfo = BusyStatusBar;
+			remoteInfo = Busy;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -52,8 +52,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				8B5AB15F2CEC0BD000211DA5 /* BusyAppShieldAction.appex in Embed Foundation Extensions */,
-				8B5AB14C2CEC085200211DA5 /* BusyAppShield.appex in Embed Foundation Extensions */,
+				8B5AB15F2CEC0BD000211DA5 /* BusyShieldAction.appex in Embed Foundation Extensions */,
+				8B5AB14C2CEC085200211DA5 /* BusyShield.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -61,15 +61,15 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		8B5AB13F2CEC085100211DA5 /* BusyAppShield.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = BusyAppShield.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		8B5AB13F2CEC085100211DA5 /* BusyShield.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = BusyShield.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B5AB1412CEC085100211DA5 /* ManagedSettings.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ManagedSettings.framework; path = System/Library/Frameworks/ManagedSettings.framework; sourceTree = SDKROOT; };
 		8B5AB1432CEC085200211DA5 /* ManagedSettingsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ManagedSettingsUI.framework; path = System/Library/Frameworks/ManagedSettingsUI.framework; sourceTree = SDKROOT; };
-		8B5AB1562CEC0BD000211DA5 /* BusyAppShieldAction.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = BusyAppShieldAction.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		8B638DCE2C610E9400C3458C /* BusyStatusBar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BusyStatusBar.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		8B638DDE2C610E9500C3458C /* BusyStatusBarTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BusyStatusBarTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		8B638DE82C610E9500C3458C /* BusyStatusBarUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BusyStatusBarUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		8B638DFD2C61195E00C3458C /* BusyStatusBar.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BusyStatusBar.entitlements; sourceTree = "<group>"; };
-		8BD9D7402C61480C0056FFC7 /* BusyStatusBar-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "BusyStatusBar-Info.plist"; sourceTree = "<group>"; };
+		8B5AB1562CEC0BD000211DA5 /* BusyShieldAction.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = BusyShieldAction.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		8B638DCE2C610E9400C3458C /* Busy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Busy.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8B638DDE2C610E9500C3458C /* BusyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BusyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8B638DE82C610E9500C3458C /* BusyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BusyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8B638DFD2C61195E00C3458C /* Busy.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Busy.entitlements; sourceTree = "<group>"; };
+		8BD9D7402C61480C0056FFC7 /* Busy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Busy-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -78,20 +78,20 @@
 			membershipExceptions = (
 				Info.plist,
 			);
-			target = 8B5AB13E2CEC085100211DA5 /* BusyAppShield */;
+			target = 8B5AB13E2CEC085100211DA5 /* BusyShield */;
 		};
 		8B5AB1602CEC0BD000211DA5 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
 			);
-			target = 8B5AB1552CEC0BD000211DA5 /* BusyAppShieldAction */;
+			target = 8B5AB1552CEC0BD000211DA5 /* BusyShieldAction */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		8B5AB1452CEC085200211DA5 /* BusyAppShield */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (8B5AB14D2CEC085200211DA5 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = BusyAppShield; sourceTree = "<group>"; };
-		8B5AB1582CEC0BD000211DA5 /* BusyAppShieldAction */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (8B5AB1602CEC0BD000211DA5 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = BusyAppShieldAction; sourceTree = "<group>"; };
+		8B5AB1452CEC085200211DA5 /* BusyShield */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (8B5AB14D2CEC085200211DA5 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = BusyShield; sourceTree = "<group>"; };
+		8B5AB1582CEC0BD000211DA5 /* BusyShieldAction */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (8B5AB1602CEC0BD000211DA5 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = BusyShieldAction; sourceTree = "<group>"; };
 		8B638DD02C610E9400C3458C /* iOS */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = iOS; sourceTree = "<group>"; };
 		8B638DE12C610E9500C3458C /* Tests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Tests; sourceTree = "<group>"; };
 		8B638DEB2C610E9500C3458C /* UITests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = UITests; sourceTree = "<group>"; };
@@ -151,13 +151,13 @@
 		8B638DC52C610E9400C3458C = {
 			isa = PBXGroup;
 			children = (
-				8BD9D7402C61480C0056FFC7 /* BusyStatusBar-Info.plist */,
-				8B638DFD2C61195E00C3458C /* BusyStatusBar.entitlements */,
+				8BD9D7402C61480C0056FFC7 /* Busy-Info.plist */,
+				8B638DFD2C61195E00C3458C /* Busy.entitlements */,
 				8B638DD02C610E9400C3458C /* iOS */,
 				8B638DE12C610E9500C3458C /* Tests */,
 				8B638DEB2C610E9500C3458C /* UITests */,
-				8B5AB1452CEC085200211DA5 /* BusyAppShield */,
-				8B5AB1582CEC0BD000211DA5 /* BusyAppShieldAction */,
+				8B5AB1452CEC085200211DA5 /* BusyShield */,
+				8B5AB1582CEC0BD000211DA5 /* BusyShieldAction */,
 				8B5AB1402CEC085100211DA5 /* Frameworks */,
 				8B638DCF2C610E9400C3458C /* Products */,
 			);
@@ -166,11 +166,11 @@
 		8B638DCF2C610E9400C3458C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8B638DCE2C610E9400C3458C /* BusyStatusBar.app */,
-				8B638DDE2C610E9500C3458C /* BusyStatusBarTests.xctest */,
-				8B638DE82C610E9500C3458C /* BusyStatusBarUITests.xctest */,
-				8B5AB13F2CEC085100211DA5 /* BusyAppShield.appex */,
-				8B5AB1562CEC0BD000211DA5 /* BusyAppShieldAction.appex */,
+				8B638DCE2C610E9400C3458C /* Busy.app */,
+				8B638DDE2C610E9500C3458C /* BusyTests.xctest */,
+				8B638DE82C610E9500C3458C /* BusyUITests.xctest */,
+				8B5AB13F2CEC085100211DA5 /* BusyShield.appex */,
+				8B5AB1562CEC0BD000211DA5 /* BusyShieldAction.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -178,9 +178,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		8B5AB13E2CEC085100211DA5 /* BusyAppShield */ = {
+		8B5AB13E2CEC085100211DA5 /* BusyShield */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8B5AB14E2CEC085200211DA5 /* Build configuration list for PBXNativeTarget "BusyAppShield" */;
+			buildConfigurationList = 8B5AB14E2CEC085200211DA5 /* Build configuration list for PBXNativeTarget "BusyShield" */;
 			buildPhases = (
 				8B5AB13B2CEC085100211DA5 /* Sources */,
 				8B5AB13C2CEC085100211DA5 /* Frameworks */,
@@ -191,18 +191,18 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				8B5AB1452CEC085200211DA5 /* BusyAppShield */,
+				8B5AB1452CEC085200211DA5 /* BusyShield */,
 			);
-			name = BusyAppShield;
+			name = BusyShield;
 			packageProductDependencies = (
 			);
-			productName = BusyAppShield;
-			productReference = 8B5AB13F2CEC085100211DA5 /* BusyAppShield.appex */;
+			productName = BusyShield;
+			productReference = 8B5AB13F2CEC085100211DA5 /* BusyShield.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
-		8B5AB1552CEC0BD000211DA5 /* BusyAppShieldAction */ = {
+		8B5AB1552CEC0BD000211DA5 /* BusyShieldAction */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8B5AB1612CEC0BD000211DA5 /* Build configuration list for PBXNativeTarget "BusyAppShieldAction" */;
+			buildConfigurationList = 8B5AB1612CEC0BD000211DA5 /* Build configuration list for PBXNativeTarget "BusyShieldAction" */;
 			buildPhases = (
 				8B5AB1522CEC0BD000211DA5 /* Sources */,
 				8B5AB1532CEC0BD000211DA5 /* Frameworks */,
@@ -213,18 +213,18 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				8B5AB1582CEC0BD000211DA5 /* BusyAppShieldAction */,
+				8B5AB1582CEC0BD000211DA5 /* BusyShieldAction */,
 			);
-			name = BusyAppShieldAction;
+			name = BusyShieldAction;
 			packageProductDependencies = (
 			);
-			productName = BusyAppShieldAction;
-			productReference = 8B5AB1562CEC0BD000211DA5 /* BusyAppShieldAction.appex */;
+			productName = BusyShieldAction;
+			productReference = 8B5AB1562CEC0BD000211DA5 /* BusyShieldAction.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
-		8B638DCD2C610E9400C3458C /* BusyStatusBar */ = {
+		8B638DCD2C610E9400C3458C /* Busy */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8B638DF22C610E9500C3458C /* Build configuration list for PBXNativeTarget "BusyStatusBar" */;
+			buildConfigurationList = 8B638DF22C610E9500C3458C /* Build configuration list for PBXNativeTarget "Busy" */;
 			buildPhases = (
 				8B638DCA2C610E9400C3458C /* Sources */,
 				8B638DCB2C610E9400C3458C /* Frameworks */,
@@ -240,16 +240,16 @@
 			fileSystemSynchronizedGroups = (
 				8B638DD02C610E9400C3458C /* iOS */,
 			);
-			name = BusyStatusBar;
+			name = Busy;
 			packageProductDependencies = (
 			);
-			productName = BusyStatusBar;
-			productReference = 8B638DCE2C610E9400C3458C /* BusyStatusBar.app */;
+			productName = Busy;
+			productReference = 8B638DCE2C610E9400C3458C /* Busy.app */;
 			productType = "com.apple.product-type.application";
 		};
-		8B638DDD2C610E9500C3458C /* BusyStatusBarTests */ = {
+		8B638DDD2C610E9500C3458C /* BusyTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8B638DF52C610E9500C3458C /* Build configuration list for PBXNativeTarget "BusyStatusBarTests" */;
+			buildConfigurationList = 8B638DF52C610E9500C3458C /* Build configuration list for PBXNativeTarget "BusyTests" */;
 			buildPhases = (
 				8B638DDA2C610E9500C3458C /* Sources */,
 				8B638DDB2C610E9500C3458C /* Frameworks */,
@@ -263,16 +263,16 @@
 			fileSystemSynchronizedGroups = (
 				8B638DE12C610E9500C3458C /* Tests */,
 			);
-			name = BusyStatusBarTests;
+			name = BusyTests;
 			packageProductDependencies = (
 			);
-			productName = BusyStatusBarTests;
-			productReference = 8B638DDE2C610E9500C3458C /* BusyStatusBarTests.xctest */;
+			productName = BusyTests;
+			productReference = 8B638DDE2C610E9500C3458C /* BusyTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		8B638DE72C610E9500C3458C /* BusyStatusBarUITests */ = {
+		8B638DE72C610E9500C3458C /* BusyUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8B638DF82C610E9500C3458C /* Build configuration list for PBXNativeTarget "BusyStatusBarUITests" */;
+			buildConfigurationList = 8B638DF82C610E9500C3458C /* Build configuration list for PBXNativeTarget "BusyUITests" */;
 			buildPhases = (
 				8B638DE42C610E9500C3458C /* Sources */,
 				8B638DE52C610E9500C3458C /* Frameworks */,
@@ -286,11 +286,11 @@
 			fileSystemSynchronizedGroups = (
 				8B638DEB2C610E9500C3458C /* UITests */,
 			);
-			name = BusyStatusBarUITests;
+			name = BusyUITests;
 			packageProductDependencies = (
 			);
-			productName = BusyStatusBarUITests;
-			productReference = 8B638DE82C610E9500C3458C /* BusyStatusBarUITests.xctest */;
+			productName = BusyUITests;
+			productReference = 8B638DE82C610E9500C3458C /* BusyUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -322,7 +322,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 8B638DC92C610E9400C3458C /* Build configuration list for PBXProject "BusyStatusBar" */;
+			buildConfigurationList = 8B638DC92C610E9400C3458C /* Build configuration list for PBXProject "Busy" */;
 			compatibilityVersion = "Xcode 15.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -335,11 +335,11 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				8B638DCD2C610E9400C3458C /* BusyStatusBar */,
-				8B638DDD2C610E9500C3458C /* BusyStatusBarTests */,
-				8B638DE72C610E9500C3458C /* BusyStatusBarUITests */,
-				8B5AB13E2CEC085100211DA5 /* BusyAppShield */,
-				8B5AB1552CEC0BD000211DA5 /* BusyAppShieldAction */,
+				8B638DCD2C610E9400C3458C /* Busy */,
+				8B638DDD2C610E9500C3458C /* BusyTests */,
+				8B638DE72C610E9500C3458C /* BusyUITests */,
+				8B5AB13E2CEC085100211DA5 /* BusyShield */,
+				8B5AB1552CEC0BD000211DA5 /* BusyShieldAction */,
 			);
 		};
 /* End PBXProject section */
@@ -423,22 +423,22 @@
 /* Begin PBXTargetDependency section */
 		8B5AB14B2CEC085200211DA5 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 8B5AB13E2CEC085100211DA5 /* BusyAppShield */;
+			target = 8B5AB13E2CEC085100211DA5 /* BusyShield */;
 			targetProxy = 8B5AB14A2CEC085200211DA5 /* PBXContainerItemProxy */;
 		};
 		8B5AB15E2CEC0BD000211DA5 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 8B5AB1552CEC0BD000211DA5 /* BusyAppShieldAction */;
+			target = 8B5AB1552CEC0BD000211DA5 /* BusyShieldAction */;
 			targetProxy = 8B5AB15D2CEC0BD000211DA5 /* PBXContainerItemProxy */;
 		};
 		8B638DE02C610E9500C3458C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 8B638DCD2C610E9400C3458C /* BusyStatusBar */;
+			target = 8B638DCD2C610E9400C3458C /* Busy */;
 			targetProxy = 8B638DDF2C610E9500C3458C /* PBXContainerItemProxy */;
 		};
 		8B638DEA2C610E9500C3458C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 8B638DCD2C610E9400C3458C /* BusyStatusBar */;
+			target = 8B638DCD2C610E9400C3458C /* Busy */;
 			targetProxy = 8B638DE92C610E9500C3458C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -447,14 +447,14 @@
 		8B5AB14F2CEC085200211DA5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = BusyAppShield/BusyAppShield.entitlements;
+				CODE_SIGN_ENTITLEMENTS = BusyShield/BusyShield.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = SXH69675TZ;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = BusyAppShield/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = BusyAppShield;
+				INFOPLIST_FILE = BusyShield/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = BusyShield;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -463,7 +463,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = bar.busy.main.BusyAppShield;
+				PRODUCT_BUNDLE_IDENTIFIER = bar.busy.main.BusyShield;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -477,14 +477,14 @@
 		8B5AB1502CEC085200211DA5 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = BusyAppShield/BusyAppShield.entitlements;
+				CODE_SIGN_ENTITLEMENTS = BusyShield/BusyShield.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = SXH69675TZ;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = BusyAppShield/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = BusyAppShield;
+				INFOPLIST_FILE = BusyShield/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = BusyShield;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -493,7 +493,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = bar.busy.main.BusyAppShield;
+				PRODUCT_BUNDLE_IDENTIFIER = bar.busy.main.BusyShield;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -507,14 +507,14 @@
 		8B5AB1622CEC0BD000211DA5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = BusyAppShieldAction/BusyAppShieldAction.entitlements;
+				CODE_SIGN_ENTITLEMENTS = BusyShieldAction/BusyShieldAction.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = SXH69675TZ;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = BusyAppShieldAction/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = BusyAppShieldAction;
+				INFOPLIST_FILE = BusyShieldAction/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = BusyShieldAction;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -523,7 +523,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = bar.busy.main.BusyAppShieldAction;
+				PRODUCT_BUNDLE_IDENTIFIER = bar.busy.main.BusyShieldAction;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -537,14 +537,14 @@
 		8B5AB1632CEC0BD000211DA5 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = BusyAppShieldAction/BusyAppShieldAction.entitlements;
+				CODE_SIGN_ENTITLEMENTS = BusyShieldAction/BusyShieldAction.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = SXH69675TZ;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = BusyAppShieldAction/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = BusyAppShieldAction;
+				INFOPLIST_FILE = BusyShieldAction/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = BusyShieldAction;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -553,7 +553,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = bar.busy.main.BusyAppShieldAction;
+				PRODUCT_BUNDLE_IDENTIFIER = bar.busy.main.BusyShieldAction;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -688,7 +688,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = BusyStatusBar.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Busy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -696,8 +696,8 @@
 				DEVELOPMENT_TEAM = SXH69675TZ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "BusyStatusBar-Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Busy Status Bar";
+				INFOPLIST_FILE = "Busy-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = BUSY;
 				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "This will allow to connect the app to your Busy Status Bar";
 				INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription = "This will allow to connect the app to your Busy Status Bar";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -729,7 +729,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = BusyStatusBar.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Busy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -737,8 +737,8 @@
 				DEVELOPMENT_TEAM = SXH69675TZ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "BusyStatusBar-Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Busy Status Bar";
+				INFOPLIST_FILE = "Busy-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = BUSY;
 				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "This will allow to connect the app to your Busy Status Bar";
 				INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription = "This will allow to connect the app to your Busy Status Bar";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -783,7 +783,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BusyStatusBar.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/BusyStatusBar";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Busy.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Busy";
 			};
 			name = Debug;
 		};
@@ -805,7 +805,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BusyStatusBar.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/BusyStatusBar";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Busy.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Busy";
 			};
 			name = Release;
 		};
@@ -826,7 +826,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
-				TEST_TARGET_NAME = BusyStatusBar;
+				TEST_TARGET_NAME = Busy;
 			};
 			name = Debug;
 		};
@@ -847,14 +847,14 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
-				TEST_TARGET_NAME = BusyStatusBar;
+				TEST_TARGET_NAME = Busy;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		8B5AB14E2CEC085200211DA5 /* Build configuration list for PBXNativeTarget "BusyAppShield" */ = {
+		8B5AB14E2CEC085200211DA5 /* Build configuration list for PBXNativeTarget "BusyShield" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8B5AB14F2CEC085200211DA5 /* Debug */,
@@ -863,7 +863,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8B5AB1612CEC0BD000211DA5 /* Build configuration list for PBXNativeTarget "BusyAppShieldAction" */ = {
+		8B5AB1612CEC0BD000211DA5 /* Build configuration list for PBXNativeTarget "BusyShieldAction" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8B5AB1622CEC0BD000211DA5 /* Debug */,
@@ -872,7 +872,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8B638DC92C610E9400C3458C /* Build configuration list for PBXProject "BusyStatusBar" */ = {
+		8B638DC92C610E9400C3458C /* Build configuration list for PBXProject "Busy" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8B638DF02C610E9500C3458C /* Debug */,
@@ -881,7 +881,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8B638DF22C610E9500C3458C /* Build configuration list for PBXNativeTarget "BusyStatusBar" */ = {
+		8B638DF22C610E9500C3458C /* Build configuration list for PBXNativeTarget "Busy" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8B638DF32C610E9500C3458C /* Debug */,
@@ -890,7 +890,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8B638DF52C610E9500C3458C /* Build configuration list for PBXNativeTarget "BusyStatusBarTests" */ = {
+		8B638DF52C610E9500C3458C /* Build configuration list for PBXNativeTarget "BusyTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8B638DF62C610E9500C3458C /* Debug */,
@@ -899,7 +899,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8B638DF82C610E9500C3458C /* Build configuration list for PBXNativeTarget "BusyStatusBarUITests" */ = {
+		8B638DF82C610E9500C3458C /* Build configuration list for PBXNativeTarget "BusyUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8B638DF92C610E9500C3458C /* Debug */,

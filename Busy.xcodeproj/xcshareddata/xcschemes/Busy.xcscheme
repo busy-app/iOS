@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
    LastUpgradeVersion = "1610"
-   wasCreatedForAppExtension = "YES"
-   version = "2.0">
+   version = "1.7">
    <BuildAction
       parallelizeBuildables = "YES"
       buildImplicitDependencies = "YES"
@@ -16,24 +15,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8B5AB1552CEC0BD000211DA5"
-               BuildableName = "BusyAppShieldAction.appex"
-               BlueprintName = "BusyAppShieldAction"
-               ReferencedContainer = "container:BusyStatusBar.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
                BlueprintIdentifier = "8B638DCD2C610E9400C3458C"
-               BuildableName = "BusyStatusBar.app"
-               BlueprintName = "BusyStatusBar"
-               ReferencedContainer = "container:BusyStatusBar.xcodeproj">
+               BuildableName = "Busy.app"
+               BlueprintName = "Busy"
+               ReferencedContainer = "container:Busy.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -47,47 +32,39 @@
    </TestAction>
    <LaunchAction
       buildConfiguration = "Debug"
-      selectedDebuggerIdentifier = ""
-      selectedLauncherIdentifier = "Xcode.IDEFoundation.Launcher.PosixSpawn"
-      launchStyle = "1"
-      askForAppToLaunch = "Yes"
+      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
+      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      launchStyle = "0"
       useCustomWorkingDirectory = "NO"
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
-      allowLocationSimulation = "YES"
-      launchAutomaticallySubstyle = "2">
-      <RemoteRunnable
-         runnableDebuggingMode = "0"
-         BundleIdentifier = "com.apple.mobilemail"
-         RemotePath = "/var/containers/Bundle/Application/91E5D99B-A98D-4A9C-A729-CE7F27E6C31B/MobileMail.app">
-      </RemoteRunnable>
-      <MacroExpansion>
+      allowLocationSimulation = "YES">
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8B638DCD2C610E9400C3458C"
-            BuildableName = "BusyStatusBar.app"
-            BlueprintName = "BusyStatusBar"
-            ReferencedContainer = "container:BusyStatusBar.xcodeproj">
+            BuildableName = "Busy.app"
+            BlueprintName = "Busy"
+            ReferencedContainer = "container:Busy.xcodeproj">
          </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
       shouldUseLaunchSchemeArgsEnv = "YES"
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
-      debugDocumentVersioning = "YES"
-      askForAppToLaunch = "Yes"
-      launchAutomaticallySubstyle = "2">
+      debugDocumentVersioning = "YES">
       <BuildableProductRunnable
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8B638DCD2C610E9400C3458C"
-            BuildableName = "BusyStatusBar.app"
-            BlueprintName = "BusyStatusBar"
-            ReferencedContainer = "container:BusyStatusBar.xcodeproj">
+            BuildableName = "Busy.app"
+            BlueprintName = "Busy"
+            ReferencedContainer = "container:Busy.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

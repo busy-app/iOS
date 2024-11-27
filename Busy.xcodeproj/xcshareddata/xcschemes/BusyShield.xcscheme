@@ -17,9 +17,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "8B5AB13E2CEC085100211DA5"
-               BuildableName = "BusyAppShield.appex"
-               BlueprintName = "BusyAppShield"
-               ReferencedContainer = "container:BusyStatusBar.xcodeproj">
+               BuildableName = "BusyShield.appex"
+               BlueprintName = "BusyShield"
+               ReferencedContainer = "container:Busy.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -31,9 +31,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "8B638DCD2C610E9400C3458C"
-               BuildableName = "BusyStatusBar.app"
-               BlueprintName = "BusyStatusBar"
-               ReferencedContainer = "container:BusyStatusBar.xcodeproj">
+               BuildableName = "Busy.app"
+               BlueprintName = "Busy"
+               ReferencedContainer = "container:Busy.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -62,9 +62,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8B638DCD2C610E9400C3458C"
-            BuildableName = "BusyStatusBar.app"
-            BlueprintName = "BusyStatusBar"
-            ReferencedContainer = "container:BusyStatusBar.xcodeproj">
+            BuildableName = "Busy.app"
+            BlueprintName = "Busy"
+            ReferencedContainer = "container:Busy.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -81,9 +81,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8B638DCD2C610E9400C3458C"
-            BuildableName = "BusyStatusBar.app"
-            BlueprintName = "BusyStatusBar"
-            ReferencedContainer = "container:BusyStatusBar.xcodeproj">
+            BuildableName = "Busy.app"
+            BlueprintName = "Busy"
+            ReferencedContainer = "container:Busy.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
