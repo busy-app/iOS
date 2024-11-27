@@ -48,6 +48,8 @@ class Timer {
 
     func stop() {
         state = .stopped
+        timer?.cancel()
+        timer = nil
     }
 
     func increase() {
