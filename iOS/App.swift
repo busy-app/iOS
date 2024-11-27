@@ -4,8 +4,8 @@ import SwiftUI
 struct App: SwiftUI.App {
     var body: some Scene {
         WindowGroup {
-            if isDevBuild {
-                Text("Dev build")
+            if isDemoBuild {
+                BusyApp()
             } else {
                 RootView()
             }
@@ -13,7 +13,7 @@ struct App: SwiftUI.App {
     }
 }
 
-var isDevBuild: Bool {
+var isDemoBuild: Bool {
     #if DEBUG
     true
     #else
@@ -23,6 +23,6 @@ var isDevBuild: Bool {
     else {
         return false
     }
-    return target == "DEV"
+    return target == "BUSY_APP"
     #endif
 }

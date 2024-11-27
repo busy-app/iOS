@@ -1,6 +1,6 @@
 import SwiftUI
 
-enum BusyApp: String {
+enum SelectedApp: String {
     case busy
     case pomodoro
     case wallpapersGifs
@@ -16,7 +16,7 @@ struct DeviceView: View {
     @State private var showPoweredOff = false
     @State private var showNoUpdateFound = false
 
-    @AppStorage("selectedApp") private var selectedApp: BusyApp = .busy
+    @AppStorage("selectedApp") private var selectedApp: SelectedApp = .busy
 
     enum Destination {
         case settings

@@ -17,6 +17,10 @@ extension Font {
         .custom("PPNeueMontreal-SemiBold", size: size)
     }
 
+    static func pragmaticaNextVF(size: Double) -> Font {
+        .custom("PragmaticaNextVF", size: size)
+    }
+
     static var titlePrimary: Font {
         .ppNeueMontrealMedium(size: 24)
     }
