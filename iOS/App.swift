@@ -4,11 +4,7 @@ import SwiftUI
 struct App: SwiftUI.App {
     var body: some Scene {
         WindowGroup {
-            if isDemoBuild {
-                BusyApp()
-            } else {
-                RootView()
-            }
+            BusyApp()
         }
     }
 }
