@@ -18,6 +18,8 @@ struct ActiveTimer: View {
                     HStack(alignment: .center) {
                         Image("PlayIcon")
                             .renderingMode(.template)
+                            .resizable()
+                            .frame(width: 24, height: 24)
                             .foregroundStyle(.blackInvert)
                             .padding(.bottom, 4)
 
@@ -60,8 +62,14 @@ struct ActiveTimer: View {
                             timer.decrease()
                         }
 
-                        PauseButton {
-                            timer.pause()
+                        PlayPauseButton(
+                            image: timer.state == .running
+                                ? "PauseIcon"
+                                : "PlayIcon"
+                        ) {
+                            timer.state == .running
+                                ? timer.pause()
+                                : timer.resume()
                         }
 
                         TimeButton("+5") {
@@ -79,22 +87,28 @@ struct ActiveTimer: View {
 }
 
 private extension ActiveTimer {
-    struct PauseButton: View {
+    struct PlayPauseButton: View {
+        let image: String
         var action: () -> Void
 
         var body: some View {
             Button {
                 action()
             } label: {
-                Image("PauseIcon")
-                    .renderingMode(.template)
-                    .foregroundStyle(.blackInvert)
-                    .frame(width: 100, height: 100)
-                    .overlay(
-                        Circle()
-                            .inset(by: 1)
-                            .stroke(.blackInvert, lineWidth: 2)
-                    )
+                Group {
+                    Image(image)
+                        .renderingMode(.template)
+                        .resizable()
+                        .frame(width: 34, height: 34)
+                        .foregroundStyle(.blackInvert)
+                        .animation(.none, value: image)
+                }
+                .frame(width: 100, height: 100)
+                .overlay(
+                    Circle()
+                        .inset(by: 1)
+                        .stroke(.blackInvert, lineWidth: 2)
+                )
             }
         }
     }
