@@ -60,10 +60,11 @@ struct BusyApp: View {
                         guard minute > 0 || second > 0 else {
                             return
                         }
-                        guard isAuthorized else {
-                            authorize()
-                            return
-                        }
+                        // TODO: Uncomment when we have permissions 
+//                        guard isAuthorized else {
+//                            authorize()
+//                            return
+//                        }
                         !isOn ? startBusy() : stopBusy()
                     }
                     .padding(.top, 16)
