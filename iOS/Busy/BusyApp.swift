@@ -13,10 +13,12 @@ struct BusyApp: View {
 
     @AppStorage("isOn") var isOn: Bool = false
 
-    @AppStorage("minute") var minute: Int = 15
-    @AppStorage("second") var second: Int = 0
+    @AppStorage("blockerSettings")
+    var blockerSettings: BlockerSettings = .init()
 
     @State var timer = Timer()
+
+    @State var isSettingsPresented: Bool = false
 
     var background: Color {
         isOn ? .backgroundBusy : .backgroundDefault
@@ -88,6 +90,12 @@ struct BusyApp: View {
                     stopBusy()
                 }
             }
+            .fullScreenCover(
+                isPresented: $isSettingsPresented
+            ) {
+                SettingsView()
+                    .environment(\.blockerSettings, $blockerSettings)
+            }
             .task {
                 if !isAuthorized {
                     authorize()
@@ -132,13 +140,21 @@ struct BusyApp: View {
     }
 
     func enableShield() {
-        managedSettingsStore.shield.applicationCategories = .all(except: [])
-        managedSettingsStore.shield.webDomainCategories = .all(except: [])
+        managedSettingsStore.shield.applications =
+            blockerSettings.applicationTokens
+        managedSettingsStore.shield.applicationCategories =
+            .specific(blockerSettings.categoryTokens, except: .init([]))
+
+        managedSettingsStore.shield.webDomains =
+            blockerSettings.domainTokens
+        managedSettingsStore.shield.webDomainCategories =
+            .specific(blockerSettings.categoryTokens, except: .init([]))
     }
 
     func disableShield() {
         managedSettingsStore.shield.applications = nil
         managedSettingsStore.shield.applicationCategories = nil
+
         managedSettingsStore.shield.webDomains = nil
         managedSettingsStore.shield.webDomainCategories = nil
     }
