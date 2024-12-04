@@ -113,6 +113,10 @@ struct TimePickerComponent<Content: View>: View {
                     guard let position = newValue else { return }
                     selection = position % kind.divider
                 }
+                // NOTE: fixes onScrollPhaseChange issue
+                .simultaneousGesture(TapGesture().onEnded {
+                    scrollToSelection(reader: reader)
+                })
                 .task {
                     scrollToSelection(reader: reader)
                 }
