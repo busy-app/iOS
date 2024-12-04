@@ -41,6 +41,7 @@ struct TimePicker: View {
                 Image(uiImage: .triangle)
                     .rotationEffect(.degrees(180))
             }
+            .gradientMask()
         }
     }
 }

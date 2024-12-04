@@ -11,7 +11,8 @@ struct BusyApp: View {
         authorizationCenter.authorizationStatus == .approved
     }
 
-    @AppStorage("isOn") var isOn: Bool = false
+    @AppStorage("timerSettings")
+    var timerSettings: TimerSettings = .init()
 
     @AppStorage("blockerSettings")
     var blockerSettings: BlockerSettings = .init()
@@ -20,14 +21,19 @@ struct BusyApp: View {
 
     @State var isSettingsPresented: Bool = false
 
-    var background: Color {
+    var isOn: Bool {
+        get { timerSettings.isOn }
+        nonmutating set { timerSettings.isOn = newValue }
+    }
+
+    var topBarBackground: Color {
         isOn ? .backgroundBusy : .backgroundDefault
     }
 
     var body: some View {
         GeometryReader { proxy in
             VStack(spacing: 0) {
-                background
+                topBarBackground
                     .frame(maxWidth: .infinity)
                     .frame(height: proxy.safeAreaInsets.top)
                     .clipShape(
@@ -43,45 +49,33 @@ struct BusyApp: View {
                 VStack(spacing: 0) {
                     ZStack {
                         if isOn {
-                            ActiveTimer(timer: $timer)
+                            TimerView(timer: $timer) {
+                                stopBusy()
+                            }
                         }
 
-                        TimePicker(
-                            minute: $minute,
-                            second: $second
-                        )
+                        TimePickerView(
+                            isSettingsPresented: $isSettingsPresented,
+                            timerSettings: $timerSettings
+                        ) {
+                            guard timerSettings.isValid else {
+                                return
+                            }
+                            #if !targetEnvironment(simulator)
+                            guard isAuthorized else {
+                                authorize()
+                                return
+                            }
+                            #endif
+                            startBusy()
+                        }
                         .opacity(!isOn ? 1 : 0)
                     }
                     .font(.pragmaticaNextVF(size: 100))
                     .frame(maxHeight: .infinity)
                     .minimumScaleFactor(0.1)
-
-                    Spacer(minLength: 0)
-
-                    BusyButton(isOn: isOn) {
-                        guard minute > 0 || second > 0 else {
-                            return
-                        }
-                        guard isAuthorized else {
-                            authorize()
-                            return
-                        }
-                        !isOn ? startBusy() : stopBusy()
-                    }
-                    .padding(.top, 16)
-                    .padding(.horizontal, 16)
-                    .padding(.bottom, 128)
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .background(background)
-                .clipShape(
-                    .rect(
-                        topLeadingRadius: 16,
-                        bottomLeadingRadius: 0,
-                        bottomTrailingRadius: 0,
-                        topTrailingRadius: 16
-                    )
-                )
             }
             .ignoresSafeArea(.all)
             .background(.blackOnContent)
@@ -97,9 +91,11 @@ struct BusyApp: View {
                     .environment(\.blockerSettings, $blockerSettings)
             }
             .task {
+                #if !targetEnvironment(simulator)
                 if !isAuthorized {
                     authorize()
                 }
+                #endif
                 if isOn {
                     startBusy()
                 }
@@ -128,7 +124,10 @@ struct BusyApp: View {
     }
 
     func startBusy() {
-        timer.start(minutes: minute, seconds: second)
+        timer.start(
+            minutes: timerSettings.minute,
+            seconds: timerSettings.second
+        )
         enableShield()
         isOn = true
     }

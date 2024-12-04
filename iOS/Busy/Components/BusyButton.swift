@@ -1,14 +1,27 @@
 import SwiftUI
 
 struct BusyButton: View {
-    let isOn: Bool
     var action: () -> Void
 
     var body: some View {
         Button {
             action()
         } label: {
-            Image(uiImage: isOn ? .stopButton : .busyButton)
+            Image(uiImage: .busyButton)
+                .resizable()
+                .scaledToFit()
+        }
+    }
+}
+
+struct StopButton: View {
+    var action: () -> Void
+
+    var body: some View {
+        Button {
+            action()
+        } label: {
+            Image(uiImage: .stopButton)
                 .resizable()
                 .scaledToFit()
         }
