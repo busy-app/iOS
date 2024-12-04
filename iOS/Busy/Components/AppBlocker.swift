@@ -7,8 +7,8 @@ struct AppBlocker: View {
 
     @Environment(\.blockerSettings) var settings
 
-    var isBlockApps: Bool {
-        settings.isBlockApps
+    var isEnabled: Bool {
+        settings.isEnabled
     }
 
     var blockingCount: Int {
@@ -24,7 +24,7 @@ struct AppBlocker: View {
                     Text("App blocker")
                         .font(.pragmaticaNextVF(size: 22))
 
-                    Toggle(isOn: settings.isBlockApps) {}
+                    Toggle(isOn: settings.isEnabled) {}
                         .tint(.backgroundBusy)
                 }
                 .padding(.top, 12)
@@ -57,8 +57,8 @@ struct AppBlocker: View {
                 }
                 .padding(.top, 26)
                 .padding(.bottom, 12)
-                .disabled(!isBlockApps)
-                .opacity(isBlockApps ? 1 : 0.2)
+                .disabled(!isEnabled)
+                .opacity(isEnabled ? 1 : 0.2)
             }
             .padding(.horizontal, 12)
         }

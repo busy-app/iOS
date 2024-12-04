@@ -6,9 +6,9 @@ extension EnvironmentValues {
 }
 
 extension Binding where Value == BlockerSettings {
-    var isBlockApps: Bool {
-        get { wrappedValue.isBlockApps }
-        nonmutating set { wrappedValue.isBlockApps = newValue }
+    var isEnabled: Bool {
+        get { wrappedValue.isEnabled }
+        nonmutating set { wrappedValue.isEnabled = newValue }
     }
 
     var applicationTokens: Set<ApplicationToken> {

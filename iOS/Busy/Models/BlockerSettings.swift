@@ -2,13 +2,13 @@ import ManagedSettings
 import FamilyControls
 
 struct BlockerSettings: Codable, RawRepresentable {
-    var isBlockApps: Bool = false
+    var isEnabled: Bool = false
     var applicationTokens: Set<ApplicationToken> = .init()
     var categoryTokens: Set<ActivityCategoryToken> = []
     var domainTokens: Set<WebDomainToken> = []
 
     enum CodingKeys: CodingKey {
-        case isBlockApps
+        case isEnabled
         case applicationTokens
         case categoryTokens
         case domainTokens
@@ -18,7 +18,7 @@ struct BlockerSettings: Codable, RawRepresentable {
 
     init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        isBlockApps = try container.decode(Bool.self, forKey: .isBlockApps)
+        isEnabled = try container.decode(Bool.self, forKey: .isEnabled)
         applicationTokens = try container
             .decode(Set<ApplicationToken>.self, forKey: .applicationTokens)
         categoryTokens = try container
@@ -29,7 +29,7 @@ struct BlockerSettings: Codable, RawRepresentable {
 
     func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(isBlockApps, forKey: .isBlockApps)
+        try container.encode(isEnabled, forKey: .isEnabled)
         try container.encode(applicationTokens, forKey: .applicationTokens)
         try container.encode(categoryTokens, forKey: .categoryTokens)
         try container.encode(domainTokens, forKey: .domainTokens)

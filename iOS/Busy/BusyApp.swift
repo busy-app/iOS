@@ -131,7 +131,9 @@ struct BusyApp: View {
             seconds: timerSettings.second,
             onEnd: notifications.notify
         )
-        enableShield()
+        if blockerSettings.isEnabled {
+            enableShield()
+        }
         isOn = true
     }
 
