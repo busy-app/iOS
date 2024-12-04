@@ -6,6 +6,7 @@ import FamilyControls
 struct BusyApp: View {
     var authorizationCenter: AuthorizationCenter { .shared }
     var managedSettingsStore: ManagedSettingsStore { .init() }
+    var notifications: Notifications { .shared }
 
     var isAuthorized: Bool {
         authorizationCenter.authorizationStatus == .approved
@@ -92,6 +93,7 @@ struct BusyApp: View {
             }
             .task {
                 #if !targetEnvironment(simulator)
+                notifications.authorize()
                 if !isAuthorized {
                     authorize()
                 }
@@ -126,7 +128,8 @@ struct BusyApp: View {
     func startBusy() {
         timer.start(
             minutes: timerSettings.minute,
-            seconds: timerSettings.second
+            seconds: timerSettings.second,
+            onEnd: notifications.notify
         )
         enableShield()
         isOn = true

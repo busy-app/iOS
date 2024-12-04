@@ -14,8 +14,10 @@ class Timer {
     }
 
     private var timer: Task<Void, Swift.Error>?
+    private var onEnd: (() -> Void)?
 
-    func start(minutes: Int, seconds: Int) {
+    func start(minutes: Int, seconds: Int, onEnd: @escaping () -> Void) {
+        self.onEnd = onEnd
         if state != .stopped {
             stop()
         }
@@ -43,6 +45,7 @@ class Timer {
                 }
             }
             stop()
+            onEnd?()
         }
     }
 
