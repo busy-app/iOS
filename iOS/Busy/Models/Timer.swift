@@ -1,11 +1,24 @@
+import Foundation
 import Observation
 
 @Observable
 class Timer {
-    var state: State = .stopped
+    typealias SystemTimer = Foundation.Timer
 
-    var minutes: Int = 0
-    var seconds: Int = 0
+    private(set) var state: State = .stopped
+    private(set) var minutes: Int = 0
+    private(set) var seconds: Int = 0
+
+    var timeInterval: Int {
+        get {
+            minutes * 60 + seconds
+        }
+        set {
+            guard timeInterval != newValue else { return }
+            minutes = min(59, max(0, newValue / 60))
+            seconds = max(0, Int(newValue % 60))
+        }
+    }
 
     enum State {
         case running
@@ -13,72 +26,54 @@ class Timer {
         case paused
     }
 
-    private var timer: Task<Void, Swift.Error>?
-    private var onEnd: (() -> Void)?
+    @ObservationIgnored private var deadline: Date = .now
+    @ObservationIgnored private var timer: SystemTimer = .init()
+    @ObservationIgnored private var onEnd: (() -> Void)?
 
     func start(minutes: Int, seconds: Int, onEnd: @escaping () -> Void) {
-        self.onEnd = onEnd
-        if state != .stopped {
-            stop()
-        }
+        stop()
         self.minutes = minutes
         self.seconds = seconds
+        self.onEnd = onEnd
         resume()
     }
 
     func pause() {
         state = .paused
-        timer?.cancel()
-        timer = nil
-    }
-
-    func resume() {
-        state = .running
-        timer = Task {
-            while minutes > 0 || seconds > 0 {
-                try await Task.sleep(for: .seconds(1))
-                if seconds > 0 {
-                    seconds -= 1
-                } else if minutes > 0 {
-                    seconds = 59
-                    minutes -= 1
-                }
-            }
-            stop()
-            onEnd?()
-        }
+        timer.invalidate()
     }
 
     func stop() {
         state = .stopped
-        timer?.cancel()
-        timer = nil
+        timer.invalidate()
+    }
+
+    func resume() {
+        state = .running
+        deadline = .now.addingTimeInterval(.init(timeInterval))
+        timer = SystemTimer.scheduledTimer(
+            withTimeInterval: 0.2,
+            repeats: true,
+            block: update
+        )
+    }
+
+    private func update(_: SystemTimer? = nil) {
+        guard deadline > .now else {
+            stop()
+            onEnd?()
+            return
+        }
+        timeInterval = .init(deadline.timeIntervalSinceNow)
     }
 
     func increase() {
-        seconds += 5
-
-        if seconds >= 60 {
-            if minutes < 99 {
-                minutes += 1
-                seconds = seconds % 60
-            } else {
-                seconds = 59
-            }
-        }
+        deadline.addTimeInterval(5)
+        update()
     }
 
     func decrease() {
-        seconds -= 5
-
-        if seconds < 0 {
-            if minutes > 0 {
-                minutes -= 1
-                seconds += 60
-            } else {
-                seconds = 0
-                stop()
-            }
-        }
+        deadline.addTimeInterval(-5)
+        update()
     }
 }
