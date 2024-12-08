@@ -9,6 +9,8 @@ class Timer {
     private(set) var minutes: Int = 0
     private(set) var seconds: Int = 0
 
+    private let tickTock = TickTock()
+
     var timeInterval: Int {
         get {
             minutes * 60 + seconds
@@ -52,19 +54,24 @@ class Timer {
         state = .running
         deadline = .now.addingTimeInterval(.init(timeInterval))
         timer = SystemTimer.scheduledTimer(
-            withTimeInterval: 0.2,
+            withTimeInterval: 1,
             repeats: true,
             block: update
         )
     }
 
-    private func update(_: SystemTimer? = nil) {
+    private func update(_: SystemTimer) {
+        update()
+        tickTock.play()
+    }
+
+    private func update() {
         guard deadline > .now else {
             stop()
             onEnd?()
             return
         }
-        timeInterval = .init(deadline.timeIntervalSinceNow)
+        timeInterval = .init(deadline.timeIntervalSinceNow.rounded(.up))
     }
 
     func increase() {
