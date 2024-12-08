@@ -1,27 +1,22 @@
 import AVFoundation
 
 class TickTock {
-    var volume: Float = 0
+    private let soundId: SystemSoundID
 
-    var player: AVAudioPlayer? = {
-        do {
-            guard let url = Bundle.main.url(
-                forResource: "tick",
-                withExtension:"mp3"
-            ) else {
-                return nil
-            }
-            try AVAudioSession.sharedInstance().setCategory(.playback)
-            try AVAudioSession.sharedInstance().setActive(true)
-            return try AVAudioPlayer(contentsOf: url)
-        } catch {
-            return nil
-        }
+    private let url: URL = {
+        Bundle.main.url(
+            forResource: "silence",
+            withExtension:"mp3"
+        )!
     }()
 
+    init() {
+        var soundId: SystemSoundID = 0
+        AudioServicesCreateSystemSoundID(url as NSURL, &soundId)
+        self.soundId = soundId
+    }
+
     func play() {
-        guard let player else { return }
-        player.volume = volume
-        player.play()
+        AudioServicesPlaySystemSound(soundId)
     }
 }
