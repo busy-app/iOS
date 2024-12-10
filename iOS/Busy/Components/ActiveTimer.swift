@@ -54,7 +54,6 @@ struct ActiveTimer: View {
                 .contentTransition(.numericText())
                 .padding(.vertical, 24)
 
-
                 VStack {
                     Spacer()
                     HStack(spacing: 25) {

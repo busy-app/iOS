@@ -1,15 +1,21 @@
 import Foundation
 import Observation
 
+import ActivityKit
+
 @Observable
 class Timer {
     typealias SystemTimer = Foundation.Timer
+
+    static let shared = Timer()
+    private init() {}
 
     private(set) var state: State = .stopped
     private(set) var minutes: Int = 0
     private(set) var seconds: Int = 0
 
     private let tickTock = TickTock()
+    private var activity: Activity<BusyWidgetAttributes>?
 
     var timeInterval: Int {
         get {
@@ -43,11 +49,13 @@ class Timer {
     func pause() {
         state = .paused
         timer.invalidate()
+        stopActivity()
     }
 
     func stop() {
         state = .stopped
         timer.invalidate()
+        stopActivity()
     }
 
     func resume() {
@@ -58,6 +66,7 @@ class Timer {
             repeats: true,
             block: update
         )
+        startActivity()
     }
 
     private func update(_: SystemTimer) {
@@ -77,10 +86,46 @@ class Timer {
     func increase() {
         deadline.addTimeInterval(5)
         update()
+        updateActivity()
     }
 
     func decrease() {
         deadline.addTimeInterval(-5)
         update()
+        updateActivity()
+    }
+}
+
+
+extension Timer {
+    var contentState: BusyWidgetAttributes.ContentState {
+        .init(
+            isOn: state == .running,
+            deadline: deadline
+        )
+    }
+
+    func startActivity() {
+        activity = try? Activity<BusyWidgetAttributes>.request(
+            attributes: .init(),
+            content: .init(state: contentState, staleDate: deadline))
+    }
+
+    func updateActivity() {
+        Task {
+            await activity?.update(
+                .init(
+                    state: contentState,
+                    staleDate: deadline
+                )
+            )
+        }
+    }
+
+    func stopActivity() {
+        Task {
+            await activity?.end(.none, dismissalPolicy: .immediate)
+            activity = nil
+        }
     }
 }

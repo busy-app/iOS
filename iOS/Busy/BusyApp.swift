@@ -18,7 +18,7 @@ struct BusyApp: View {
     @AppStorage("blockerSettings")
     var blockerSettings: BlockerSettings = .init()
 
-    @State var timer = Timer()
+    @State var timer = Timer.shared
 
     @State var isSettingsPresented: Bool = false
 
