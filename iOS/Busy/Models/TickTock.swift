@@ -11,7 +11,9 @@ class TickTock {
             ) else {
                 return nil
             }
-            try AVAudioSession.sharedInstance().setCategory(.playback)
+            try AVAudioSession
+                .sharedInstance()
+                .setCategory(.playback, options: .mixWithOthers)
             try AVAudioSession.sharedInstance().setActive(true)
             return try AVAudioPlayer(contentsOf: url)
         } catch {
