@@ -5,7 +5,6 @@ struct App: SwiftUI.App {
     var body: some Scene {
         WindowGroup {
             BusyApp()
-                .modifier(BackgroundModifier())
         }
     }
 }
