@@ -10,8 +10,6 @@
 		8B5AB1422CEC085200211DA5 /* ManagedSettings.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B5AB1412CEC085100211DA5 /* ManagedSettings.framework */; };
 		8B5AB1442CEC085200211DA5 /* ManagedSettingsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B5AB1432CEC085200211DA5 /* ManagedSettingsUI.framework */; };
 		8B5AB14C2CEC085200211DA5 /* BusyShield.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 8B5AB13F2CEC085100211DA5 /* BusyShield.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		8B5AB1572CEC0BD000211DA5 /* ManagedSettings.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B5AB1412CEC085100211DA5 /* ManagedSettings.framework */; };
-		8B5AB15F2CEC0BD000211DA5 /* BusyShieldAction.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 8B5AB1562CEC0BD000211DA5 /* BusyShieldAction.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		8B82C3AF2CF8FDC900AE782C /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B1147282CF8FC3000CA9361 /* WidgetKit.framework */; };
 		8B82C3B02CF8FDC900AE782C /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B11472A2CF8FC3000CA9361 /* SwiftUI.framework */; };
 		8B82C3C12CF8FDCA00AE782C /* BusyWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 8B82C3AE2CF8FDC900AE782C /* BusyWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -24,13 +22,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = 8B5AB13E2CEC085100211DA5;
 			remoteInfo = BusyShield;
-		};
-		8B5AB15D2CEC0BD000211DA5 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 8B638DC62C610E9400C3458C /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 8B5AB1552CEC0BD000211DA5;
-			remoteInfo = BusyShieldAction;
 		};
 		8B638DDF2C610E9500C3458C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -62,7 +53,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				8B5AB15F2CEC0BD000211DA5 /* BusyShieldAction.appex in Embed Foundation Extensions */,
 				8B82C3C12CF8FDCA00AE782C /* BusyWidgetExtension.appex in Embed Foundation Extensions */,
 				8B5AB14C2CEC085200211DA5 /* BusyShield.appex in Embed Foundation Extensions */,
 			);
@@ -78,7 +68,6 @@
 		8B5AB13F2CEC085100211DA5 /* BusyShield.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = BusyShield.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B5AB1412CEC085100211DA5 /* ManagedSettings.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ManagedSettings.framework; path = System/Library/Frameworks/ManagedSettings.framework; sourceTree = SDKROOT; };
 		8B5AB1432CEC085200211DA5 /* ManagedSettingsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ManagedSettingsUI.framework; path = System/Library/Frameworks/ManagedSettingsUI.framework; sourceTree = SDKROOT; };
-		8B5AB1562CEC0BD000211DA5 /* BusyShieldAction.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = BusyShieldAction.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B638DCE2C610E9400C3458C /* Busy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Busy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B638DDE2C610E9500C3458C /* BusyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BusyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B638DE82C610E9500C3458C /* BusyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BusyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -94,13 +83,6 @@
 				Info.plist,
 			);
 			target = 8B5AB13E2CEC085100211DA5 /* BusyShield */;
-		};
-		8B5AB1602CEC0BD000211DA5 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Info.plist,
-			);
-			target = 8B5AB1552CEC0BD000211DA5 /* BusyShieldAction */;
 		};
 		8B82C3C42CF8FDCA00AE782C /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
@@ -120,7 +102,6 @@
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		8B5AB1452CEC085200211DA5 /* BusyShield */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (8B5AB14D2CEC085200211DA5 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = BusyShield; sourceTree = "<group>"; };
-		8B5AB1582CEC0BD000211DA5 /* BusyShieldAction */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (8B5AB1602CEC0BD000211DA5 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = BusyShieldAction; sourceTree = "<group>"; };
 		8B638DD02C610E9400C3458C /* iOS */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = iOS; sourceTree = "<group>"; };
 		8B638DE12C610E9500C3458C /* Tests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Tests; sourceTree = "<group>"; };
 		8B638DEB2C610E9500C3458C /* UITests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = UITests; sourceTree = "<group>"; };
@@ -134,14 +115,6 @@
 			files = (
 				8B5AB1422CEC085200211DA5 /* ManagedSettings.framework in Frameworks */,
 				8B5AB1442CEC085200211DA5 /* ManagedSettingsUI.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		8B5AB1532CEC0BD000211DA5 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				8B5AB1572CEC0BD000211DA5 /* ManagedSettings.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -199,7 +172,6 @@
 				8B638DE12C610E9500C3458C /* Tests */,
 				8B638DEB2C610E9500C3458C /* UITests */,
 				8B5AB1452CEC085200211DA5 /* BusyShield */,
-				8B5AB1582CEC0BD000211DA5 /* BusyShieldAction */,
 				8B82C3B12CF8FDC900AE782C /* BusyWidget */,
 				8B5AB1402CEC085100211DA5 /* Frameworks */,
 				8B638DCF2C610E9400C3458C /* Products */,
@@ -213,7 +185,6 @@
 				8B638DDE2C610E9500C3458C /* BusyTests.xctest */,
 				8B638DE82C610E9500C3458C /* BusyUITests.xctest */,
 				8B5AB13F2CEC085100211DA5 /* BusyShield.appex */,
-				8B5AB1562CEC0BD000211DA5 /* BusyShieldAction.appex */,
 				8B82C3AE2CF8FDC900AE782C /* BusyWidgetExtension.appex */,
 			);
 			name = Products;
@@ -244,28 +215,6 @@
 			productReference = 8B5AB13F2CEC085100211DA5 /* BusyShield.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
-		8B5AB1552CEC0BD000211DA5 /* BusyShieldAction */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 8B5AB1612CEC0BD000211DA5 /* Build configuration list for PBXNativeTarget "BusyShieldAction" */;
-			buildPhases = (
-				8B5AB1522CEC0BD000211DA5 /* Sources */,
-				8B5AB1532CEC0BD000211DA5 /* Frameworks */,
-				8B5AB1542CEC0BD000211DA5 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			fileSystemSynchronizedGroups = (
-				8B5AB1582CEC0BD000211DA5 /* BusyShieldAction */,
-			);
-			name = BusyShieldAction;
-			packageProductDependencies = (
-			);
-			productName = BusyShieldAction;
-			productReference = 8B5AB1562CEC0BD000211DA5 /* BusyShieldAction.appex */;
-			productType = "com.apple.product-type.app-extension";
-		};
 		8B638DCD2C610E9400C3458C /* Busy */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8B638DF22C610E9500C3458C /* Build configuration list for PBXNativeTarget "Busy" */;
@@ -279,7 +228,6 @@
 			);
 			dependencies = (
 				8B5AB14B2CEC085200211DA5 /* PBXTargetDependency */,
-				8B5AB15E2CEC0BD000211DA5 /* PBXTargetDependency */,
 				8B82C3C02CF8FDCA00AE782C /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
@@ -373,9 +321,6 @@
 					8B5AB13E2CEC085100211DA5 = {
 						CreatedOnToolsVersion = 16.1;
 					};
-					8B5AB1552CEC0BD000211DA5 = {
-						CreatedOnToolsVersion = 16.1;
-					};
 					8B638DCD2C610E9400C3458C = {
 						CreatedOnToolsVersion = 16.0;
 					};
@@ -409,7 +354,6 @@
 				8B638DDD2C610E9500C3458C /* BusyTests */,
 				8B638DE72C610E9500C3458C /* BusyUITests */,
 				8B5AB13E2CEC085100211DA5 /* BusyShield */,
-				8B5AB1552CEC0BD000211DA5 /* BusyShieldAction */,
 				8B82C3AD2CF8FDC900AE782C /* BusyWidgetExtension */,
 			);
 		};
@@ -417,13 +361,6 @@
 
 /* Begin PBXResourcesBuildPhase section */
 		8B5AB13D2CEC085100211DA5 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		8B5AB1542CEC0BD000211DA5 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -468,13 +405,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		8B5AB1522CEC0BD000211DA5 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		8B638DCA2C610E9400C3458C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -510,11 +440,6 @@
 			isa = PBXTargetDependency;
 			target = 8B5AB13E2CEC085100211DA5 /* BusyShield */;
 			targetProxy = 8B5AB14A2CEC085200211DA5 /* PBXContainerItemProxy */;
-		};
-		8B5AB15E2CEC0BD000211DA5 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 8B5AB1552CEC0BD000211DA5 /* BusyShieldAction */;
-			targetProxy = 8B5AB15D2CEC0BD000211DA5 /* PBXContainerItemProxy */;
 		};
 		8B638DE02C610E9500C3458C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -584,66 +509,6 @@
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = app.busy.BusyShield;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = NO;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
-			};
-			name = Release;
-		};
-		8B5AB1622CEC0BD000211DA5 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = BusyShieldAction/BusyShieldAction.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = SXH69675TZ;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = BusyShieldAction/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = BusyShieldAction;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = app.busy.BusyShieldAction;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = NO;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
-			};
-			name = Debug;
-		};
-		8B5AB1632CEC0BD000211DA5 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = BusyShieldAction/BusyShieldAction.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = SXH69675TZ;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = BusyShieldAction/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = BusyShieldAction;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = app.busy.BusyShieldAction;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1015,15 +880,6 @@
 			buildConfigurations = (
 				8B5AB14F2CEC085200211DA5 /* Debug */,
 				8B5AB1502CEC085200211DA5 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		8B5AB1612CEC0BD000211DA5 /* Build configuration list for PBXNativeTarget "BusyShieldAction" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				8B5AB1622CEC0BD000211DA5 /* Debug */,
-				8B5AB1632CEC0BD000211DA5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
