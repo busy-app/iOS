@@ -11,6 +11,7 @@ struct BusyWidgetLiveActivity: Widget {
 
                     Text(timerInterval: .now...context.state.deadline)
                         .contentTransition(.numericText())
+                        .foregroundStyle(.white)
                         .font(.system(size: 48))
                         .padding(.top, 12)
                 }
