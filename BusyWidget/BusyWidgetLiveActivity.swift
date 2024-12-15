@@ -48,12 +48,14 @@ struct BusyWidgetLiveActivity: Widget {
             } compactLeading: {
                 Image("BusyIcon")
                     .resizable()
-                    .scaledToFit()
+                    .frame(width: 40, height: 18)
+                    .padding(.leading, 4)
             } compactTrailing: {
                 Text(timerInterval: .now...context.state.deadline)
                     .frame(minWidth: 0, maxWidth: 65)
                     .multilineTextAlignment(.trailing)
                     .contentTransition(.numericText())
+                    .padding(.trailing, 4)
             } minimal: {
                 ProgressView(
                     timerInterval: .now...context.state.deadline,
