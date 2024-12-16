@@ -64,8 +64,6 @@ struct AppBlocker: View {
         }
         .background(.transparentBlackInvertQuinary)
         .cornerRadius(8)
-        .padding(.vertical, 24)
-        .padding(.horizontal, 16)
         .familyActivityPicker(
             isPresented: $isPickerPresented,
             selection: $selection

@@ -18,6 +18,9 @@ struct BusyApp: View {
     @AppStorage("blockerSettings")
     var blockerSettings: BlockerSettings = .init()
 
+    @AppStorage("metronome")
+    var metronome: Bool = false
+
     @State var timer = Timer.shared
 
     @State var isSettingsPresented: Bool = false
@@ -88,7 +91,7 @@ struct BusyApp: View {
             .fullScreenCover(
                 isPresented: $isSettingsPresented
             ) {
-                SettingsView()
+                SettingsView(metronome: $metronome)
                     .environment(\.blockerSettings, $blockerSettings)
             }
             .task {
@@ -129,6 +132,7 @@ struct BusyApp: View {
         timer.start(
             minutes: timerSettings.minute,
             seconds: timerSettings.second,
+            metronome: metronome,
             onEnd: notifications.notify
         )
         if blockerSettings.isEnabled {

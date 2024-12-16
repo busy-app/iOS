@@ -5,6 +5,7 @@ import ManagedSettings
 extension BusyApp {
     struct SettingsView: View {
         @Environment(\.dismiss) var dismiss
+        @Binding var metronome: Bool
 
         var body: some View {
             GeometryReader { proxy in
@@ -24,12 +25,22 @@ extension BusyApp {
                         }
                     }
                     .padding(.vertical, 22)
-                    .padding(.horizontal, 16)
 
                     AppBlocker()
+                        .padding(.vertical, 24)
+
+                    VStack {
+                        Toggle("Metronome", isOn: $metronome)
+                            .font(.pragmaticaNextVF(size: 16))
+                            .padding(10)
+                            .tint(.backgroundBusy)
+                    }
+                    .background(.transparentBlackInvertQuinary)
+                    .cornerRadius(8)
 
                     Spacer()
                 }
+                .padding(.horizontal, 16)
                 .foregroundStyle(.blackInvert)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background(.backgroundDefault)

@@ -14,9 +14,6 @@ class Timer {
     private(set) var minutes: Int = 0
     private(set) var seconds: Int = 0
 
-    private let tickTock = TickTock()
-    private var activity: Activity<BusyWidgetAttributes>?
-
     var timeInterval: Int {
         get {
             minutes * 60 + seconds
@@ -34,14 +31,23 @@ class Timer {
         case paused
     }
 
+    @ObservationIgnored private let tickTock = TickTock()
+    @ObservationIgnored private var activity: Activity<BusyWidgetAttributes>?
+
     @ObservationIgnored private var deadline: Date = .now
     @ObservationIgnored private var timer: SystemTimer = .init()
     @ObservationIgnored private var onEnd: (() -> Void)?
 
-    func start(minutes: Int, seconds: Int, onEnd: @escaping () -> Void) {
+    func start(
+        minutes: Int,
+        seconds: Int,
+        metronome: Bool,
+        onEnd: @escaping () -> Void
+    ) {
         stop()
         self.minutes = minutes
         self.seconds = seconds
+        self.tickTock.volume = metronome ? 1 : 0
         self.onEnd = onEnd
         resume()
     }
