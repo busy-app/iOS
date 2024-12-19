@@ -1,9 +1,10 @@
 import SwiftUI
 
-struct CodeField: View {
+struct CodeField: View { // NOTE: Rename, because it's not only a field
     @Environment(\.codeFieldState) private var state
 
-    @FocusState private var focusState: Int?
+    @State private var currentIndex: Int?
+    @FocusState private var isFocused: Int?
 
     @Binding var code: [String]
     let timeLeft: String // NOTE: Maybe use TimeInterval here
@@ -39,21 +40,24 @@ struct CodeField: View {
                     Spacer()
 
                     Text("Expires in \(timeLeft)")
+                        .onTapGesture {
+                            currentIndex = nil
+                        }
                 }
                 .font(.labelSecondary)
                 .foregroundColor(.blackInvert)
 
                 HStack(spacing: 18) {
                     ForEach(0..<code.count, id: \.self) { index in
-                        SymbolField(
-                            code: $code,
-                            isCorrect: state == .default,
-                            index: index
-                        ) { focusState = $0 }
-                        .focused($focusState, equals: index)
+                        SymbolFieldNew(
+                            index: index,
+                            codeLength: code.count,
+                            symbol: $code[index],
+                            currentIndex: $currentIndex
+                        )
+                        .focused($isFocused, equals: index)
                     }
                 }
-                .frame(maxHeight: .infinity)
 
                 Text("Incorrect code")
                     .font(.labelSecondary)
@@ -62,12 +66,46 @@ struct CodeField: View {
                     .opacity(state == .default ? 0 : 1)
             }
             .onAppear {
-                if forceOpenKeyboard {
-                    focusState = 0
-                } else {
-                    focusState = nil
+                currentIndex = forceOpenKeyboard ? 0 : nil
+            }
+            .onChange(of: currentIndex) { _, index in
+                isFocused = currentIndex
+            }
+            .toolbar {
+                ToolbarItem(placement: .keyboard) {
+                    HStack {
+                        Spacer()
+                        Button(action: pasteFromClipboard) {
+                            Text("Paste code from clipboard")
+                                .font(.labelSecondary)
+                                .foregroundColor(.brandPrimary)
+                        }
+                        Spacer()
+                    }
+                    .frame(maxWidth: .infinity)
                 }
             }
+        }
+    }
+
+
+    private func pasteFromClipboard() {
+        guard
+            let pasteboard = UIPasteboard
+                .general
+                .string?
+                .filter({ $0.isNumber })
+        else { return }
+
+        currentIndex = nil
+
+        for (index, _) in code.enumerated() {
+            code[index] = .emptySymbol
+        }
+
+        for (index, character) in pasteboard.enumerated() {
+            guard index < code.count else { break }
+            code[index] = String(character)
         }
     }
 }
@@ -81,12 +119,17 @@ struct CodeField_Previews: PreviewProvider {
                 CodeField(
                     code: $code,
                     timeLeft: "9:59",
-                    label: "Verification code"
+                    label: "Verification code",
+                    forceOpenKeyboard: true
                 )
-                .frame(height: 100)
                 .environment(\.codeFieldState, state)
             }
         }
         .padding()
     }
+}
+
+// NOTE: Move to extensions file
+extension String {
+    static let emptySymbol = "\u{200B}"
 }

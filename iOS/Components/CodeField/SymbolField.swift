@@ -1,6 +1,88 @@
 import SwiftUI
 import UIKit
 
+struct SymbolFieldNew: View {
+    @Environment(\.codeFieldState) private var state
+
+    let index: Int
+    let codeLength: Int
+
+    @Binding var symbol: String
+    @Binding var currentIndex: Int?
+
+    private var isCorrect: Bool { state == .default  }
+    private var isSelected: Bool { currentIndex == index }
+
+    private var backgroundColor: Color {
+        isCorrect
+            ? .neutralSeptenary
+            : .dangerTertiary
+    }
+
+    private var borderColor: Color {
+        isCorrect
+            ? isSelected
+                ? .brandPrimary
+                : .neutralQuaternary
+            : .dangerSecondary
+    }
+
+    var body: some View {
+        ZStack {
+            TextField(
+                "",
+                text: $symbol
+            )
+            .keyboardType(.numberPad)
+            .frame(width: 0, height: 0)
+
+            Text(symbol)
+                .foregroundColor(.blackInvert)
+                .font(.titlePrimary)
+                .padding(.vertical, 24)
+                .frame(maxWidth: .infinity)
+                .background(
+                    RoundedRectangle(cornerRadius: 8)
+                        .stroke(borderColor, lineWidth: 1)
+                        .fill(backgroundColor)
+                        .onTapGesture {
+                            currentIndex = index
+                        }
+                )
+        }
+        .onAppear {
+            symbol = .emptySymbol
+        }
+        .onChange(of: symbol) { oldValue, newValue in
+            guard let _ = currentIndex else { return }
+
+            if newValue.isEmpty {
+                symbol = .emptySymbol
+                decreaseIndex()
+                return
+            }
+
+            if newValue.count > 1 && newValue != .emptySymbol {
+                symbol = String(newValue.last ?? Character(""))
+                increaseIndex()
+                return
+            }
+
+            if oldValue == .emptySymbol && newValue != .emptySymbol {
+                increaseIndex()
+            }
+        }
+    }
+
+    private func increaseIndex() {
+        currentIndex = index == codeLength - 1 ? nil : index + 1
+    }
+
+    private func decreaseIndex() {
+        currentIndex = index == 0 ? nil : index - 1
+    }
+}
+
 struct SymbolField: UIViewRepresentable {
     @Binding var code: [String]
 
