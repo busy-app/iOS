@@ -10,7 +10,9 @@ class Timer {
     static let shared = Timer()
     private init() {}
 
-    private(set) var state: State = .stopped
+    private(set) var state: State = .stopped {
+        didSet { onStateChanged(state) }
+    }
     private(set) var minutes: Int = 0
     private(set) var seconds: Int = 0
 
@@ -99,6 +101,14 @@ class Timer {
         deadline.addTimeInterval(-5)
         update()
         updateActivity()
+    }
+
+    private func onStateChanged(_ state: State) {
+        switch state {
+        case .stopped: UserDefaultsStorage.shared.timerSettings.isOn = false
+        case .running: UserDefaultsStorage.shared.timerSettings.isOn = true
+        case .paused: ()
+        }
     }
 }
 
