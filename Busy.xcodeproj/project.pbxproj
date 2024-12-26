@@ -655,6 +655,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = BUSY;
 				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "This will allow to connect the app to your Busy Status Bar";
 				INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription = "This will allow to connect the app to your Busy Status Bar";
+				INFOPLIST_KEY_NSSiriUsageDescription = "This will allow to uses Siri to start Busy";
 				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				INFOPLIST_KEY_NSSupportsLiveActivitiesFrequentUpdates = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -699,6 +700,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = BUSY;
 				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "This will allow to connect the app to your Busy Status Bar";
 				INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription = "This will allow to connect the app to your Busy Status Bar";
+				INFOPLIST_KEY_NSSiriUsageDescription = "This will allow to uses Siri to start Busy";
 				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				INFOPLIST_KEY_NSSupportsLiveActivitiesFrequentUpdates = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;

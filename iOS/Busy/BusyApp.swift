@@ -1,5 +1,7 @@
 import SwiftUI
 
+import Intents
+
 import ManagedSettings
 import FamilyControls
 
@@ -8,8 +10,12 @@ struct BusyApp: View {
     var authorizationCenter: AuthorizationCenter { .shared }
     var notifications: Notifications { .shared }
 
-    var isAuthorized: Bool {
+    var isFamilyControlsAuthorized: Bool {
         authorizationCenter.authorizationStatus == .approved
+    }
+
+    var isAllowSiri: Bool {
+        INPreferences.siriAuthorizationStatus() == .authorized
     }
 
     @AppStorage(UserDefaults.Keys.timerSettings.rawValue) // Note: edit to .timerSettings
@@ -63,8 +69,8 @@ struct BusyApp: View {
                                 return
                             }
                             #if !targetEnvironment(simulator)
-                            guard isAuthorized else {
-                                authorize()
+                            guard isFamilyControlsAuthorized else {
+                                familyControlsAuthorize()
                                 return
                             }
                             #endif
@@ -94,8 +100,11 @@ struct BusyApp: View {
             .task {
                 #if !targetEnvironment(simulator)
                 notifications.authorize()
-                if !isAuthorized {
-                    authorize()
+                if !isFamilyControlsAuthorized {
+                    familyControlsAuthorize()
+                }
+                if !isAllowSiri {
+                    siriAuthorization()
                 }
                 #endif
 
@@ -110,15 +119,20 @@ struct BusyApp: View {
         }
     }
 
-    func authorize() {
+    func familyControlsAuthorize() {
         Task {
             do {
-                try await AuthorizationCenter
-                    .shared
+                try await authorizationCenter
                     .requestAuthorization(for: .individual)
             } catch {
                 print("authorization error: \(error)")
             }
+        }
+    }
+
+    func siriAuthorization() {
+        INPreferences.requestSiriAuthorization {
+            print("Siri authorization status: \($0)")
         }
     }
 
