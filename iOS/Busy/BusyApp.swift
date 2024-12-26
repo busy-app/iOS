@@ -1,33 +1,36 @@
 import SwiftUI
 
+import Intents
+
 import ManagedSettings
 import FamilyControls
 
 struct BusyApp: View {
+
     var authorizationCenter: AuthorizationCenter { .shared }
-    var managedSettingsStore: ManagedSettingsStore { .init() }
     var notifications: Notifications { .shared }
 
-    var isAuthorized: Bool {
+    var isFamilyControlsAuthorized: Bool {
         authorizationCenter.authorizationStatus == .approved
     }
 
-    @AppStorage("timerSettings")
+    var isAllowSiri: Bool {
+        INPreferences.siriAuthorizationStatus() == .authorized
+    }
+
+    @AppStorage(UserDefaults.Keys.timerSettings.rawValue) // Note: edit to .timerSettings
     var timerSettings: TimerSettings = .init()
 
-    @AppStorage("blockerSettings")
-    var blockerSettings: BlockerSettings = .init()
-
-    @AppStorage("metronome")
+    @AppStorage(UserDefaults.Keys.metronome.rawValue) // Note: edit to .metronome
     var metronome: Bool = false
 
     @State var timer = Timer.shared
+    @State var blocker = Blocker.shared
 
     @State var isSettingsPresented: Bool = false
 
     var isOn: Bool {
-        get { timerSettings.isOn }
-        nonmutating set { timerSettings.isOn = newValue }
+        timerSettings.isOn
     }
 
     var topBarBackground: Color {
@@ -66,8 +69,8 @@ struct BusyApp: View {
                                 return
                             }
                             #if !targetEnvironment(simulator)
-                            guard isAuthorized else {
-                                authorize()
+                            guard isFamilyControlsAuthorized else {
+                                familyControlsAuthorize()
                                 return
                             }
                             #endif
@@ -92,18 +95,18 @@ struct BusyApp: View {
                 isPresented: $isSettingsPresented
             ) {
                 SettingsView(metronome: $metronome)
-                    .environment(\.blockerSettings, $blockerSettings)
+                    .environment(blocker)
             }
             .task {
                 #if !targetEnvironment(simulator)
                 notifications.authorize()
-                if !isAuthorized {
-                    authorize()
+                if !isFamilyControlsAuthorized {
+                    familyControlsAuthorize()
+                }
+                if !isAllowSiri {
+                    siriAuthorization()
                 }
                 #endif
-                if isOn {
-                    startBusy()
-                }
 
                 NotificationCenter.default.addObserver(
                     forName: UIApplication.willTerminateNotification,
@@ -116,15 +119,20 @@ struct BusyApp: View {
         }
     }
 
-    func authorize() {
+    func familyControlsAuthorize() {
         Task {
             do {
-                try await AuthorizationCenter
-                    .shared
+                try await authorizationCenter
                     .requestAuthorization(for: .individual)
             } catch {
                 print("authorization error: \(error)")
             }
+        }
+    }
+
+    func siriAuthorization() {
+        INPreferences.requestSiriAuthorization {
+            print("Siri authorization status: \($0)")
         }
     }
 
@@ -135,36 +143,12 @@ struct BusyApp: View {
             metronome: metronome,
             onEnd: notifications.notify
         )
-        if blockerSettings.isEnabled {
-            enableShield()
-        }
-        isOn = true
+        blocker.enableShield()
     }
 
     func stopBusy() {
-        isOn = false
         timer.stop()
-        disableShield()
-    }
-
-    func enableShield() {
-        managedSettingsStore.shield.applications =
-            blockerSettings.applicationTokens
-        managedSettingsStore.shield.applicationCategories =
-            .specific(blockerSettings.categoryTokens, except: .init([]))
-
-        managedSettingsStore.shield.webDomains =
-            blockerSettings.domainTokens
-        managedSettingsStore.shield.webDomainCategories =
-            .specific(blockerSettings.categoryTokens, except: .init([]))
-    }
-
-    func disableShield() {
-        managedSettingsStore.shield.applications = nil
-        managedSettingsStore.shield.applicationCategories = nil
-
-        managedSettingsStore.shield.webDomains = nil
-        managedSettingsStore.shield.webDomainCategories = nil
+        blocker.disableShield()
     }
 }
 
