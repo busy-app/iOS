@@ -13,6 +13,7 @@
 		8B82C3AF2CF8FDC900AE782C /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B1147282CF8FC3000CA9361 /* WidgetKit.framework */; };
 		8B82C3B02CF8FDC900AE782C /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B11472A2CF8FC3000CA9361 /* SwiftUI.framework */; };
 		8B82C3C12CF8FDCA00AE782C /* BusyWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 8B82C3AE2CF8FDC900AE782C /* BusyWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		8BA245132D105E1500F29FD2 /* Macro in Frameworks */ = {isa = PBXBuildFile; productRef = 8BA245122D105E1500F29FD2 /* Macro */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -122,6 +123,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8BA245132D105E1500F29FD2 /* Macro in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -235,6 +237,7 @@
 			);
 			name = Busy;
 			packageProductDependencies = (
+				8BA245122D105E1500F29FD2 /* Macro */,
 			);
 			productName = Busy;
 			productReference = 8B638DCE2C610E9400C3458C /* Busy.app */;
@@ -346,6 +349,9 @@
 				Base,
 			);
 			mainGroup = 8B638DC52C610E9400C3458C;
+			packageReferences = (
+				8BA245112D105E1500F29FD2 /* XCLocalSwiftPackageReference "Packages/Macro" */,
+			);
 			productRefGroup = 8B638DCF2C610E9400C3458C /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -825,6 +831,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BusyWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = BusyWidget;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -855,6 +862,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BusyWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = BusyWidget;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -930,6 +938,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		8BA245112D105E1500F29FD2 /* XCLocalSwiftPackageReference "Packages/Macro" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages/Macro;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		8BA245122D105E1500F29FD2 /* Macro */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Macro;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 8B638DC62C610E9400C3458C /* Project object */;
 }
