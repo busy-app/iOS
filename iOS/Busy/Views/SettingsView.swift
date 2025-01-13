@@ -4,7 +4,7 @@ import ManagedSettings
 
 extension BusyApp {
     struct SettingsView: View {
-        @Environment(\.dismiss) var dismiss
+        @Environment(\.dismissModal) var dismissModal
 
         var body: some View {
             GeometryReader { proxy in
@@ -15,7 +15,7 @@ extension BusyApp {
                         Spacer()
 
                         Button {
-                            dismiss()
+                            dismissModal()
                         } label: {
                             Image(systemName: "xmark")
                                 .resizable()
