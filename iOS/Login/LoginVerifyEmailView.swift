@@ -80,6 +80,7 @@ extension LoginFlow {
                 .opacity(codeFieldState == .expired ? 0 : 1)
             }
             .padding(16)
+            .background(.surfacePrimary)
             .topBar {
                 NavigationBackButton()
 

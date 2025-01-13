@@ -37,6 +37,7 @@ extension LoginFlow {
                 Spacer()
             }
             .padding(16)
+            .background(.surfacePrimary)
             .topBar {
                 NavigationBackButton()
 

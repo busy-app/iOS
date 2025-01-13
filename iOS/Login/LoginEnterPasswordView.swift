@@ -59,6 +59,7 @@ extension LoginFlow {
             .ignoresSafeArea(.keyboard)
             .onAppear { focusState = .password}
             .padding(16)
+            .background(.surfacePrimary)
             .topBar {
                 NavigationBackButton()
 
