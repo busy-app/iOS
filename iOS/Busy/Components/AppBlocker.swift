@@ -37,6 +37,7 @@ struct AppBlocker: View {
                 .foregroundStyle(.neutralTertiary)
                 .font(.pragmaticaNextVF(size: 16))
                 .padding(.top, 10)
+                .lineSpacing(4)
 
                 Button {
                     selection.applicationTokens = settings.applicationTokens
