@@ -3,14 +3,30 @@ import SwiftUI
 extension LoginFlow {
     struct LoginToCloudView: View {
         @Environment(\.path) private var path
+        @Environment(\.dismissModal) private var dismissModal
 
         @State private var email = ""
 
         var body: some View {
             VStack(spacing: 0) {
-                Text("Log in to Busy Cloud")
-                    .font(.titlePrimary)
-                    .foregroundColor(.blackInvert)
+                HStack {
+                    Spacer()
+                    Text("Log in to Busy Cloud")
+                        .font(.titlePrimary)
+                        .foregroundColor(.blackInvert)
+                        .padding(.leading, 22)
+                    Spacer()
+                    Button {
+                        dismissModal()
+                    } label: {
+                        Image(systemName: "xmark")
+                            .resizable()
+                            .fontWeight(.light)
+                            .foregroundStyle(.blackInvert)
+                            .frame(width: 22, height: 22)
+                            .padding(5)
+                    }
+                }
 
                 Image(.busyCloud)
                     .resizable()

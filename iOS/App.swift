@@ -4,11 +4,7 @@ import SwiftUI
 struct App: SwiftUI.App {
     var body: some Scene {
         WindowGroup {
-            if isDevBuild {
-                LoginFlow()
-            } else {
-                BusyApp()
-            }
+            BusyApp()
         }
     }
 }
@@ -23,6 +19,6 @@ var isDevBuild: Bool {
     else {
         return false
     }
-    return target == "BUSY_APP"
+    return target == "DEV"
     #endif
 }

@@ -20,6 +20,7 @@ struct BusyApp: View {
 
     @State var timer = Timer.shared
 
+    @State var isSignInPresented: Bool = false
     @State var isSettingsPresented: Bool = false
 
     var isOn: Bool {
@@ -56,6 +57,7 @@ struct BusyApp: View {
                         }
 
                         TimePickerView(
+                            isSignInPresented: $isSignInPresented,
                             isSettingsPresented: $isSettingsPresented,
                             timerSettings: $timerSettings
                         ) {
@@ -86,9 +88,16 @@ struct BusyApp: View {
                 }
             }
             .fullScreenCover(
+                isPresented: $isSignInPresented
+            ) {
+                LoginFlow()
+                    .dismissModal($isSignInPresented)
+            }
+            .fullScreenCover(
                 isPresented: $isSettingsPresented
             ) {
                 SettingsView()
+                    .dismissModal($isSettingsPresented)
                     .environment(\.blockerSettings, $blockerSettings)
             }
             .task {

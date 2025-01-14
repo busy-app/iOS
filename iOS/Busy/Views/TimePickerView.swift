@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct TimePickerView: View {
+    @Binding var isSignInPresented: Bool
     @Binding var isSettingsPresented: Bool
     @Binding var timerSettings: TimerSettings
 
@@ -9,6 +10,17 @@ struct TimePickerView: View {
     var body: some View {
         VStack(spacing: 0) {
             HStack {
+                Button {
+                    isSignInPresented = true
+                } label: {
+                    Image(systemName: "person")
+                        .resizable()
+                        .renderingMode(.template)
+                        .foregroundColor(.blackInvert)
+                        .fontWeight(.thin)
+                        .frame(width: 32, height: 32)
+                }
+                .padding(.horizontal, 40)
                 Spacer()
                 Button {
                     isSettingsPresented = true
