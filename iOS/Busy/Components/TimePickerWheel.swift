@@ -150,6 +150,7 @@ private struct TimeWheelItem: View {
                     .offset(y: yOffset)
                     .animation(.spring(), value: scale)
                     .opacity(textOpacity)
+                    .contentShape(Rectangle())
                     .onTapGesture { onTap() }
                     .background(
                         GeometryReader {
