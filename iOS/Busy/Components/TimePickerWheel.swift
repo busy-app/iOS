@@ -1,20 +1,19 @@
 import SwiftUI
 
 struct TimePickerWheel: View {
-    @Binding var selectedIndex: Int
+    let minutes: [Int]
+    @Binding var current: Int
 
     private var timeLabels: [String] {
-        var labels = ["∞"]
-        for totalMinutes in stride(from: 5, through: 540, by: 5) {
+        minutes.map { totalMinutes in
             let hours = totalMinutes / 60
             let minutes = totalMinutes % 60
             if hours > 0 {
-                labels.append("\(hours)h \(minutes)m")
+                return "\(hours)h \(minutes)m"
             } else {
-                labels.append("\(minutes)m")
+                return "\(minutes)m"
             }
         }
-        return labels
     }
 
     var body: some View {
@@ -22,22 +21,34 @@ struct TimePickerWheel: View {
             ScrollViewReader { scrollProxy in
                 TimeWheelScrollView(
                     items: timeLabels,
-                    selectedIndex: $selectedIndex,
                     outerGeometry: outerGeometry,
-                    scrollProxy: scrollProxy
+                    scrollProxy: scrollProxy,
+                    onSelectedIndexChange: onUpdateTime
                 )
+                .onChange(of: current, initial: true) { old, new in
+                    let index = minutes.firstIndex(of: current) ?? 0
+                    withAnimation {
+                        scrollProxy.scrollTo(index, anchor: .center)
+                    }
+                }
             }
         }
         .background(.blackInvert)
         .frame(height: 150)
     }
+
+    private func onUpdateTime(_ index: Int) {
+        current = minutes[index]
+    }
 }
 
 private struct TimeWheelScrollView: View {
     let items: [String]
-    @Binding var selectedIndex: Int
+
     let outerGeometry: GeometryProxy
     let scrollProxy: ScrollViewProxy
+
+    let onSelectedIndexChange: (Int) -> Void
 
     @State private var centerPositions: [Int: CGFloat] = [:]
     @State private var lastFeedbackIndex: Int? = nil
@@ -52,12 +63,7 @@ private struct TimeWheelScrollView: View {
                         isFirst: index == 0,
                         isLast: index == (items.count - 1),
                         outerGeometry: outerGeometry,
-                        onTap: {
-                            selectedIndex = index
-                            withAnimation {
-                                scrollProxy.scrollTo(index, anchor: .center)
-                            }
-                        }
+                        onTap: { onSelectedIndexChange(index) }
                     )
                     .frame(width: itemWidth, height: itemHeight)
                 }
@@ -77,20 +83,11 @@ private struct TimeWheelScrollView: View {
                 .onEnded { _ in
                     Task { @MainActor in
                         try await Task.sleep(nanoseconds: 200_000_000)
-                        guard let nearest = findNearestIndex() else { return }
-
-                        selectedIndex = nearest
-                        withAnimation {
-                            scrollProxy.scrollTo(nearest, anchor: .center)
-                        }
+                        guard let index = findNearestIndex() else { return }
+                        onSelectedIndexChange(index)
                     }
             }
         )
-        .onChange(of: selectedIndex, initial: true) { old, new in
-            withAnimation {
-                scrollProxy.scrollTo(new, anchor: .center)
-            }
-        }
     }
 
     private func findNearestIndex() -> Int? {
@@ -127,6 +124,7 @@ private struct TimeWheelItem: View {
             let opacity = calculateOpacity(for: distance)
 
             // Increase the scale for infinite symbol
+            let text = isFirst ? "∞" : text
             let textScale = isFirst ? scale * 2 : scale
 
             // Hide even text in default state
@@ -243,12 +241,17 @@ fileprivate extension View {
 }
 
 #Preview {
-    @Previewable @State var index: Int = 0
+    @Previewable @State var currentMinute: Int = 0
+
+    var minutes: [Int] {
+        return Array(stride(from: 0, through: 540, by: 5))
+    }
+
     VStack {
-        TimePickerWheel(selectedIndex: $index)
+        TimePickerWheel(minutes: minutes, current: $currentMinute)
             .colorScheme(.dark)
 
-        TimePickerWheel(selectedIndex: $index)
+        TimePickerWheel(minutes: minutes, current: $currentMinute)
             .colorScheme(.light)
     }
 }
