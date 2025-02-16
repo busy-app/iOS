@@ -5,10 +5,10 @@ struct AppBlocker: View {
     @State var isPickerPresented: Bool = false
     @State var selection = FamilyActivitySelection()
 
-    @Environment(\.blockerSettings) var settings
+    @Binding private var settings: BlockerSettings
 
-    var isEnabled: Bool {
-        settings.isEnabled
+    var isOn: Bool {
+        settings.isOn
     }
 
     var blockingCount: Int {
@@ -24,8 +24,7 @@ struct AppBlocker: View {
                     Text("App blocker")
                         .font(.pragmaticaNextVF(size: 22))
 
-                    Toggle(isOn: settings.isEnabled) {}
-                        .tint(.backgroundBusy)
+                    Toggle(isOn: $settings.isOn) {}
                 }
                 .padding(.top, 12)
 
@@ -57,8 +56,8 @@ struct AppBlocker: View {
                 }
                 .padding(.top, 26)
                 .padding(.bottom, 12)
-                .disabled(!isEnabled)
-                .opacity(isEnabled ? 1 : 0.2)
+                .disabled(!isOn)
+                .opacity(isOn ? 1 : 0.2)
             }
             .padding(.horizontal, 12)
         }

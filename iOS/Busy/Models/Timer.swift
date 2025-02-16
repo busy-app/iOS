@@ -1,12 +1,8 @@
 import Foundation
 import Observation
 
-import ActivityKit
-
 @Observable
 class Timer {
-    typealias SystemTimer = Foundation.Timer
-
     static let shared = Timer()
     private init() {}
 
@@ -31,53 +27,43 @@ class Timer {
         case paused
     }
 
-    @ObservationIgnored private let tickTock = TickTock()
-    @ObservationIgnored private var activity: Activity<BusyWidgetAttributes>?
+    @ObservationIgnored var onChange: (() -> Void)?
+    @ObservationIgnored var onEnd: (() -> Void)?
 
-    @ObservationIgnored private var deadline: Date = .now
-    @ObservationIgnored private var timer: SystemTimer = .init()
-    @ObservationIgnored private var onEnd: (() -> Void)?
+    @ObservationIgnored private(set) var deadline: Date = .now
+    @ObservationIgnored private var timer: Foundation.Timer = .init()
 
     func start(
         minutes: Int,
-        seconds: Int,
-        metronome: Bool,
-        onEnd: @escaping () -> Void
+        seconds: Int
     ) {
         stop()
         self.minutes = minutes
         self.seconds = seconds
-        self.tickTock.volume = metronome ? 1 : 0
-        self.onEnd = onEnd
         resume()
     }
 
     func pause() {
         state = .paused
         timer.invalidate()
-        stopActivity()
+        onChange?()
     }
 
     func stop() {
         state = .stopped
         timer.invalidate()
-        stopActivity()
+        onChange?()
     }
 
     func resume() {
         state = .running
         deadline = .now.addingTimeInterval(.init(timeInterval))
-        timer = SystemTimer.scheduledTimer(
+        timer = .scheduledTimer(
             withTimeInterval: 1,
             repeats: true,
-            block: update
+            block: { _ in self.update() }
         )
-        startActivity()
-    }
-
-    private func update(_: SystemTimer) {
-        update()
-        tickTock.play()
+        onChange?()
     }
 
     private func update() {
@@ -87,51 +73,6 @@ class Timer {
             return
         }
         timeInterval = .init(deadline.timeIntervalSinceNow.rounded(.up))
-    }
-
-    func increase() {
-        deadline.addTimeInterval(5)
-        update()
-        updateActivity()
-    }
-
-    func decrease() {
-        deadline.addTimeInterval(-5)
-        update()
-        updateActivity()
-    }
-}
-
-
-extension Timer {
-    var contentState: BusyWidgetAttributes.ContentState {
-        .init(
-            isOn: state == .running,
-            deadline: deadline
-        )
-    }
-
-    func startActivity() {
-        activity = try? Activity<BusyWidgetAttributes>.request(
-            attributes: .init(),
-            content: .init(state: contentState, staleDate: deadline))
-    }
-
-    func updateActivity() {
-        Task {
-            await activity?.update(
-                .init(
-                    state: contentState,
-                    staleDate: deadline
-                )
-            )
-        }
-    }
-
-    func stopActivity() {
-        Task {
-            await activity?.end(.none, dismissalPolicy: .immediate)
-            activity = nil
-        }
+        onChange?()
     }
 }

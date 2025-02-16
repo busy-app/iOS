@@ -3,116 +3,64 @@ import SwiftUI
 import ManagedSettings
 import FamilyControls
 
+import ActivityKit
+
 struct BusyApp: View {
-    var authorizationCenter: AuthorizationCenter { .shared }
-    var managedSettingsStore: ManagedSettingsStore { .init() }
-    var notifications: Notifications { .shared }
+    private var authorizationCenter: AuthorizationCenter { .shared }
+    private var managedSettingsStore: ManagedSettingsStore { .init() }
+    private var notifications: Notifications { .shared }
 
     var isAuthorized: Bool {
         authorizationCenter.authorizationStatus == .approved
     }
 
-    @AppStorage("timerSettings")
-    var timerSettings: TimerSettings = .init()
+    @AppStorage("busySettings")
+    var busySettings: BusySettings = .init()
 
-    @AppStorage("blockerSettings")
-    var blockerSettings: BlockerSettings = .init()
+    @State private var timer = Timer.shared
+    @State private var activity: Activity<BusyWidgetAttributes>?
 
-    @AppStorage("metronome")
-    var metronome: Bool = false
-
-    @State var timer = Timer.shared
-
-    @State var isSettingsPresented: Bool = false
-
-    var isOn: Bool {
-        get { timerSettings.isOn }
-        nonmutating set { timerSettings.isOn = newValue }
+    indirect enum AppState {
+        case cards
+        case paused(AppState)
+        case working
+        case resting
+        case longResting
+        case finished
     }
 
-    var topBarBackground: Color {
-        isOn ? .backgroundBusy : .backgroundDefault
-    }
+    @State var appState: AppState = .cards
 
     var body: some View {
-        GeometryReader { proxy in
-            VStack(spacing: 0) {
-                topBarBackground
-                    .frame(maxWidth: .infinity)
-                    .frame(height: proxy.safeAreaInsets.top)
-                    .clipShape(
-                        .rect(
-                            topLeadingRadius: 0,
-                            bottomLeadingRadius: 16,
-                            bottomTrailingRadius: 16,
-                            topTrailingRadius: 0
-                        )
-                    )
-                    .padding(.bottom, 2)
+        Group {
+            switch appState {
+            case .cards: CardsView(settings: $busySettings)
+            case .paused: TimerView.PauseView()
+            case .working: TimerView(timer: $timer, settings: $busySettings)
+            case .resting: TimerView(timer: $timer, settings: $busySettings)
+            case .longResting: TimerView(timer: $timer, settings: $busySettings)
+            case .finished: TimerView.FinishedView()
+            }
+        }
+        .environment(\.appState, $appState)
+        .task {
+            #if !targetEnvironment(simulator)
+            notifications.authorize()
+            if !isAuthorized {
+                authorize()
+            }
+            #endif
+            disableShieldOnTerminate()
+        }
+    }
 
-                VStack(spacing: 0) {
-                    ZStack {
-                        if isOn {
-                            TimerView(timer: $timer) {
-                                stopBusy()
-                            }
-                        }
-
-                        TimePickerView(
-                            isSettingsPresented: $isSettingsPresented,
-                            timerSettings: $timerSettings
-                        ) {
-                            guard timerSettings.isValid else {
-                                return
-                            }
-                            #if !targetEnvironment(simulator)
-                            guard isAuthorized else {
-                                authorize()
-                                return
-                            }
-                            #endif
-                            startBusy()
-                        }
-                        .opacity(!isOn ? 1 : 0)
-                    }
-                    .font(.pragmaticaNextVF(size: 100))
-                    .frame(maxHeight: .infinity)
-                    .minimumScaleFactor(0.1)
-                }
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-            }
-            .ignoresSafeArea(.all)
-            .background(.blackOnContent)
-            .onChange(of: timer.state) { old, new in
-                if new == .stopped, isOn {
-                    stopBusy()
-                }
-            }
-            .fullScreenCover(
-                isPresented: $isSettingsPresented
-            ) {
-                SettingsView(metronome: $metronome)
-                    .environment(\.blockerSettings, $blockerSettings)
-            }
-            .task {
-                #if !targetEnvironment(simulator)
-                notifications.authorize()
-                if !isAuthorized {
-                    authorize()
-                }
-                #endif
-                if isOn {
-                    startBusy()
-                }
-
-                NotificationCenter.default.addObserver(
-                    forName: UIApplication.willTerminateNotification,
-                    object: nil,
-                    queue: .main
-                ) { _ in
-                    stopBusy()
-                }
-            }
+    func disableShieldOnTerminate() {
+        NotificationCenter.default.addObserver(
+            forName: UIApplication.willTerminateNotification,
+            object: nil,
+            queue: .main
+        ) { _ in
+            stopBusy()
         }
     }
 
@@ -129,34 +77,51 @@ struct BusyApp: View {
     }
 
     func startBusy() {
-        timer.start(
-            minutes: timerSettings.minute,
-            seconds: timerSettings.second,
-            metronome: metronome,
-            onEnd: notifications.notify
-        )
-        if blockerSettings.isEnabled {
+        #if !targetEnvironment(simulator)
+        if busySettings.blocker.isOn {
+            guard isAuthorized else {
+                authorize()
+                return
+            }
             enableShield()
         }
-        isOn = true
+        #endif
+
+        timer.onChange = {
+            if timer.state == .running {
+                updateActivity()
+            } else {
+                stopActivity()
+            }
+        }
+
+        timer.onEnd = {
+            notifications.notify()
+        }
+
+        timer.start(
+            minutes: busySettings.intervals.busy.minutes,
+            seconds: busySettings.intervals.busy.seconds
+        )
+
+        startActivity()
     }
 
     func stopBusy() {
-        isOn = false
         timer.stop()
         disableShield()
     }
 
     func enableShield() {
         managedSettingsStore.shield.applications =
-            blockerSettings.applicationTokens
+            busySettings.blocker.applicationTokens
         managedSettingsStore.shield.applicationCategories =
-            .specific(blockerSettings.categoryTokens, except: .init([]))
+            .specific(busySettings.blocker.categoryTokens, except: .init([]))
 
         managedSettingsStore.shield.webDomains =
-            blockerSettings.domainTokens
+            busySettings.blocker.domainTokens
         managedSettingsStore.shield.webDomainCategories =
-            .specific(blockerSettings.categoryTokens, except: .init([]))
+            .specific(busySettings.blocker.categoryTokens, except: .init([]))
     }
 
     func disableShield() {
@@ -168,6 +133,44 @@ struct BusyApp: View {
     }
 }
 
+extension BusyApp {
+    var contentState: BusyWidgetAttributes.ContentState {
+        .init(
+            isOn: timer.state == .running,
+            deadline: timer.deadline
+        )
+    }
+
+    func startActivity() {
+        activity = try? Activity<BusyWidgetAttributes>.request(
+            attributes: .init(),
+            content: .init(
+                state: contentState,
+                staleDate: contentState.deadline
+            )
+        )
+    }
+
+    func updateActivity() {
+        Task {
+            await activity?.update(
+                .init(
+                    state: contentState,
+                    staleDate: contentState.deadline
+                )
+            )
+        }
+    }
+
+    func stopActivity() {
+        Task {
+            await activity?.end(.none, dismissalPolicy: .immediate)
+            activity = nil
+        }
+    }
+}
+
 #Preview {
     BusyApp()
+        .colorScheme(.light)
 }
