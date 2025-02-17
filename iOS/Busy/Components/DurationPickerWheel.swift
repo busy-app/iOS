@@ -1,17 +1,51 @@
 import SwiftUI
 
-struct TimePickerWheel: View {
-    let minutes: [Int]
-    @Binding var current: Int
+struct DurationPickerWheel: View {
+    @Binding var value: Int
 
-    private var timeLabels: [String] {
-        minutes.map { totalMinutes in
+    private let minutes: [Int]
+    private let labels: [String]
+
+    enum Role {
+        case total
+        case work
+        case rest
+        case longRest
+    }
+
+    init(_ value: Binding<Int>, role: Role) {
+        switch role {
+        case .total: self.init(value, in: 15...(9 * 60), allowingInfinity: true)
+        case .work: self.init(value, in: 15...60)
+        case .rest: self.init(value, in: 5...15)
+        case .longRest: self.init(value, in: 15...30)
+        }
+    }
+
+    private init(
+        _ value: Binding<Int>,
+        in range: ClosedRange<Int>,
+        allowingInfinity: Bool = false
+    ) {
+        _value = value
+
+        minutes = (allowingInfinity ? [0] : [])
+            + .init(
+                    stride(
+                        from: range.lowerBound,
+                        through: range.upperBound,
+                        by: 5
+                    )
+                )
+
+        labels = minutes.map { totalMinutes in
             let hours = totalMinutes / 60
             let minutes = totalMinutes % 60
-            if hours > 0 {
-                return "\(hours)h \(minutes)m"
-            } else {
-                return "\(minutes)m"
+            switch (hours, minutes) {
+            case (0, 0): return "∞"
+            case (0, _): return "\(minutes)m"
+            case (_, 0): return "\(hours)h"
+            default: return "\(hours)h \(minutes)m"
             }
         }
     }
@@ -19,14 +53,14 @@ struct TimePickerWheel: View {
     var body: some View {
         GeometryReader { outerGeometry in
             ScrollViewReader { scrollProxy in
-                TimeWheelScrollView(
-                    items: timeLabels,
+                WheelScrollView(
+                    items: labels,
                     outerGeometry: outerGeometry,
                     scrollProxy: scrollProxy,
                     onSelectedIndexChange: onUpdateTime
                 )
-                .onChange(of: current, initial: true) { old, new in
-                    let index = minutes.firstIndex(of: current) ?? 0
+                .onChange(of: value, initial: true) { old, new in
+                    let index = minutes.firstIndex(of: value) ?? 0
                     withAnimation {
                         scrollProxy.scrollTo(index, anchor: .center)
                     }
@@ -38,11 +72,11 @@ struct TimePickerWheel: View {
     }
 
     private func onUpdateTime(_ index: Int) {
-        current = minutes[index]
+        value = minutes[index]
     }
 }
 
-private struct TimeWheelScrollView: View {
+private struct WheelScrollView: View {
     let items: [String]
 
     let outerGeometry: GeometryProxy
@@ -57,7 +91,7 @@ private struct TimeWheelScrollView: View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 0) {
                 ForEach(items.indices, id: \.self) { index in
-                    TimeWheelItem(
+                    WheelItem(
                         index: index,
                         text: items[index],
                         isFirst: index == 0,
@@ -107,7 +141,7 @@ private struct TimeWheelScrollView: View {
     }
 }
 
-private struct TimeWheelItem: View {
+private struct WheelItem: View {
     let index: Int
     let text: String
 
@@ -124,8 +158,7 @@ private struct TimeWheelItem: View {
             let opacity = calculateOpacity(for: distance)
 
             // Increase the scale for infinite symbol
-            let text = isFirst ? "∞" : text
-            let textScale = isFirst ? scale * 2 : scale
+            let textScale = text == "∞" ? scale * 2 : scale
 
             // Hide even text in default state
             let textOpacity = index % 2 == 1
@@ -242,17 +275,24 @@ fileprivate extension View {
 }
 
 #Preview {
-    @Previewable @State var currentMinute: Int = 0
-
-    var minutes: [Int] {
-        return Array(stride(from: 0, through: 540, by: 5))
-    }
+    @Previewable @State var total: Int = 90
+    @Previewable @State var work: Int = 30
+    @Previewable @State var rest: Int = 15
+    @Previewable @State var longRest: Int = 35
 
     VStack {
-        TimePickerWheel(minutes: minutes, current: $currentMinute)
-            .colorScheme(.dark)
+        Text("Total")
+        DurationPickerWheel($total, role: .total)
 
-        TimePickerWheel(minutes: minutes, current: $currentMinute)
-            .colorScheme(.light)
+        Text("Work")
+        DurationPickerWheel($work, role: .work)
+
+        Text("Rest")
+        DurationPickerWheel($rest, role: .rest)
+
+        Text("Long rest")
+        DurationPickerWheel($longRest, role: .longRest)
     }
+    .background(.white)
+    .colorScheme(.light)
 }
