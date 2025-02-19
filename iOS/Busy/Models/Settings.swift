@@ -10,6 +10,7 @@ struct BusySettings: Codable, RawRepresentable {
 
     enum CodingKeys: CodingKey {
         case name
+        case time
         case intervals
         case blocker
         case sound
@@ -20,6 +21,7 @@ struct BusySettings: Codable, RawRepresentable {
     init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         name = try container.decode(String.self, forKey: .name)
+        time = try container.decode(Duration.self, forKey: .time)
         intervals = try container.decode(IntervalsSettings.self, forKey: .intervals)
         blocker = try container.decode(BlockerSettings.self, forKey: .blocker)
         sound = try container.decode(SoundSettings.self, forKey: .sound)
@@ -28,6 +30,7 @@ struct BusySettings: Codable, RawRepresentable {
     func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(name, forKey: .name)
+        try container.encode(time, forKey: .time)
         try container.encode(intervals, forKey: .intervals)
         try container.encode(blocker, forKey: .blocker)
         try container.encode(sound, forKey: .sound)
