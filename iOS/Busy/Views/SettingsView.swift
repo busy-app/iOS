@@ -16,8 +16,15 @@ extension BusyApp {
                         .padding(.top, 32)
                         .padding(.horizontal, 16)
 
-                    DurationPicker($settings.time, role: .total)
-                        .padding(.top, 16)
+                    VStack(spacing: 0) {
+                        Text("Total time")
+                            .font(.ppNeueMontrealMedium(size: 16))
+                            .foregroundStyle(.whiteInvert)
+
+                        DurationPicker($settings.time, role: .total)
+                    }
+                    .padding(.top, 20)
+                    .background(.blackInvert)
 
                     IntervalsToggle(isOn: $settings.intervals.isOn)
                         .padding(.top, 24)
