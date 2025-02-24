@@ -20,11 +20,12 @@ extension BusyApp {
                         Text("Total time")
                             .font(.ppNeueMontrealMedium(size: 16))
                             .foregroundStyle(.whiteInvert)
+                            .padding(.top, 24)
 
                         DurationPicker($settings.time, role: .total)
                     }
-                    .padding(.top, 20)
                     .background(.blackInvert)
+                    .padding(.top, 8)
 
                     IntervalsToggle(isOn: $settings.intervals.isOn)
                         .padding(.top, 24)
