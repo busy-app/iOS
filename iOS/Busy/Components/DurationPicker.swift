@@ -176,11 +176,9 @@ private struct WheelItem: View {
             // Increase the scale for infinite symbol
             let textScale = text == "∞" ? scale * 2 : scale
 
-            // Hide even text in default state
-            let textOpacity = index % 2 == 1
-                ? scale > 1.1
-                    ? 1.0
-                    : 0.0
+            // Hide even long text in default state
+            let textOpacity = (index % 2 == 1 && scale <= 1.1 && text.count > 3)
+                ? 0.0
                 : 1.0
 
             // Offset text up
