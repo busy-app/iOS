@@ -99,8 +99,8 @@ extension Duration {
 extension Duration {
     var hr: String {
         minutes >= 60
-            ? "\(minutes / 60)h\(String(format: "%02d", minutes % 60))m"
-            : "\(String(format: "%02d", minutes % 60))m"
+            ? "\(minutes / 60)h \(minutes % 60)m"
+            : "\(minutes % 60)m"
 
     }
 }
