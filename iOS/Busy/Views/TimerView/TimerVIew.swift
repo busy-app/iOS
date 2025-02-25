@@ -57,7 +57,6 @@ struct TimerView: View {
                 case .longResting: appState.wrappedValue = .finished
                 default: break
                 }
-
             }
             .padding(.top, 18)
 

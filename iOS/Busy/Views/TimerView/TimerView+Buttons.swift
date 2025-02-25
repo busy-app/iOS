@@ -99,7 +99,7 @@ extension TimerView {
 }
 
 #Preview {
-    VStack {
+    VStack(spacing: 24) {
         TimerView.StartButton {}
 
         TimerView.PauseButton {}
@@ -110,5 +110,7 @@ extension TimerView {
 
         TimerView.RestartButton {}
     }
+    .frame(maxWidth: .infinity, maxHeight: .infinity)
     .colorScheme(.light)
+    .background(.backgroundDark)
 }
