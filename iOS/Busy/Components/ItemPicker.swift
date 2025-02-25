@@ -1,17 +1,17 @@
 import SwiftUI
 
-struct ItemPicker<Content: View>: View {
-    @Binding var selection: Int
-    let range: Range<Int>
-    @ViewBuilder var content: (Int) -> Content
+struct HPicker<Item: Hashable, Content: View>: View {
+    @Binding var selection: Item
+    let items: [Item]
+    @ViewBuilder var content: (Item) -> Content
 
     init(
-        _ value: Binding<Int>,
-        in range: Range<Int>,
-        @ViewBuilder content: @escaping (Int) -> Content
+        _ value: Binding<Item>,
+        in items: [Item],
+        @ViewBuilder content: @escaping (Item) -> Content
     ) {
         self._selection = value
-        self.range = range
+        self.items = items
         self.content = content
     }
 
@@ -19,12 +19,11 @@ struct ItemPicker<Content: View>: View {
         GeometryReader { proxy in
             ScrollView(.horizontal) {
                 LazyHStack(alignment: .bottom, spacing: 0) {
-                    ForEach(range, id: \.self) { value in
-                        content(value)
+                    ForEach(items, id: \.self) { item in
+                        content(item)
                             .onTapGesture {
-                                selection = value
+                                selection = item
                             }
-                            .id(value)
                     }
                 }
                 .scrollTargetLayout()
@@ -35,8 +34,8 @@ struct ItemPicker<Content: View>: View {
     }
 }
 
-extension ScrollView {
-    func picker(_ value: Binding<Int>) -> some View {
+private extension ScrollView {
+    func picker(_ value: Binding<some Hashable>) -> some View {
         ScrollViewReader { proxy in
             self
                 .modifier(
@@ -49,11 +48,11 @@ extension ScrollView {
     }
 }
 
-struct ItemPickerModifier: ViewModifier {
-    @Binding var selection: Int
+private struct ItemPickerModifier<Item: Hashable>: ViewModifier {
+    @Binding var selection: Item
     let proxy: ScrollViewProxy
 
-    @State private var position: Int?
+    @State private var position: Item?
     @State var scrollToItemWhenIdle: Bool = false
 
     func body(content: Content) -> some View {
@@ -104,7 +103,7 @@ struct ItemPickerModifier: ViewModifier {
 #Preview {
     @Previewable @State var selection: Int = 2
 
-    ItemPicker($selection, in: 0..<10) { index in
+    HPicker($selection, in: .init(0..<10)) { index in
         VStack {
             Text("\(index)")
         }

@@ -64,6 +64,11 @@ private struct _DurationPicker: View {
     let minorHeight = 16.0
     let majorHeight = 34.0
 
+    var selectedDivider: some View {
+        Color.whiteInvert
+            .frame(width: width, height: majorHeight)
+    }
+
     var divider: some View {
         Color.white
             .frame(width: width, height: minorHeight)
@@ -79,19 +84,12 @@ private struct _DurationPicker: View {
 
     var body: some View {
         GeometryReader { proxy in
-            // TODO: Rewrite ItemPicker to accept [Identifiable & Hashable]
-            ItemPicker(
-                .init(
-                    get: { values.firstIndex(of: value) ?? 0 },
-                    set: { value = values[$0] }
-                ),
-                in: values.indices
-            ) { index in
-                let isFirst = index == values.startIndex
-                let isLast = index == values.endIndex.advanced(by: -1)
-                let isInfinity = values[index] == 0
-                let isEven = values[index].isMultiple(of: 2)
-                let text = String(minutes: values[index])
+            HPicker($value, in: values) { value in
+                let isFirst = value == values.first
+                let isLast = value == values.last
+                let isInfinity = value == 0
+                let isEven = value.isMultiple(of: 2)
+                let text = String(minutes: value)
 
                 VStack {
                     Text(text)
@@ -118,7 +116,7 @@ private struct _DurationPicker: View {
                         dividers
                             .opacity(isFirst ? 0 : 1)
 
-                        Color.whiteInvert
+                        selectedDivider
                             .opacityEffect(
                                 0.2,
                                 center: proxy.frame(in: .global).midX,
@@ -129,7 +127,7 @@ private struct _DurationPicker: View {
                                 center: proxy.frame(in: .global).midX,
                                 width: (spacing + width) * 5
                             )
-                            .frame(width: width, height: majorHeight)
+
 
                         dividers
                             .opacity(isLast ? 0 : 1)
