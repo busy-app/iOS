@@ -23,6 +23,8 @@ extension BusyApp {
                             .padding(.top, 24)
 
                         DurationPicker($settings.time, role: .total)
+                            .padding(.top, 12)
+                            .padding(.bottom, 32)
                     }
                     .background(.blackInvert)
                     .padding(.top, 8)
@@ -261,6 +263,9 @@ extension BusyApp.SettingsView {
                     .fixedSize(horizontal: false, vertical: true)
 
                 DurationPicker($interval.duration, role: role)
+                    .padding(.top, 26)
+                    .padding(.bottom, 32)
+                    .background(.blackInvert)
                     .padding(.top, 16)
 
                 CustomToggle(

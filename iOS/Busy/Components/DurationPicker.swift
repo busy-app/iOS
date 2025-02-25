@@ -2,9 +2,7 @@ import SwiftUI
 
 struct DurationPicker: View {
     @Binding var value: Int
-
-    private let minutes: [Int]
-    private let labels: [String]
+    let values: [Int]
 
     enum Role {
         case total
@@ -36,255 +34,146 @@ struct DurationPicker: View {
         in range: ClosedRange<Int>,
         allowingInfinity: Bool = false
     ) {
-        _value = value
-
-        minutes = (allowingInfinity ? [0] : [])
+        self._value = value
+        self.values = (allowingInfinity ? [0] : [])
             + .init(
-                    stride(
-                        from: range.lowerBound,
-                        through: range.upperBound,
-                        by: 5
-                    )
+                stride(
+                    from: range.lowerBound,
+                    through: range.upperBound,
+                    by: 5
                 )
-
-        labels = minutes.map { totalMinutes in
-            let hours = totalMinutes / 60
-            let minutes = totalMinutes % 60
-            switch (hours, minutes) {
-            case (0, 0): return "∞"
-            case (0, _): return "\(minutes)m"
-            case (_, 0): return "\(hours)h"
-            default: return "\(hours)h \(minutes)m"
-            }
-        }
-    }
-
-    var body: some View {
-        GeometryReader { outerGeometry in
-            ScrollViewReader { scrollProxy in
-                WheelScrollView(
-                    items: labels,
-                    outerGeometry: outerGeometry,
-                    scrollProxy: scrollProxy,
-                    onSelectedIndexChange: onUpdateTime
-                )
-                .task {
-                    scrollToSelectedValue(scrollProxy)
-                }
-                .onChange(of: value, initial: false) { old, new in
-                    withAnimation {
-                        scrollToSelectedValue(scrollProxy)
-                    }
-                }
-            }
-        }
-        .background(.blackInvert)
-        .frame(height: 150)
-    }
-
-    private func scrollToSelectedValue(_ scrollProxy: ScrollViewProxy) {
-        let index = minutes.firstIndex(of: value) ?? 0
-        scrollProxy.scrollTo(index, anchor: .center)
-    }
-
-    private func onUpdateTime(_ index: Int) {
-        value = minutes[index]
-    }
-}
-
-private struct WheelScrollView: View {
-    let items: [String]
-
-    let outerGeometry: GeometryProxy
-    let scrollProxy: ScrollViewProxy
-
-    let onSelectedIndexChange: (Int) -> Void
-
-    @State private var centerPositions: [Int: CGFloat] = [:]
-    @State private var lastFeedbackIndex: Int? = nil
-
-    var body: some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: 0) {
-                ForEach(items.indices, id: \.self) { index in
-                    WheelItem(
-                        index: index,
-                        text: items[index],
-                        isFirst: index == 0,
-                        isLast: index == (items.count - 1),
-                        outerGeometry: outerGeometry,
-                        onTap: { onSelectedIndexChange(index) }
-                    )
-                    .frame(width: itemWidth, height: itemHeight)
-                }
-            }
-            .padding(.top, 45)
-            .padding(.horizontal, (outerGeometry.size.width - itemWidth) / 2)
-        }
-        .coordinateSpace(name: scrollSpace)
-        .onPreferenceChange(CenterPositionKey.self) {
-            centerPositions = $0
-
-            guard let nearest = findNearestIndex() else { return }
-            selectionFeedback(index: nearest)
-        }
-        .simultaneousGesture(
-            DragGesture()
-                .onEnded { _ in
-                    Task { @MainActor in
-                        try await Task.sleep(nanoseconds: 200_000_000)
-                        guard let index = findNearestIndex() else { return }
-                        onSelectedIndexChange(index)
-                    }
-            }
-        )
-    }
-
-    private func findNearestIndex() -> Int? {
-        let centerX = outerGeometry.size.width / 2
-
-        return centerPositions
-            .min { abs($0.value - centerX) < abs($1.value - centerX) }?
-            .key
-    }
-
-    private func selectionFeedback(index: Int) {
-        if index != lastFeedbackIndex {
-            let generator = UISelectionFeedbackGenerator()
-            generator.selectionChanged()
-            lastFeedbackIndex = index
-        }
-    }
-}
-
-private struct WheelItem: View {
-    let index: Int
-    let text: String
-
-    let isFirst: Bool
-    let isLast: Bool
-
-    let outerGeometry: GeometryProxy
-    let onTap: () -> Void
-
-    var body: some View {
-        GeometryReader { innerGeometry in
-            let distance = calculateDistance(in: innerGeometry)
-            let scale = calculateDynamicScale(for: distance)
-            let opacity = calculateOpacity(for: distance)
-
-            // Increase the scale for infinite symbol
-            let textScale = text == "∞" ? scale * 2 : scale
-
-            // Hide even long text in default state
-            let textOpacity = (index % 2 == 1 && scale <= 1.1 && text.count > 3)
-                ? 0.0
-                : 1.0
-
-            // Offset text up
-            let yOffset = (scale - 1) * -60
-
-            VStack(spacing: 0) {
-                Text(text)
-                    .foregroundStyle(.whiteInvert.opacity(opacity))
-                    .font(.ppNeueMontrealMedium(size: 20))
-                    .frame(
-                        maxWidth: .infinity,
-                        maxHeight: .infinity,
-                        alignment: .center
-                    )
-                    .scaleEffect(textScale, anchor: .center)
-                    .offset(y: yOffset)
-                    .animation(.spring(), value: scale)
-                    .opacity(textOpacity)
-                    .contentShape(Rectangle())
-                    .onTapGesture { onTap() }
-                    .background(
-                        GeometryReader {
-                            let midX = $0.frame(in: .named(scrollSpace)).midX
-
-                            Color
-                                .clear
-                                .preference(
-                                    key: CenterPositionKey.self,
-                                    value: [index: midX]
-                                )
-                        }
-                    )
-
-                HStack(spacing: 0) {
-                    divider(height: secondaryDividerHeight)
-                        .opacity(isFirst ? 0 : 1)
-
-                    divider(height: secondaryDividerHeight)
-                        .padding(.leading, dividerSpacing)
-                        .opacity(isFirst ? 0 : 1)
-
-                    divider(height: primaryDividerHeight, opacity: opacity)
-                        .padding(.horizontal, dividerSpacing)
-
-                    divider(height: secondaryDividerHeight)
-                        .padding(.trailing, dividerSpacing)
-                        .opacity(isLast ? 0 : 1)
-
-                    divider(height: secondaryDividerHeight)
-                        .opacity(isLast ? 0 : 1)
-                }
-            }
-        }
-    }
-
-    @ViewBuilder private func divider(
-        height: CGFloat,
-        opacity: Double = 0.2
-    ) -> some View {
-        RoundedRectangle(cornerRadius: 2)
-            .fill(.whiteInvert.opacity(opacity))
-            .frame(
-                width: dividerWidth,
-                height: height
             )
     }
 
-    private func calculateDistance(in inner: GeometryProxy) -> CGFloat {
-        let midX = inner.frame(in: .named(scrollSpace)).midX
-        let centerX = outerGeometry.size.width / 2
-        return abs(midX - centerX)
-    }
-
-    private func calculateOpacity(for distance: CGFloat) -> Double {
-        max(0.2, 1 - (distance / 50 * 0.8))
-    }
-
-    private func calculateDynamicScale(for distance: CGFloat) -> CGFloat {
-        max(1, 1.5 - distance / 150)
+    var body: some View {
+        _DurationPicker(
+            value: $value,
+            values: values
+        )
+        .frame(height: 110)
     }
 }
 
-private struct CenterPositionKey: PreferenceKey {
-    static var defaultValue: [Int: CGFloat] = [:]
+private struct _DurationPicker: View {
+    @Binding var value: Int
+    let values: [Int]
 
-    static func reduce(
-        value: inout [Int: CGFloat],
-        nextValue: () -> [Int: CGFloat]
-    ) {
-        value.merge(nextValue(), uniquingKeysWith: { $1 })
+    let spacing = 12.0
+
+    let width = 1.0
+    let minorHeight = 16.0
+    let majorHeight = 34.0
+
+    var selectedDivider: some View {
+        Color.whiteInvert
+            .frame(width: width, height: majorHeight)
+    }
+
+    var divider: some View {
+        Color.white
+            .frame(width: width, height: minorHeight)
+            .opacity(0.2)
+    }
+
+    var dividers: some View {
+        HStack(spacing: spacing) {
+            divider
+            divider
+        }
+    }
+
+    var body: some View {
+        GeometryReader { proxy in
+            HPicker($value, in: values) { value in
+                let isFirst = value == values.first
+                let isLast = value == values.last
+                let isInfinity = value == 0
+                let isEven = value.isMultiple(of: 2)
+                let text = String(minutes: value)
+
+                VStack {
+                    Text(text)
+                        .font(.pragmaticaNextVF(size: isInfinity ? 30 : 15))
+                        .offset(y: isInfinity ? 12 : 0)
+                        .foregroundStyle(.white)
+                        .opacityEffect(
+                            (isEven || text.count < 5) ? 0.2 : 0.0,
+                            center: proxy.frame(in: .global).midX,
+                            width: (spacing + width) * 5
+                        )
+                        .scaleEffect(
+                            2.6,
+                            center: proxy.frame(in: .global).midX,
+                            width: (spacing + width) * 5
+                        )
+                        .offsetEffect(
+                            -36,
+                             center: proxy.frame(in: .global).midX,
+                             width: (spacing + width) * 5
+                        )
+
+                    HStack(spacing: spacing) {
+                        dividers
+                            .opacity(isFirst ? 0 : 1)
+
+                        selectedDivider
+                            .opacityEffect(
+                                0.2,
+                                center: proxy.frame(in: .global).midX,
+                                width: (spacing + width) * 5
+                            )
+                            .scaleEffect(
+                                1.8,
+                                center: proxy.frame(in: .global).midX,
+                                width: (spacing + width) * 5
+                            )
+
+
+                        dividers
+                            .opacity(isLast ? 0 : 1)
+                    }
+                }
+                .padding(spacing / 2)
+            }
+        }
     }
 }
 
-fileprivate extension View {
-    var scrollSpace: String { "TimePickerScroll" }
+private extension View {
+    func opacityEffect(
+        _ value: Double,
+        center: Double,
+        width: Double
+    ) -> some View {
+        self.visualEffect { content, proxy in
+            let itemCenter = proxy.frame(in: .global).midX
+            let factor = max(0.0, 1.0 - abs(itemCenter - center) / width)
+            return content.opacity(max(value, 1 * factor))
+        }
+    }
 
-    var itemHeight: CGFloat { 80 }
-    var itemWidth: CGFloat { 80 }
+    func scaleEffect(
+        _ value: Double,
+        center: Double,
+        width: Double
+    ) -> some View {
+        self.visualEffect { content, proxy in
+            let itemCenter = proxy.frame(in: .global).midX
+            let factor = max(0.0, 1.0 - abs(itemCenter - center) / width)
+            return content.scaleEffect(max(1, value * factor))
+        }
+    }
 
-    var primaryDividerHeight: CGFloat { 50 }
-    var secondaryDividerHeight: CGFloat { 28 }
-
-    var dividerWidth: CGFloat { 2 }
-    var dividerCount: CGFloat { 5 }
-    var dividerSpacing: CGFloat {
-        (itemWidth - dividerCount * dividerWidth) / dividerCount
+    func offsetEffect(
+        _ value: Double,
+        center: Double,
+        width: Double
+    ) -> some View {
+        self.visualEffect { content, proxy in
+            let itemCenter = proxy.frame(in: .global).midX
+            let factor = max(0.0, 1.0 - abs(itemCenter - center) / width)
+            return content.offset(y: value * factor)
+        }
     }
 }
 
@@ -307,6 +196,6 @@ fileprivate extension View {
         Text("Long rest")
         DurationPicker($longRest, role: .longRest)
     }
-    .background(.white)
+    .background(.black)
     .colorScheme(.light)
 }
