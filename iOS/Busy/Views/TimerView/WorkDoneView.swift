@@ -9,6 +9,8 @@ extension TimerView {
                 Spacer()
 
                 Image(.checkmarkGreen)
+                    .resizable()
+                    .frame(width: 132, height: 132)
 
                 Text("BUSY 1/3 done!")
                     .font(.pragmaticaNextVF(size: 32))

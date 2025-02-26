@@ -52,8 +52,8 @@ struct TimerView: View {
 
             SkipButton {
                 switch appState.wrappedValue {
-                case .working: appState.wrappedValue = .resting
-                case .resting: appState.wrappedValue = .longResting
+                case .working: appState.wrappedValue = .workDone
+                case .resting: appState.wrappedValue = .restOver
                 case .longResting: appState.wrappedValue = .finished
                 default: break
                 }

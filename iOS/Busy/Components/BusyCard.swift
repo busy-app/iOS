@@ -87,7 +87,7 @@ private struct BusyCard: View {
         }
         .frame(height: 232)
         .frame(maxWidth: .infinity)
-        .background(.card)
+        .background(.e5)
         .clipShape(RoundedRectangle(cornerRadius: 24))
         .padding(16)
     }
