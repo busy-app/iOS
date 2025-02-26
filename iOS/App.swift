@@ -2,6 +2,10 @@ import SwiftUI
 
 @main
 struct App: SwiftUI.App {
+    init() {
+        BusyShortcuts.updateAppShortcutParameters()
+    }
+
     var body: some Scene {
         WindowGroup {
             BusyApp()
