@@ -24,7 +24,9 @@ struct BusyApp: View {
         case cards
         case paused(AppState)
         case working
+        case workDone
         case resting
+        case restOver
         case longResting
         case finished
     }
@@ -37,7 +39,9 @@ struct BusyApp: View {
             case .cards: CardsView(settings: $busySettings)
             case .paused: TimerView.PauseView()
             case .working: TimerView(timer: $timer, settings: $busySettings)
+            case .workDone: TimerView.WorkDoneView()
             case .resting: TimerView(timer: $timer, settings: $busySettings)
+            case .restOver: TimerView.RestOverView()
             case .longResting: TimerView(timer: $timer, settings: $busySettings)
             case .finished: TimerView.FinishedView()
             }

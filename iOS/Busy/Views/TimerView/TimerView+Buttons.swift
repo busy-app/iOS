@@ -45,20 +45,6 @@ extension TimerView {
         }
     }
 
-    struct SkipButton: View {
-        let action: () -> Void
-
-        public var body: some View {
-            Button {
-                action()
-            } label: {
-                Text("Skip")
-                    .font(.pragmaticaNextVF(size: 18))
-                    .foregroundStyle(.transparentWhiteInvertSecondary)
-            }
-        }
-    }
-
     struct FinishButton: View {
         var action: () -> Void
 
@@ -99,16 +85,16 @@ extension TimerView {
 }
 
 #Preview {
-    VStack {
+    VStack(spacing: 24) {
         TimerView.StartButton {}
 
         TimerView.PauseButton {}
-
-        TimerView.SkipButton {}
 
         TimerView.FinishButton {}
 
         TimerView.RestartButton {}
     }
+    .frame(maxWidth: .infinity, maxHeight: .infinity)
     .colorScheme(.light)
+    .background(.backgroundDark)
 }

@@ -1,8 +1,8 @@
 struct TimerState: Codable, RawRepresentable {
-    var minute: Int = 15
-    var second: Int = 0
+    var minutes: Int = 15
+    var seconds: Int = 0
 
     var isValid: Bool {
-        return minute > 0 || second >= 0 && second < 60
+        return minutes > 0 || seconds >= 0 && seconds < 60
     }
 }

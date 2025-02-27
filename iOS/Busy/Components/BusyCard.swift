@@ -34,7 +34,9 @@ private struct BusyCard: View {
 
                     Spacer()
 
-                    Image(.dots)
+                    Text("Edit")
+                        .font(.pragmaticaNextVF(size: 18))
+                        .foregroundStyle(.transparentWhiteInvertPrimary)
                 }
 
                 Spacer()
@@ -78,13 +80,14 @@ private struct BusyCard: View {
                         }
                         .frame(minHeight: 0)
                     }
+                    .opacity(settings.blocker.selectedCount == 0 ? 0 : 1)
                 }
             }
-            .padding(16)
+            .padding(24)
         }
         .frame(height: 232)
         .frame(maxWidth: .infinity)
-        .background(.card)
+        .background(.e5)
         .clipShape(RoundedRectangle(cornerRadius: 24))
         .padding(16)
     }
