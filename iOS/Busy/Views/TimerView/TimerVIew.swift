@@ -10,26 +10,37 @@ struct TimerView: View {
 
     var name: String {
         switch appState.wrappedValue {
-        case .working: settings.name
-        case .resting: "Rest"
-        case .longResting: "Long rest"
+        case .working, .paused(.working): settings.name
+        case .resting, .paused(.resting): "Rest"
+        case .longResting, .paused(.longResting): "Long rest"
         default: ""
         }
     }
 
     var description: String {
         switch appState.wrappedValue {
-        case .working: "1/3"
+        case .working, .paused(.working): "1/3"
         default: ""
+        }
+    }
+
+    var showPause: Bool {
+        switch appState.wrappedValue {
+        case .paused: true
+        default: false
         }
     }
 
     var colors: [Color] {
         switch appState.wrappedValue {
-        case .working: [.backgroundBusyStart, .backgroundBusyStop]
-        case .resting: [.backgroundRestStart, .backgroundRestStop]
-        case .longResting: [.backgroundLongRestStart, .backgroundLongRestStop]
-        default: []
+        case .working, .paused(.working):
+            [.backgroundBusyStart, .backgroundBusyStop]
+        case .resting, .paused(.resting):
+            [.backgroundRestStart, .backgroundRestStop]
+        case .longResting, .paused(.longResting):
+            [.backgroundLongRestStart, .backgroundLongRestStop]
+        default:
+            []
         }
     }
 
@@ -90,6 +101,10 @@ struct TimerView: View {
                 startPoint: .top,
                 endPoint: .bottom
             )
+        )
+        .overlay(
+            PauseOverlayView()
+                .opacity(showPause ? 1 : 0)
         )
     }
 

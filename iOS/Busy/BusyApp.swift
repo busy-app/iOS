@@ -37,7 +37,7 @@ struct BusyApp: View {
         Group {
             switch appState {
             case .cards: CardsView(settings: $busySettings)
-            case .paused: TimerView.PauseView()
+            case .paused: TimerView(timer: $timer, settings: $busySettings)
             case .working: TimerView(timer: $timer, settings: $busySettings)
             case .workDone: TimerView.WorkDoneView()
             case .resting: TimerView(timer: $timer, settings: $busySettings)

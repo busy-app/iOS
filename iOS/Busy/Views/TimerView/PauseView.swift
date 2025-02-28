@@ -1,16 +1,23 @@
 import SwiftUI
 
 extension TimerView {
-    struct PauseView: View {
+    struct PauseOverlayView: View {
         @Environment(\.appState) var appState
 
         var body: some View {
             VStack {
                 Spacer()
 
-                Image(.pauseIcon)
-                    .resizable()
-                    .frame(width: 66, height: 66)
+                Button {
+                    switch appState.wrappedValue {
+                    case .paused(let state): appState.wrappedValue = state
+                    default: break
+                    }
+                } label: {
+                    Image(.pauseIcon)
+                        .resizable()
+                        .frame(width: 66, height: 66)
+                }
 
                 Spacer()
 
@@ -20,14 +27,14 @@ extension TimerView {
                     default: break
                     }
                 }
-                .padding(.bottom, 64)
+                .padding(.bottom, 16)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(.backgroundPause)
+            .background(.black.opacity(0.8))
         }
     }
 }
-
+ 
 #Preview {
-    TimerView.PauseView()
+    TimerView.PauseOverlayView()
 }
