@@ -93,7 +93,7 @@ struct TimerView: View {
                 appState.wrappedValue = .paused(appState.wrappedValue)
             }
             .padding(.top, 16)
-            .padding(.bottom, 16)
+            .padding(.bottom, 64)
         }
         .background(
             LinearGradient(

@@ -27,7 +27,7 @@ extension TimerView {
                     default: break
                     }
                 }
-                .padding(.bottom, 16)
+                .padding(.bottom, 64)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(.black.opacity(0.8))
