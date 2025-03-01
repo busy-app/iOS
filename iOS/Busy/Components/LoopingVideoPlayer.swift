@@ -30,6 +30,7 @@ struct LoopingVideoPlayer: View {
     func createPlayer(with url: URL) {
         let item = AVPlayerItem(asset: AVURLAsset(url: url))
         self.player = AVQueuePlayer(playerItem: item)
+        self.player?.allowsExternalPlayback = false
         self.playerLooper = AVPlayerLooper(player: player!, templateItem: item)
     }
 
