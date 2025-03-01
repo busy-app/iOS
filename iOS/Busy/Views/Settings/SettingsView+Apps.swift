@@ -1,0 +1,145 @@
+import SwiftUI
+
+import FamilyControls
+import ManagedSettings
+
+extension BusyApp.SettingsView {
+    struct AppsSettingsControl: View {
+        @Binding var blockerSettings: BlockerSettings
+
+        var body: some View {
+            VStack(alignment: .leading, spacing: 0) {
+                Toggle(isOn: $blockerSettings.isOn) {
+                    Text("Block apps")
+                        .font(.pragmaticaNextVF(size: 18))
+                        .foregroundStyle(.whiteInvert)
+                }
+                .tint(.accent)
+
+                SelectAppsButton(settings: $blockerSettings)
+                    .padding(.top, 22)
+            }
+            .padding(12)
+            .background(.transparentWhiteInvertQuinary)
+            .clipShape(RoundedRectangle(cornerRadius: 12))
+        }
+    }
+
+    struct SelectAppsButton: View {
+        @Binding var settings: BlockerSettings
+
+        @State private var showPicker: Bool = false
+        @State private var selection = FamilyActivitySelection()
+
+        var body: some View {
+            Button {
+                showPicker = true
+            } label: {
+                Group {
+                    if settings.selectedCount > 0 {
+                        SelectedApps(settings: settings)
+                    } else {
+                        AddApps()
+                    }
+                }
+            }
+            .familyActivityPicker(
+                isPresented: $showPicker,
+                selection: $selection
+            )
+            .onChange(of: selection) {
+                settings.applicationTokens = selection.applicationTokens
+                settings.categoryTokens = selection.categoryTokens
+                settings.domainTokens = selection.webDomainTokens
+            }
+            .task {
+                selection.applicationTokens = settings.applicationTokens
+                selection.categoryTokens = settings.categoryTokens
+                selection.webDomainTokens = settings.domainTokens
+            }
+        }
+    }
+
+    struct AddApps: View {
+        var body: some View {
+            HStack {
+                Spacer()
+                Text("+ Add apps")
+                Spacer()
+            }
+            .padding(12)
+            .font(.pragmaticaNextVF(size: 18))
+            .foregroundStyle(.transparentWhiteInvertPrimary)
+            .background(.transparentWhiteInvertQuinary)
+            .clipShape(RoundedRectangle(cornerRadius: 12))
+            .overlay {
+                RoundedRectangle(cornerRadius: 12)
+                    .strokeBorder(
+                        style: StrokeStyle(lineWidth: 2, dash: [4])
+                    )
+                    .tint(.transparentWhiteInvertQuaternary)
+            }
+        }
+    }
+
+    struct SelectedApps: View {
+        let settings: BlockerSettings
+
+        var body: some View {
+            HStack(spacing: 0) {
+                AppsIcons(settings: settings)
+                Spacer()
+                Text(settings.selectedCountString)
+                    .font(.pragmaticaNextVF(size: 14))
+                    .foregroundStyle(.transparentWhiteInvertSecondary)
+                Image(.arrowIcon)
+            }
+            .padding(.vertical, 4)
+        }
+    }
+
+    struct AppsIcons: View {
+        let settings: BlockerSettings
+        
+        var body: some View {
+            if settings.isAllSelected {
+                GeometryReader { proxy in
+                    Image(.appsIcon)
+                        .resizable()
+                        .frame(
+                            width: min(proxy.size.width, proxy.size.height),
+                            height: min(proxy.size.width, proxy.size.height)
+                        )
+                }
+            } else {
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: 4) {
+                        ForEach(Array(settings.categoryTokens), id: \.self) {
+                            Label($0)
+                                .labelStyle(.iconOnly)
+                        }
+
+                        ForEach(Array(settings.applicationTokens), id: \.self) {
+                            Label($0)
+                                .labelStyle(.iconOnly)
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+#Preview {
+    @Previewable @State var isPresented: Bool = true
+    @Previewable @State var settings: BusySettings = .init()
+
+    Button("Show") {
+        isPresented = true
+    }
+    .sheet(isPresented: $isPresented) {
+        BusyApp.SettingsView(settings: $settings)
+            .colorScheme(.light)
+            .presentationDragIndicator(.visible)
+    }
+}
