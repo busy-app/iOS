@@ -56,7 +56,7 @@ struct TimerView: View {
                     }
                     .colorScheme(.light)
                     .presentationBackground(.clear)
-                    .presentationDetents([.height(210)])
+                    .presentationDetents([.height(230)])
                 }
 
                 Spacer()
@@ -175,8 +175,9 @@ struct TimerView: View {
                 .padding(.top, 48)
             }
             .padding(24)
-            .background(.backgroundDark.opacity(0.6))
+            .background(VisualEffectView(effect: UIBlurEffect(style: .dark)))
             .clipShape(RoundedRectangle(cornerRadius: 32))
+            .padding(16)
             .onDisappear {
                 if confirmed {
                     onConfirm()
@@ -195,7 +196,7 @@ struct TimerView: View {
                         Image(.stopIcon)
                             .renderingMode(.template)
                         Text("Stop")
-                            .font(.pragmaticaNextVF(size: 24))
+                            .font(.pragmaticaNextVF(size: 20))
                     }
                     .frame(height: 64)
                     .frame(maxWidth: .infinity)
@@ -215,7 +216,7 @@ struct TimerView: View {
                 } label: {
                     HStack {
                         Text("Keep BUSY")
-                            .font(.pragmaticaNextVF(size: 24))
+                            .font(.pragmaticaNextVF(size: 20))
                     }
                     .frame(height: 64)
                     .frame(maxWidth: .infinity)
