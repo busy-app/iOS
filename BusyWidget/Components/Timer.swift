@@ -28,6 +28,8 @@ extension BusyWidgetLiveActivity {
             switch state.event {
             case .active, .paused:
                 Timer(state: state, fontSize: 11)
+                    // FIXME: Timer display on full width when hours are not present
+                    .multilineTextAlignment(.center)
             case .completed:
                 Text(state.tag.title)
                     .font(.pragmaticaNextVF(size: 11))
