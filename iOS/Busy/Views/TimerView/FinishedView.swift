@@ -2,7 +2,12 @@ import SwiftUI
 
 extension TimerView {
     struct FinishedView: View {
+        var restart: () -> Void
+
         @Environment(\.appState) var appState
+
+        @AppStorage("completed", store: .group) var completed: Int = 0
+        @AppStorage("blocked", store: .group) var blocked: Int = 0
 
         var body: some View {
             VStack {
@@ -21,7 +26,7 @@ extension TimerView {
                 }
                 .padding(.top, 54)
 
-                StatsView()
+                StatsView(completed: completed, blocked: blocked)
                     .padding(.top, 10)
 
                 Spacer()
@@ -31,7 +36,7 @@ extension TimerView {
                 }
 
                 RestartButton {
-                    appState.wrappedValue = .working
+                    restart()
                 }
                 .padding(.top, 24)
             }
@@ -56,9 +61,15 @@ extension TimerView {
                     endPoint: UnitPoint(x: -0.06, y: 1.05)
                 )
             )
+            .task {
+                completed += 1
+            }
         }
 
         struct StatsView: View {
+            let completed: Int
+            let blocked: Int
+
             struct Card<Content: View>: View {
                 @ViewBuilder var content: () -> Content
 
@@ -83,7 +94,7 @@ extension TimerView {
                                 .font(.pragmaticaNextVF(size: 18))
                                 .foregroundStyle(.transparentWhiteInvertPrimary)
 
-                            Text("5X")
+                            Text("\(completed)X")
                                 .font(.pragmaticaNextVF(size: 40))
                                 .foregroundStyle(.whiteInvert)
                         }
@@ -95,7 +106,7 @@ extension TimerView {
                                 .font(.pragmaticaNextVF(size: 18))
                                 .foregroundStyle(.transparentWhiteInvertPrimary)
 
-                            Text("3X")
+                            Text("\(blocked)X")
                                 .font(.pragmaticaNextVF(size: 40))
                                 .foregroundStyle(.e5)
                         }
@@ -107,5 +118,5 @@ extension TimerView {
 }
 
 #Preview {
-    TimerView.FinishedView()
+    TimerView.FinishedView {}
 }

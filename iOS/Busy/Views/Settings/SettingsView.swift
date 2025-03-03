@@ -24,7 +24,7 @@ extension BusyApp {
                             .foregroundStyle(.whiteInvert)
                             .padding(.top, 24)
 
-                        DurationPicker($settings.time, role: .total)
+                        DurationPicker($settings.duration, role: .total)
                             .padding(.top, 12)
                             .padding(.bottom, 32)
                     }

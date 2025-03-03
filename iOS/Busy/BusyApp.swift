@@ -17,18 +17,11 @@ struct BusyApp: View {
     @AppStorage("busySettings")
     var busySettings: BusySettings = .init()
 
-    @State private var timer = Timer.shared
     @State private var activity: Activity<BusyWidgetAttributes>?
 
     indirect enum AppState {
         case cards
-        case paused(AppState)
-        case working
-        case workDone
-        case resting
-        case restOver
-        case longResting
-        case finished
+        case busy
     }
 
     @State var appState: AppState = .cards
@@ -37,13 +30,7 @@ struct BusyApp: View {
         Group {
             switch appState {
             case .cards: CardsView(settings: $busySettings)
-            case .paused: TimerView(timer: $timer, settings: $busySettings)
-            case .working: TimerView(timer: $timer, settings: $busySettings)
-            case .workDone: TimerView.WorkDoneView()
-            case .resting: TimerView(timer: $timer, settings: $busySettings)
-            case .restOver: TimerView.RestOverView()
-            case .longResting: TimerView(timer: $timer, settings: $busySettings)
-            case .finished: TimerView.FinishedView()
+            case .busy: BusyView(settings: $busySettings)
             }
         }
         .environment(\.appState, $appState)
@@ -65,7 +52,7 @@ struct BusyApp: View {
             queue: .main
         ) { _ in
             MainActor.assumeIsolated {
-                stopBusy()
+                disableShield()
             }
         }
     }
@@ -92,30 +79,6 @@ struct BusyApp: View {
             enableShield()
         }
         #endif
-
-        timer.onChange = {
-            if timer.state == .running {
-                updateActivity()
-            } else {
-                stopActivity()
-            }
-        }
-
-        timer.onEnd = {
-            notifications.notify()
-        }
-
-        timer.start(
-            minutes: busySettings.intervals.busy.minutes,
-            seconds: busySettings.intervals.busy.seconds
-        )
-
-        startActivity()
-    }
-
-    func stopBusy() {
-        timer.stop()
-        disableShield()
     }
 
     func enableShield() {
@@ -136,45 +99,6 @@ struct BusyApp: View {
 
         managedSettingsStore.shield.webDomains = nil
         managedSettingsStore.shield.webDomainCategories = nil
-    }
-}
-
-extension BusyApp {
-    var contentState: BusyWidgetAttributes.ContentState {
-        .init(
-            isOn: timer.state == .running,
-            deadline: timer.deadline
-        )
-    }
-
-    func startActivity() {
-        activity = try? Activity<BusyWidgetAttributes>.request(
-            attributes: .init(),
-            content: .init(
-                state: contentState,
-                staleDate: contentState.deadline
-            )
-        )
-    }
-
-    func updateActivity() {
-        let activity = self.activity
-        Task {
-            await activity?.update(
-                .init(
-                    state: contentState,
-                    staleDate: contentState.deadline
-                )
-            )
-        }
-    }
-
-    func stopActivity() {
-        let activity = self.activity
-        self.activity = nil
-        Task {
-            await activity?.end(.none, dismissalPolicy: .immediate)
-        }
     }
 }
 

@@ -2,21 +2,21 @@ import SwiftUI
 
 extension TimerView {
     struct TimeCard: View {
-        let state: TimerState
-
-        @Environment(\.appState) var appState
+        let duration: Duration
+        let progress: Double
+        let kind: BusyState.Interval.Kind
 
         var video: String {
-            switch appState.wrappedValue {
-            case .working: "Fire.mp4"
-            default: "Smoke.mp4"
+            switch kind {
+            case .work: "Fire.mp4"
+            case .rest, .longRest: "Smoke.mp4"
             }
         }
 
         var videoOpacity: Double {
-            switch appState.wrappedValue {
-            case .working: 0.2
-            default: 0.3
+            switch kind {
+            case .work: 0.2
+            case .rest, .longRest: 0.3
             }
         }
 
@@ -31,22 +31,28 @@ extension TimerView {
                             .font(.pragmaticaNextVF(size: 18))
                             .foregroundStyle(.transparentWhiteInvertSecondary)
                     }
+                    .opacity(0)
                 }
 
-                Time(
-                    minutes: state.minutes,
-                    seconds: state.seconds
-                )
+                Time(duration: duration)
 
-                Progress(value: 0.85)
+                Progress(value: progress, kind: kind)
             }
             .padding(24)
             .background {
+                #if DISABLE_VIDEO
+                switch kind {
+                case .work: Color.red.opacity(0.8)
+                case .rest: Color.green.opacity(0.8)
+                case .longRest: Color.blue.opacity(0.8)
+                }
+                #else
                 LoopingVideoPlayer(video)
                     .opacity(videoOpacity)
                     .disabled(true)
                     .scaledToFill()
-                    .scaleEffect(1.25)
+                    .scaleEffect(1.3)
+                #endif
             }
             .clipShape(RoundedRectangle(cornerRadius: 24))
         }
@@ -54,19 +60,17 @@ extension TimerView {
 
     struct Progress: View {
         let value: Double
-
-        @Environment(\.appState) var appState
+        let kind: BusyState.Interval.Kind
 
         var background: Color {
             foreground.opacity(0.1)
         }
 
         var foreground: Color {
-            switch appState.wrappedValue {
-            case .working: .red
-            case .resting: .green
-            case .longResting: .green
-            default: .clear
+            switch kind {
+            case .work: .red
+            case .rest: .green
+            case .longRest: .green
             }
         }
 
@@ -83,8 +87,15 @@ extension TimerView {
     }
 
     struct Time: View {
-        let minutes: Int
-        let seconds: Int
+        let duration: Duration
+
+        var minutes: Int {
+            duration.seconds / 60
+        }
+
+        var seconds: Int {
+            duration.seconds % 60
+        }
 
         var body: some View {
             HStack(spacing: 8) {
@@ -107,9 +118,8 @@ extension TimerView {
             }
             .font(.jetBrainsMonoRegular(size: 64))
             .foregroundStyle(.surfacePrimary)
-            .animation(.linear, value: minutes)
-            .animation(.linear, value: seconds)
-            .contentTransition(.numericText())
+            .animation(.linear, value: duration)
+            .contentTransition(.numericText(countsDown: false))
         }
     }
 }
@@ -117,15 +127,12 @@ extension TimerView {
 #Preview {
     VStack {
         TimerView.TimeCard(
-            state: .init(
-                minutes: 24,
-                seconds: 04
-            )
+            duration: .seconds(15 * 60 + 05),
+            progress: 0.8,
+            kind: .work
         )
-        .environment(\.appState, .constant(.working))
         .colorScheme(.light)
         .padding(24)
     }
     .background(.gray)
 }
-

@@ -2,13 +2,13 @@ import SwiftUI
 
 extension Text {
     init(_ duration: Duration) {
-        self.init(duration.hr)
+        self.init(String(minutes: duration.seconds / 60))
     }
 }
 
 extension Text {
     init(_ interval: Interval) {
-        self.init(interval.duration.hr)
+        self.init(interval.duration)
     }
 }
 

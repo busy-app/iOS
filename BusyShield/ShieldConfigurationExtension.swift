@@ -1,12 +1,22 @@
 import ManagedSettings
 import ManagedSettingsUI
 import UIKit
+import SwiftUI
 
 class ShieldConfigurationExtension: ShieldConfigurationDataSource {
+    var blocked: Int {
+        get {
+            UserDefaults.group.integer(forKey: "blocked")
+        } set {
+            UserDefaults.group.set(newValue, forKey: "blocked")
+        }
+    }
+
     func configuration(
         shielding name: String
     ) -> ShieldConfiguration {
-        .init(
+        blocked += 1
+        return .init(
             backgroundBlurStyle: nil,
             backgroundColor: .background,
             icon: .blocked,

@@ -11,7 +11,7 @@ extension BusyApp {
                 BusyCardButton(settings: $settings)
 
                 TimerView.StartButton {
-                    appState.wrappedValue = .working
+                    appState.wrappedValue = .busy
                 }
                 .padding(.top, 100)
             }

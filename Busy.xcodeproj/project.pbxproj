@@ -101,6 +101,7 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		8B3C7F0B2D7AF4510088CC48 /* Shared */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Shared; sourceTree = "<group>"; };
 		8B5AB1452CEC085200211DA5 /* BusyShield */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (8B5AB14D2CEC085200211DA5 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = BusyShield; sourceTree = "<group>"; };
 		8B638DD02C610E9400C3458C /* iOS */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = iOS; sourceTree = "<group>"; };
 		8B638DE12C610E9500C3458C /* Tests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Tests; sourceTree = "<group>"; };
@@ -169,6 +170,7 @@
 				8BD9D7402C61480C0056FFC7 /* Busy-Info.plist */,
 				8B638DFD2C61195E00C3458C /* Busy.entitlements */,
 				8B638DD02C610E9400C3458C /* iOS */,
+				8B3C7F0B2D7AF4510088CC48 /* Shared */,
 				8B638DE12C610E9500C3458C /* Tests */,
 				8B638DEB2C610E9500C3458C /* UITests */,
 				8B5AB1452CEC085200211DA5 /* BusyShield */,
@@ -206,6 +208,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
+				8B3C7F0B2D7AF4510088CC48 /* Shared */,
 				8B5AB1452CEC085200211DA5 /* BusyShield */,
 			);
 			name = BusyShield;
@@ -231,6 +234,7 @@
 				8B82C3C02CF8FDCA00AE782C /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
+				8B3C7F0B2D7AF4510088CC48 /* Shared */,
 				8B638DD02C610E9400C3458C /* iOS */,
 			);
 			name = Busy;
@@ -254,6 +258,7 @@
 				8B638DE02C610E9500C3458C /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
+				8B3C7F0B2D7AF4510088CC48 /* Shared */,
 				8B638DE12C610E9500C3458C /* Tests */,
 			);
 			name = BusyTests;
@@ -277,6 +282,7 @@
 				8B638DEA2C610E9500C3458C /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
+				8B3C7F0B2D7AF4510088CC48 /* Shared */,
 				8B638DEB2C610E9500C3458C /* UITests */,
 			);
 			name = BusyUITests;
@@ -299,6 +305,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
+				8B3C7F0B2D7AF4510088CC48 /* Shared */,
 				8B82C3B12CF8FDC900AE782C /* BusyWidget */,
 			);
 			name = BusyWidgetExtension;

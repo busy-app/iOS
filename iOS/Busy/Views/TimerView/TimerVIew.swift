@@ -1,46 +1,39 @@
 import SwiftUI
 
 struct TimerView: View {
-    @Binding var timer: Timer
-    @Binding var settings: BusySettings
+    let interval: BusyState.Interval
 
-    @Environment(\.appState) var appState
+    @Binding var state: BusyState
+    @Binding var settings: BusySettings
 
     @State var showConfirmationDialog: Bool = false
 
+    @Environment(\.appState) var appState
+
     var name: String {
-        switch appState.wrappedValue {
-        case .working, .paused(.working): settings.name
-        case .resting, .paused(.resting): "Rest"
-        case .longResting, .paused(.longResting): "Long rest"
-        default: ""
+        switch interval.kind {
+        case .work: settings.name
+        case .rest: "Rest"
+        case .longRest: "Long rest"
         }
     }
 
     var description: String {
-        switch appState.wrappedValue {
-        case .working, .paused(.working): "1/3"
-        default: ""
+        switch interval.kind {
+        case .work: "\(state.intervalNumber)/\(state.intervalTotal)"
+        case .rest, .longRest: ""
         }
     }
 
     var showPause: Bool {
-        switch appState.wrappedValue {
-        case .paused: true
-        default: false
-        }
+        state.timer.state == .paused
     }
 
     var colors: [Color] {
-        switch appState.wrappedValue {
-        case .working, .paused(.working):
-            [.backgroundBusyStart, .backgroundBusyStop]
-        case .resting, .paused(.resting):
-            [.backgroundRestStart, .backgroundRestStop]
-        case .longResting, .paused(.longResting):
-            [.backgroundLongRestStart, .backgroundLongRestStop]
-        default:
-            []
+        switch interval.kind {
+        case .work: [.backgroundBusyStart, .backgroundBusyStop]
+        case .rest: [.backgroundRestStart, .backgroundRestStop]
+        case .longRest: [.backgroundLongRestStart, .backgroundLongRestStop]
         }
     }
 
@@ -52,6 +45,7 @@ struct TimerView: View {
                 }
                 .sheet(isPresented: $showConfirmationDialog) {
                     ConfirmationDialog {
+                        state.stop()
                         appState.wrappedValue = .cards
                     }
                     .colorScheme(.light)
@@ -62,12 +56,7 @@ struct TimerView: View {
                 Spacer()
 
                 SkipButton {
-                    switch appState.wrappedValue {
-                    case .working: appState.wrappedValue = .workDone
-                    case .resting: appState.wrappedValue = .restOver
-                    case .longResting: appState.wrappedValue = .finished
-                    default: break
-                    }
+                    state.skip()
                 }
             }
             .padding(.top, 12)
@@ -81,16 +70,17 @@ struct TimerView: View {
 
             Spacer()
 
-            TimeCard(state: .init(
-                minutes: timer.minutes,
-                seconds: timer.seconds
-            ))
+            TimeCard(
+                duration: state.timer.timeLeft,
+                progress: state.timer.timeLeft / interval.duration,
+                kind: interval.kind
+            )
             .padding(24)
 
             Spacer()
 
             PauseButton {
-                appState.wrappedValue = .paused(appState.wrappedValue)
+                state.pause()
             }
             .padding(.top, 16)
             .padding(.bottom, 64)
@@ -103,8 +93,10 @@ struct TimerView: View {
             )
         )
         .overlay(
-            PauseOverlayView()
-                .opacity(showPause ? 1 : 0)
+            PauseOverlayView {
+                state.resume()
+            }
+            .opacity(showPause ? 1 : 0)
         )
     }
 
@@ -230,10 +222,34 @@ struct TimerView: View {
 }
 
 #Preview("Working") {
-    @Previewable @State var timer = Timer.shared
-    @Previewable @State var setting = BusySettings()
+    @Previewable @State var settings = BusySettings()
+    @Previewable @State var state = BusyState.preview
 
-    TimerView(timer: $timer, settings: $setting)
-        .colorScheme(.light)
-        .environment(\.appState, .constant(.working))
+    TimerView(
+        interval: .init(kind: .work, duration: .minutes(15)),
+        state: $state,
+        settings: $settings
+    )
+    .colorScheme(.light)
+    .task {
+        state.start()
+    }
+}
+
+extension BusyState {
+    var intervalNumber: Int {
+        guard let interval else { return 0 }
+
+        return intervals.intervals[...intervals.index].indices.filter {
+            intervals.intervals[$0].kind == interval.kind
+        }.count
+    }
+
+    var intervalTotal: Int {
+        guard let interval else { return 0 }
+
+        return intervals.intervals.indices.filter {
+            intervals.intervals[$0].kind == interval.kind
+        }.count
+    }
 }

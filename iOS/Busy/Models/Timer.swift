@@ -4,81 +4,61 @@ import Observation
 @MainActor
 @Observable
 class Timer {
-    @MainActor
-    static let shared = Timer()
-    private init() {}
-
-    private(set) var state: State = .stopped
-    private(set) var minutes: Int = 0
-    private(set) var seconds: Int = 0
-
-    var timeInterval: Int {
-        get {
-            minutes * 60 + seconds
-        }
-        set {
-            guard timeInterval != newValue else { return }
-            minutes = min(59, max(0, newValue / 60))
-            seconds = max(0, Int(newValue % 60))
-        }
-    }
-
     enum State {
+        case finished
         case running
-        case stopped
         case paused
     }
 
-    @ObservationIgnored var onChange: (() -> Void)?
-    @ObservationIgnored var onEnd: (() -> Void)?
+    private(set) var state: State = .paused
+    private(set) var timeLeft: Duration = .seconds(0)
 
-    @ObservationIgnored private(set) var deadline: Date = .now
-    @ObservationIgnored private var timer: Foundation.Timer = .init()
+    @ObservationIgnored var completion: (() -> Void)?
 
-    func start(
-        minutes: Int,
-        seconds: Int
-    ) {
-        stop()
-        self.minutes = minutes
-        self.seconds = seconds
+    @ObservationIgnored private var deadline: Date = .now
+    @ObservationIgnored private var timer: Foundation.Timer?
+
+    init() {
+    }
+
+    deinit {
+    }
+
+    func start(_ duration: Duration) {
+        precondition(state != .running)
+        timeLeft = duration
         resume()
     }
 
     func pause() {
+        timer?.invalidate()
         state = .paused
-        timer.invalidate()
-        onChange?()
-    }
-
-    func stop() {
-        state = .stopped
-        timer.invalidate()
-        onChange?()
     }
 
     func resume() {
         state = .running
-        deadline = .now.addingTimeInterval(.init(timeInterval))
+        deadline = .now.addingTimeInterval(.init(timeLeft.seconds))
         timer = .scheduledTimer(
             withTimeInterval: 1,
             repeats: true,
             block: { _ in
-                Task { @MainActor in
-                    self.update()
+                Task { @MainActor [weak self] in
+                    self?.update()
                 }
             }
         )
-        onChange?()
+    }
+
+    func finish() {
+        timer?.invalidate()
+        state = .finished
+        completion?()
     }
 
     private func update() {
-        guard deadline > .now else {
-            stop()
-            onEnd?()
-            return
+        timeLeft = .seconds(max(0, deadline.timeIntervalSinceNow.rounded(.up)))
+        if timeLeft <= .seconds(0) {
+            finish()
         }
-        timeInterval = .init(deadline.timeIntervalSinceNow.rounded(.up))
-        onChange?()
     }
 }

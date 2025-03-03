@@ -3,14 +3,16 @@ import FamilyControls
 
 struct BusySettings: Codable, RawRepresentable {
     var name: String = "BUSY"
-    var time: Duration = .minutes(90)
+    var duration: Duration = .minutes(90)
     var intervals: IntervalsSettings = .init()
     var blocker: BlockerSettings = .init()
     var sound: SoundSettings = .init()
 
+    var workIntervalCount: Int { intervals.isOn ? 1 : 3 }
+
     enum CodingKeys: CodingKey {
         case name
-        case time
+        case duration
         case intervals
         case blocker
         case sound
@@ -21,7 +23,7 @@ struct BusySettings: Codable, RawRepresentable {
     init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         name = try container.decode(String.self, forKey: .name)
-        time = try container.decode(Duration.self, forKey: .time)
+        duration = try container.decode(Duration.self, forKey: .duration)
         intervals = try container.decode(IntervalsSettings.self, forKey: .intervals)
         blocker = try container.decode(BlockerSettings.self, forKey: .blocker)
         sound = try container.decode(SoundSettings.self, forKey: .sound)
@@ -30,7 +32,7 @@ struct BusySettings: Codable, RawRepresentable {
     func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(name, forKey: .name)
-        try container.encode(time, forKey: .time)
+        try container.encode(duration, forKey: .duration)
         try container.encode(intervals, forKey: .intervals)
         try container.encode(blocker, forKey: .blocker)
         try container.encode(sound, forKey: .sound)
@@ -58,10 +60,6 @@ struct IntervalsSettings: Codable {
     var busy: Interval = .init(.minutes(25), autostart: true)
     var rest: Interval = .init(.minutes(5), autostart: true)
     var longRest: Interval = .init(.minutes(15), autostart: true)
-
-    var total: Duration {
-        busy.duration + rest.duration + longRest.duration
-    }
 }
 
 struct Interval: Codable {
@@ -92,15 +90,6 @@ extension Duration {
     }
 
     var seconds: Int {
-        Int(components.seconds) % 60
-    }
-}
-
-extension Duration {
-    var hr: String {
-        minutes >= 60
-            ? "\(minutes / 60)h \(minutes % 60)m"
-            : "\(minutes % 60)m"
-
+        Int(components.seconds)
     }
 }

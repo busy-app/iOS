@@ -43,7 +43,7 @@ private struct BusyCard: View {
 
                 HStack(alignment: .bottom) {
                     VStack(alignment: .leading, spacing: 0) {
-                        Text(settings.intervals.total)
+                        Text(settings.duration)
                             .font(.pragmaticaNextVF(size: 40))
                             .foregroundStyle(.whiteInvert)
                             .padding(.bottom, 16)

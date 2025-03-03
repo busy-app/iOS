@@ -11,7 +11,7 @@ struct StopBusyIntent: AppIntent {
     }
 
     func perform() async throws -> some IntentResult {
-        await Timer.shared.stop()
+        // await Timer.shared.stop()
         return .result()
     }
 }

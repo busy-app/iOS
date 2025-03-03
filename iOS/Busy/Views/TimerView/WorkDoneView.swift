@@ -22,7 +22,7 @@ extension TimerView {
                     .padding(.top, 12)
 
                 Button {
-                    appState.wrappedValue = .resting
+                    // appState.wrappedValue = .resting
                 } label: {
                     Text("Start rest")
                         .font(.pragmaticaNextVF(size: 24))
@@ -36,7 +36,7 @@ extension TimerView {
                 Spacer()
 
                 Button {
-                    appState.wrappedValue = .finished
+                    // appState.wrappedValue = .finished
                 } label: {
                     Text("Finish for today")
                         .foregroundStyle(.transparentWhiteInvertPrimary)
