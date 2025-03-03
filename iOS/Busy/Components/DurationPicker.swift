@@ -6,6 +6,9 @@ struct DurationPicker: View {
     private let minutes: [Int]
     private let labels: [String]
 
+    @State private var position = ScrollPosition(idType: Int.self)
+    @State private var currentIndex: Int?
+
     enum Role {
         case total
         case work
@@ -40,12 +43,12 @@ struct DurationPicker: View {
 
         minutes = (allowingInfinity ? [0] : [])
             + .init(
-                    stride(
-                        from: range.lowerBound,
-                        through: range.upperBound,
-                        by: 5
-                    )
+                stride(
+                    from: range.lowerBound,
+                    through: range.upperBound,
+                    by: 5
                 )
+            )
 
         labels = minutes.map { totalMinutes in
             let hours = totalMinutes / 60
@@ -61,99 +64,80 @@ struct DurationPicker: View {
 
     var body: some View {
         GeometryReader { outerGeometry in
-            ScrollViewReader { scrollProxy in
-                WheelScrollView(
-                    items: labels,
-                    outerGeometry: outerGeometry,
-                    scrollProxy: scrollProxy,
-                    onSelectedIndexChange: onUpdateTime
-                )
-                .task {
-                    scrollToSelectedValue(scrollProxy)
-                }
-                .onChange(of: value, initial: false) { old, new in
-                    withAnimation {
-                        scrollToSelectedValue(scrollProxy)
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 0) {
+                    ForEach(minutes.indices, id: \.self) { index in
+                        WheelItem(
+                            index: index,
+                            text: labels[index],
+                            isFirst: index == 0,
+                            isLast: index == (minutes.count - 1),
+                            outerGeometry: outerGeometry,
+                            onTap: { onTap(by: index) }
+                        )
+                        .id(index)
+                        .frame(width: itemWidth, height: itemHeight)
                     }
                 }
+                .padding(.top, 45)
+                .padding(
+                    .horizontal,
+                    (outerGeometry.size.width - itemWidth) / 2
+                )
+                .scrollTargetLayout()
+            }
+            .scrollPosition(
+                $position,
+                anchor: .init(x: 0.5, y: 0)
+            )
+            .scrollTargetBehavior(TargetBehavior(itemWidth))
+            .onChange(of: position) {
+                guard let index = position.viewID as? Int else { return }
+                value = minutes[index]
+
+                if index != currentIndex {
+                    let generator = UISelectionFeedbackGenerator()
+                    generator.selectionChanged()
+                    currentIndex = index
+                }
+            }
+            .onAppear {
+                let index = minutes.firstIndex(of: value) ?? 0
+                currentIndex = index
+                position.scrollTo(id: index, anchor: .center)
             }
         }
         .background(.blackInvert)
         .frame(height: 150)
     }
 
-    private func scrollToSelectedValue(_ scrollProxy: ScrollViewProxy) {
-        let index = minutes.firstIndex(of: value) ?? 0
-        scrollProxy.scrollTo(index, anchor: .center)
-    }
-
-    private func onUpdateTime(_ index: Int) {
-        value = minutes[index]
+    private func onTap(by index: Int) {
+        withAnimation {
+            position.scrollTo(id: index, anchor: .center)
+        }
     }
 }
 
-private struct WheelScrollView: View {
-    let items: [String]
+private struct TargetBehavior: ScrollTargetBehavior {
+    let itemWidth: CGFloat
 
-    let outerGeometry: GeometryProxy
-    let scrollProxy: ScrollViewProxy
+    init(_ itemWidth: CGFloat) {
+        self.itemWidth = itemWidth
+    }
 
-    let onSelectedIndexChange: (Int) -> Void
-
-    @State private var centerPositions: [Int: CGFloat] = [:]
-    @State private var lastFeedbackIndex: Int? = nil
-
-    var body: some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: 0) {
-                ForEach(items.indices, id: \.self) { index in
-                    WheelItem(
-                        index: index,
-                        text: items[index],
-                        isFirst: index == 0,
-                        isLast: index == (items.count - 1),
-                        outerGeometry: outerGeometry,
-                        onTap: { onSelectedIndexChange(index) }
-                    )
-                    .frame(width: itemWidth, height: itemHeight)
-                }
-            }
-            .padding(.top, 45)
-            .padding(.horizontal, (outerGeometry.size.width - itemWidth) / 2)
-        }
-        .coordinateSpace(name: scrollSpace)
-        .onPreferenceChange(CenterPositionKey.self) {
-            centerPositions = $0
-
-            guard let nearest = findNearestIndex() else { return }
-            selectionFeedback(index: nearest)
-        }
-        .simultaneousGesture(
-            DragGesture()
-                .onEnded { _ in
-                    Task { @MainActor in
-                        try await Task.sleep(nanoseconds: 200_000_000)
-                        guard let index = findNearestIndex() else { return }
-                        onSelectedIndexChange(index)
-                    }
-            }
+    func updateTarget(
+        _ target: inout ScrollTarget,
+        context: ScrollTargetBehaviorContext
+    ) {
+        let offset = target.rect.midX - context.contentSize.width / 2
+        let index = round(offset / itemWidth)
+        let midX = context.contentSize.width / 2 + index * itemWidth
+        target.rect = CGRect(
+            x: midX - target.rect.width / 2,
+            y: target.rect.minY,
+            width: target.rect.width,
+            height: target.rect.height
         )
-    }
-
-    private func findNearestIndex() -> Int? {
-        let centerX = outerGeometry.size.width / 2
-
-        return centerPositions
-            .min { abs($0.value - centerX) < abs($1.value - centerX) }?
-            .key
-    }
-
-    private func selectionFeedback(index: Int) {
-        if index != lastFeedbackIndex {
-            let generator = UISelectionFeedbackGenerator()
-            generator.selectionChanged()
-            lastFeedbackIndex = index
-        }
     }
 }
 
@@ -201,18 +185,6 @@ private struct WheelItem: View {
                     .opacity(textOpacity)
                     .contentShape(Rectangle())
                     .onTapGesture { onTap() }
-                    .background(
-                        GeometryReader {
-                            let midX = $0.frame(in: .named(scrollSpace)).midX
-
-                            Color
-                                .clear
-                                .preference(
-                                    key: CenterPositionKey.self,
-                                    value: [index: midX]
-                                )
-                        }
-                    )
 
                 HStack(spacing: 0) {
                     divider(height: secondaryDividerHeight)
@@ -260,17 +232,6 @@ private struct WheelItem: View {
 
     private func calculateDynamicScale(for distance: CGFloat) -> CGFloat {
         max(1, 1.5 - distance / 150)
-    }
-}
-
-private struct CenterPositionKey: PreferenceKey {
-    static var defaultValue: [Int: CGFloat] = [:]
-
-    static func reduce(
-        value: inout [Int: CGFloat],
-        nextValue: () -> [Int: CGFloat]
-    ) {
-        value.merge(nextValue(), uniquingKeysWith: { $1 })
     }
 }
 
