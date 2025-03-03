@@ -20,6 +20,9 @@ extension BusyApp.SettingsView {
         @State private var showRestIntervalEditor: Bool = false
         @State private var showLongRestIntervalEditor: Bool = false
 
+        // Fix presentationDetents height issue
+        @State private var cantShit: Bool = false
+
         var body: some View {
             HStack(spacing: 8) {
                 IntervalButton(
@@ -27,6 +30,7 @@ extension BusyApp.SettingsView {
                     icon: .busyIcon,
                     interval: $intervals.busy
                 ) {
+                    cantShit = true
                     showBusyIntervalEditor = true
                 }
                 .sheet(isPresented: $showBusyIntervalEditor) {
@@ -39,6 +43,9 @@ extension BusyApp.SettingsView {
                         interval: $intervals.busy,
                         role: .work
                     )
+                    .onDisappear {
+                        cantShit = false
+                    }
                     .presentationDragIndicator(.visible)
                     .presentationAutoHeight()
                     .colorScheme(.light)
@@ -49,6 +56,7 @@ extension BusyApp.SettingsView {
                     icon: .restIcon,
                     interval: $intervals.rest
                 ) {
+                    cantShit = true
                     showRestIntervalEditor = true
                 }
                 .sheet(isPresented: $showRestIntervalEditor) {
@@ -61,6 +69,9 @@ extension BusyApp.SettingsView {
                         interval: $intervals.rest,
                         role: .rest
                     )
+                    .onDisappear {
+                        cantShit = false
+                    }
                     .presentationDragIndicator(.visible)
                     .presentationAutoHeight()
                     .colorScheme(.light)
@@ -71,6 +82,7 @@ extension BusyApp.SettingsView {
                     icon: .longRestIcon,
                     interval: $intervals.longRest
                 ) {
+                    cantShit = true
                     showLongRestIntervalEditor = true
                 }
                 .sheet(isPresented: $showLongRestIntervalEditor) {
@@ -83,11 +95,15 @@ extension BusyApp.SettingsView {
                         interval: $intervals.longRest,
                         role: .longRest
                     )
+                    .onDisappear {
+                        cantShit = false
+                    }
                     .presentationDragIndicator(.visible)
                     .presentationAutoHeight()
                     .colorScheme(.light)
                 }
             }
+            .disabled(cantShit)
         }
     }
 
