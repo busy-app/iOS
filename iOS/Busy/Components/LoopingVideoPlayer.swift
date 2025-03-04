@@ -44,6 +44,13 @@ struct LoopingVideoPlayer: View {
     }
 }
 
+extension AVPlayerViewController {
+    override open func viewDidLoad() {
+        super.viewDidLoad()
+        self.showsPlaybackControls = false
+    }
+}
+
 #Preview {
     LoopingVideoPlayer("Smoke.mp4")
         .disabled(true)
