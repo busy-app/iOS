@@ -208,12 +208,12 @@ private struct WheelItem: View {
                 : 1.0
 
             // Offset text up
-            let yOffset = (scale - 1) * -60
+            let yOffset = (scale - 1) * -50
 
             VStack(spacing: 0) {
                 Text(text)
                     .foregroundStyle(.whiteInvert.opacity(opacity))
-                    .font(.ppNeueMontrealMedium(size: 20))
+                    .font(.pragmaticaNextVF(size: 20, weight: 500))
                     .frame(
                         maxWidth: .infinity,
                         maxHeight: .infinity,
