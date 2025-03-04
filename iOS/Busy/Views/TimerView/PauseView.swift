@@ -30,7 +30,10 @@ extension TimerView {
                 .padding(.bottom, 64)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(.backgroundPause)
+            .background(
+                DarkBlur()
+                    .ignoresSafeArea(.all)
+            )
         }
     }
 }

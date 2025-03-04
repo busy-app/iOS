@@ -175,7 +175,7 @@ struct TimerView: View {
                 .padding(.top, 48)
             }
             .padding(24)
-            .background(VisualEffectView(effect: UIBlurEffect(style: .dark)))
+            .background(DarkBlur())
             .clipShape(RoundedRectangle(cornerRadius: 32))
             .padding(16)
             .onDisappear {

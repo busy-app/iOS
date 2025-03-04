@@ -14,3 +14,9 @@ struct VisualEffectView: UIViewRepresentable {
         uiView.effect = effect
     }
 }
+
+struct DarkBlur: View {
+    var body: some View {
+        VisualEffectView(effect: UIBlurEffect(style: .dark))
+    }
+}
