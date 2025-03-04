@@ -126,7 +126,7 @@ struct DurationPicker: View {
                     }
             )
         }
-        .background(.blackInvert)
+        .background(.transparentBlackInvertSecondary)
         .frame(height: 150)
     }
 
@@ -310,6 +310,6 @@ fileprivate extension View {
         Text("Long rest")
         DurationPicker($longRest, role: .longRest)
     }
-    .background(.white)
+    .background(.black)
     .colorScheme(.light)
 }
