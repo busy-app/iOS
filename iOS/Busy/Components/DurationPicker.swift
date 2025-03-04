@@ -86,6 +86,7 @@ struct DurationPicker: View {
                     }
                 }
                 .padding(.top, 45)
+                .padding(.bottom, 8)
                 .padding(
                     .horizontal,
                     (outerGeometry.size.width - itemWidth) / 2
@@ -236,6 +237,7 @@ private struct WheelItem: View {
 
                     divider(height: primaryDividerHeight, opacity: opacity)
                         .padding(.horizontal, dividerSpacing)
+                        .scaleEffect(scale, anchor: .center)
 
                     divider(height: secondaryDividerHeight)
                         .padding(.trailing, dividerSpacing)
@@ -279,16 +281,16 @@ fileprivate extension View {
     var scrollSpace: String { "TimePickerScroll" }
 
     var itemHeight: CGFloat { 80 }
-    var itemWidth: CGFloat { 80 }
+    var itemWidth: CGFloat {
+        dividerSpacing * dividerCount + dividerWidth * dividerCount
+    }
 
-    var primaryDividerHeight: CGFloat { 50 }
-    var secondaryDividerHeight: CGFloat { 28 }
+    var primaryDividerHeight: CGFloat { 32 }
+    var secondaryDividerHeight: CGFloat { 16 }
 
     var dividerWidth: CGFloat { 2 }
     var dividerCount: CGFloat { 5 }
-    var dividerSpacing: CGFloat {
-        (itemWidth - dividerCount * dividerWidth) / dividerCount
-    }
+    var dividerSpacing: CGFloat { 16 }
 }
 
 #Preview {
