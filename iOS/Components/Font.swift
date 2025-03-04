@@ -1,6 +1,11 @@
 import SwiftUI
 
 extension Font {
+    enum Variations: Int {
+        case weight = 2003265652
+        case width = 2003072104
+    }
+
     static func jetBrainsMonoRegular(size: Double) -> Font {
         .custom("JetBrainsMono-Regular", size: size)
     }
@@ -21,14 +26,8 @@ extension Font {
         size: Double,
         weight: Double = 400
     ) -> Font {
-        func fontAxisIdentifier(from axisName: String) -> UInt32 {
-            axisName
-                .compactMap { $0.asciiValue }
-                .reduce(UInt32(0)) { $0 << 8 | UInt32($1) }
-        }
-
-        let axes: [UInt32: CGFloat] = [
-            fontAxisIdentifier(from: "wght"): CGFloat(weight)
+        let axes: [Int: Double] = [
+            Variations.weight.rawValue: Double(weight)
         ]
 
         let descriptor = UIFontDescriptor(fontAttributes: [
