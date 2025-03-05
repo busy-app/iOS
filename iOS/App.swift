@@ -5,6 +5,7 @@ struct App: SwiftUI.App {
     var body: some Scene {
         WindowGroup {
             BusyApp()
+                .preferredColorScheme(.dark)
                 .colorScheme(.light)
         }
     }
