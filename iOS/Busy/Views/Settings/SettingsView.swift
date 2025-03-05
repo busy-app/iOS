@@ -6,6 +6,7 @@ import ManagedSettings
 extension BusyApp {
     struct SettingsView: View {
         @Binding var settings: BusySettings
+        @State var DELETEME: Duration = .minutes(90)
 
         @Environment(\.dismiss) private var dismiss
 
@@ -23,6 +24,10 @@ extension BusyApp {
                             .padding(.top, 24)
 
                         DurationPicker($settings.time, role: .total)
+                            .padding(.top, 12)
+                            .padding(.bottom, 32)
+
+                        ODurationPicker($DELETEME, role: .total)
                             .padding(.top, 12)
                             .padding(.bottom, 32)
                     }
