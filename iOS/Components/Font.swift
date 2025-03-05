@@ -24,10 +24,10 @@ extension Font {
 
     static func pragmaticaNextVF(
         size: Double,
-        weight: Double = 400
+        weight: Double = 500
     ) -> Font {
-        let axes: [Int: Double] = [
-            Variations.weight.rawValue: Double(weight)
+        let axes = [
+            Variations.weight.rawValue: weight
         ]
 
         let descriptor = UIFontDescriptor(fontAttributes: [
