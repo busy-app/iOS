@@ -30,6 +30,7 @@ extension BusyApp.SettingsView {
                     icon: .busyIcon,
                     interval: $intervals.busy
                 ) {
+                    guard !cantShit else { return }
                     cantShit = true
                     showBusyIntervalEditor = true
                 }
@@ -56,6 +57,7 @@ extension BusyApp.SettingsView {
                     icon: .restIcon,
                     interval: $intervals.rest
                 ) {
+                    guard !cantShit else { return }
                     cantShit = true
                     showRestIntervalEditor = true
                 }
@@ -82,6 +84,7 @@ extension BusyApp.SettingsView {
                     icon: .longRestIcon,
                     interval: $intervals.longRest
                 ) {
+                    guard !cantShit else { return }
                     cantShit = true
                     showLongRestIntervalEditor = true
                 }
@@ -103,7 +106,6 @@ extension BusyApp.SettingsView {
                     .colorScheme(.light)
                 }
             }
-            .disabled(cantShit)
         }
     }
 
