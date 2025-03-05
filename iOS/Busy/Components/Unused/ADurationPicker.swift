@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct DurationPicker: View {
+struct ADurationPicker: View {
     @Binding var value: Int
     let values: [Int]
 
@@ -185,16 +185,16 @@ private extension View {
 
     VStack {
         Text("Total")
-        DurationPicker($total, role: .total)
+        ADurationPicker($total, role: .total)
 
         Text("Work")
-        DurationPicker($work, role: .work)
+        ADurationPicker($work, role: .work)
 
         Text("Rest")
-        DurationPicker($rest, role: .rest)
+        ADurationPicker($rest, role: .rest)
 
         Text("Long rest")
-        DurationPicker($longRest, role: .longRest)
+        ADurationPicker($longRest, role: .longRest)
     }
     .background(.black)
     .colorScheme(.light)
