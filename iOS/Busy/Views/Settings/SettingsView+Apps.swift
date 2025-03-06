@@ -94,6 +94,7 @@ extension BusyApp.SettingsView {
                         AddApps()
                     }
                 }
+                .frame(height: 32)
             }
             .familyActivityPicker(
                 isPresented: $showPicker,
@@ -119,6 +120,7 @@ extension BusyApp.SettingsView {
                 Text("+ Add apps")
                 Spacer()
             }
+            .frame(maxHeight: .infinity)
             .padding(12)
             .font(.pragmaticaNextVF(size: 18))
             .foregroundStyle(.transparentWhiteInvertPrimary)
@@ -156,28 +158,60 @@ extension BusyApp.SettingsView {
         
         var body: some View {
             if settings.isAllSelected {
-                GeometryReader { proxy in
-                    Image(.appsIcon)
-                        .resizable()
-                        .frame(
-                            width: min(proxy.size.width, proxy.size.height),
-                            height: min(proxy.size.width, proxy.size.height)
-                        )
-                }
+                Image(.appsIcon)
+                    .resizable()
+                    .frame(width: 32, height: 32)
             } else {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 4) {
-                        ForEach(Array(settings.categoryTokens), id: \.self) {
-                            Label($0)
-                                .labelStyle(.iconOnly)
+                        ForEach(
+                            Array(settings.categoryTokens),
+                            id: \.self
+                        ) { token in
+                            AppIcon {
+                                Label(token)
+                                    .padding(-1)
+                            }
                         }
 
-                        ForEach(Array(settings.applicationTokens), id: \.self) {
-                            Label($0)
-                                .labelStyle(.iconOnly)
+                        ForEach(
+                            Array(settings.applicationTokens),
+                            id: \.self
+                        ) { token in
+                            AppIcon {
+                                Label(token)
+                                    .padding(-6)
+                            }
                         }
                     }
                 }
+            }
+        }
+
+        struct AppIcon<Content: View>: View {
+            let label: () -> Content
+
+            @State private var scale: CGSize = .zero
+            private var size: Double { 32 }
+
+            var body: some View {
+                Spacer()
+                    .frame(width: size, height: size)
+                    .overlay {
+                        label()
+                            .labelStyle(.iconOnly)
+                            .onGeometryChange(for: CGSize.self) { geometry in
+                                geometry.size
+                            } action: {
+                                scale = $0
+                            }
+                            .scaleEffect(
+                                CGSize(
+                                    width: size / scale.width,
+                                    height: size / scale.height
+                                )
+                            )
+                    }
             }
         }
     }
