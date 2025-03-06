@@ -200,13 +200,7 @@ private struct WheelItem: View {
 
             // Increase the scale for infinite symbol
             let textScale = text == "∞" ? scale * 2 : scale
-
-            // Hide even text in default state
-            let textOpacity = index % 2 == 1
-                ? scale > 1.1
-                    ? 1.0
-                    : 0.0
-                : 1.0
+            let textOpacity = calculateTextOpacity(for: scale)
 
             // Offset text up
             let yOffset = (scale - 1) * -50
@@ -288,6 +282,16 @@ private struct WheelItem: View {
 
     private func calculateDividerFraction(for opacity: CGFloat) -> CGFloat {
         min(1.0, max(0.0, (opacity - 0.4) * 2))
+    }
+
+    private func calculateTextOpacity(for scale: CGFloat) -> CGFloat {
+        guard text.count >= 4 else { return 1.0 }
+
+        return index % 2 == 1
+            ? scale > 1.1
+                ? 1.0
+                : 0.0
+            : 1.0
     }
 }
 
