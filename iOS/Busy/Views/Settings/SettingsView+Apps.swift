@@ -160,7 +160,7 @@ extension BusyApp.SettingsView {
             if settings.isAllSelected {
                 Image(.appsIcon)
                     .resizable()
-                    .frame(width: 32, height: 32)
+                    .scaledToFit()
             } else {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 4) {
