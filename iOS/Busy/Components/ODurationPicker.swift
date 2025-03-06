@@ -228,38 +228,48 @@ private struct WheelItem: View {
                     .onTapGesture { onTap() }
 
                 HStack(spacing: 0) {
-                    divider(height: secondaryDividerHeight)
+                    secondaryDivider()
                         .opacity(isFirst ? 0 : 1)
 
-                    divider(height: secondaryDividerHeight)
+                    secondaryDivider()
                         .padding(.leading, dividerSpacing)
                         .opacity(isFirst ? 0 : 1)
 
-                    divider(height: primaryDividerHeight, opacity: opacity)
+                    primaryDivider(opacity: opacity)
                         .padding(.horizontal, dividerSpacing)
                         .scaleEffect(scale, anchor: .center)
 
-                    divider(height: secondaryDividerHeight)
+                    secondaryDivider()
                         .padding(.trailing, dividerSpacing)
                         .opacity(isLast ? 0 : 1)
 
-                    divider(height: secondaryDividerHeight)
+                    secondaryDivider()
                         .opacity(isLast ? 0 : 1)
                 }
             }
         }
     }
 
-    @ViewBuilder private func divider(
-        height: CGFloat,
-        opacity: Double = 0.2
-    ) -> some View {
+    @ViewBuilder private func secondaryDivider() -> some View {
         RoundedRectangle(cornerRadius: 2)
-            .fill(.whiteInvert.opacity(opacity))
+            .fill(.whiteInvert.opacity(0.2))
             .frame(
                 width: dividerWidth,
-                height: height
+                height: secondaryDividerHeight
             )
+    }
+
+    @ViewBuilder private func primaryDivider(opacity: Double) -> some View {
+        let fraction = calculateDividerFraction(for: opacity)
+        let color = Color.whiteInvert.mix(with: .accent, by: fraction)
+
+        RoundedRectangle(cornerRadius: 2)
+            .fill(color.opacity(opacity))
+            .frame(
+                width: dividerWidth,
+                height: primaryDividerHeight
+            )
+            .animation(.spring(), value: color)
     }
 
     private func calculateDistance(in inner: GeometryProxy) -> CGFloat {
@@ -274,6 +284,10 @@ private struct WheelItem: View {
 
     private func calculateDynamicScale(for distance: CGFloat) -> CGFloat {
         max(1, 1.5 - distance / 150)
+    }
+
+    private func calculateDividerFraction(for opacity: CGFloat) -> CGFloat {
+        min(1.0, max(0.0, (opacity - 0.4) * 2))
     }
 }
 
