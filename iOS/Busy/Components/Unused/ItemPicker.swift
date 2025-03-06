@@ -35,6 +35,7 @@ struct HPicker<Item: Hashable, Content: View>: View {
 }
 
 private extension ScrollView {
+    @MainActor
     func picker(_ value: Binding<some Hashable>) -> some View {
         ScrollViewReader { proxy in
             self

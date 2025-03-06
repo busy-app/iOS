@@ -21,8 +21,10 @@ struct AutoHeightModifier: ViewModifier {
                     )
                 }
             }
-            .onPreferenceChange(Key.self) {
-                height = $0
+            .onPreferenceChange(Key.self) { height in
+                Task { @MainActor in
+                    self.height = height
+                }
             }
             .presentationDetents([.height(height)])
     }

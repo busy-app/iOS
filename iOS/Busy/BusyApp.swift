@@ -64,7 +64,9 @@ struct BusyApp: View {
             object: nil,
             queue: .main
         ) { _ in
-            stopBusy()
+            MainActor.assumeIsolated {
+                stopBusy()
+            }
         }
     }
 
@@ -156,6 +158,7 @@ extension BusyApp {
     }
 
     func updateActivity() {
+        let activity = self.activity
         Task {
             await activity?.update(
                 .init(
@@ -167,9 +170,10 @@ extension BusyApp {
     }
 
     func stopActivity() {
+        let activity = self.activity
+        self.activity = nil
         Task {
             await activity?.end(.none, dismissalPolicy: .immediate)
-            activity = nil
         }
     }
 }

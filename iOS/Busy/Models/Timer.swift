@@ -1,8 +1,10 @@
 import Foundation
 import Observation
 
+@MainActor
 @Observable
 class Timer {
+    @MainActor
     static let shared = Timer()
     private init() {}
 
@@ -61,7 +63,11 @@ class Timer {
         timer = .scheduledTimer(
             withTimeInterval: 1,
             repeats: true,
-            block: { _ in self.update() }
+            block: { _ in
+                Task { @MainActor in
+                    self.update()
+                }
+            }
         )
         onChange?()
     }
