@@ -128,6 +128,7 @@ extension BusyApp.SettingsView {
                             .lineLimit(1)
                             .frame(maxWidth: .infinity)
                             .foregroundStyle(.transparentWhiteInvertSecondary)
+                            .padding(.leading, 4)
                         Spacer(minLength: 0)
                         Image(.arrowIcon)
                             .opacity(0.3)
