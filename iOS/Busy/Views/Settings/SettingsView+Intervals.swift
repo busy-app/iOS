@@ -124,6 +124,10 @@ extension BusyApp.SettingsView {
 
                     HStack(spacing: 0) {
                         Image(icon)
+                            .renderingMode(.template)
+                            .foregroundStyle(
+                                .transparentWhiteInvertPrimary
+                            )
                         Text(interval.duration)
                             .lineLimit(1)
                             .frame(maxWidth: .infinity)
@@ -155,10 +159,11 @@ extension BusyApp.SettingsView {
         var body: some View {
             VStack(alignment: .leading) {
                 HStack(spacing: 8) {
-                    Image(.busyIcon)
+                    Image(icon)
                         .resizable()
+                        .renderingMode(.template)
                         .frame(width: 32, height: 32)
-                        .foregroundStyle(.transparentWhiteInvertPrimary)
+                        .foregroundStyle(.white)
 
                     Text(name)
                         .foregroundStyle(.whiteInvert)
@@ -205,6 +210,7 @@ extension BusyApp.SettingsView {
     Button("Show") {
         isPresented = true
     }
+    .preferredColorScheme(.dark)
     .sheet(isPresented: $isPresented) {
         BusyApp.SettingsView(settings: $settings)
             .colorScheme(.light)

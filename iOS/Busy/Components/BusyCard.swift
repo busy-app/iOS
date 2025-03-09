@@ -53,6 +53,10 @@ private struct BusyCard: View {
                                 HStack(spacing: 0) {
                                     HStack(spacing: 4) {
                                         Image(.busyIcon)
+                                            .renderingMode(.template)
+                                            .foregroundStyle(
+                                                .transparentWhiteInvertPrimary
+                                            )
                                         Text(settings.intervals.busy)
                                     }
 
@@ -62,6 +66,10 @@ private struct BusyCard: View {
 
                                     HStack(spacing: 4) {
                                         Image(.restIcon)
+                                            .renderingMode(.template)
+                                            .foregroundStyle(
+                                                .transparentWhiteInvertPrimary
+                                            )
                                         Text(settings.intervals.rest)
                                     }
                                 }
@@ -74,6 +82,10 @@ private struct BusyCard: View {
                     SmallCard {
                         HStack(spacing: 4) {
                             Image(.blockedIcon)
+                                .renderingMode(.template)
+                                .foregroundStyle(
+                                    .transparentWhiteInvertPrimary
+                                )
                             Text(
                                 settings.blocker.selectedCountString
                             )
