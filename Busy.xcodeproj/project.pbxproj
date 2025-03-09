@@ -91,6 +91,33 @@
 			);
 			target = 8B82C3AD2CF8FDC900AE782C /* BusyWidgetExtension */;
 		};
+		8BCCF4402D7E139C004D0B7C /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Font.swift,
+				"Fonts/JetBrainsMono-Regular.ttf",
+				"Fonts/pragmatica-next_vf.ttf",
+			);
+			target = 8B638DDD2C610E9500C3458C /* BusyTests */;
+		};
+		8BCCF4412D7E139C004D0B7C /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Font.swift,
+				"Fonts/JetBrainsMono-Regular.ttf",
+				"Fonts/pragmatica-next_vf.ttf",
+			);
+			target = 8B638DE72C610E9500C3458C /* BusyUITests */;
+		};
+		8BCCF4422D7E139C004D0B7C /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Font.swift,
+				"Fonts/JetBrainsMono-Regular.ttf",
+				"Fonts/pragmatica-next_vf.ttf",
+			);
+			target = 8B5AB13E2CEC085100211DA5 /* BusyShield */;
+		};
 		8BE288D42D07CE8F007479A4 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -101,7 +128,7 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		8B3C7F0B2D7AF4510088CC48 /* Shared */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Shared; sourceTree = "<group>"; };
+		8B3C7F0B2D7AF4510088CC48 /* Shared */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (8BCCF4402D7E139C004D0B7C /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 8BCCF4412D7E139C004D0B7C /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 8BCCF4422D7E139C004D0B7C /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = Shared; sourceTree = "<group>"; };
 		8B5AB1452CEC085200211DA5 /* BusyShield */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (8B5AB14D2CEC085200211DA5 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = BusyShield; sourceTree = "<group>"; };
 		8B638DD02C610E9400C3458C /* iOS */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = iOS; sourceTree = "<group>"; };
 		8B638DE12C610E9500C3458C /* Tests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Tests; sourceTree = "<group>"; };
