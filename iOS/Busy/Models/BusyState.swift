@@ -3,10 +3,21 @@ import Observation
 @MainActor
 @Observable
 class BusyState {
+    let settings: BusySettings
+
     var timer: Timer
     var intervals: Intervals
 
     var interval: Interval?
+
+    private var autostart: Bool {
+        return switch interval?.kind {
+        case .work: settings.intervals.busy.autostart
+        case .rest: settings.intervals.rest.autostart
+        case .longRest: settings.intervals.longRest.autostart
+        default: false
+        }
+    }
 
     struct Intervals {
         var index: Int = 0
@@ -39,6 +50,8 @@ class BusyState {
     }
 
     init(_ settings: BusySettings) {
+        self.settings = settings
+
         self.timer = Timer()
         self.intervals = Intervals(settings: settings)
         self.interval = intervals.intervals.first
@@ -50,14 +63,18 @@ class BusyState {
             return
         }
         timer.completion = { [weak self] in
-            self?.next()
-            self?.start()
+            guard let self else { return }
+            if autostart {
+                next()
+                start()
+            }
         }
         timer.start(interval.duration)
     }
 
     func skip() {
         stop()
+        next()
         start()
     }
 

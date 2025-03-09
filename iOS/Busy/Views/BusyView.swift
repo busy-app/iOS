@@ -8,11 +8,25 @@ struct BusyView: View {
     var body: some View {
         Group {
             if let interval = state.interval {
-                TimerView(
-                    interval: interval,
-                    state: $state,
-                    settings: $settings
-                )
+                if state.timer.state != .finished {
+                    TimerView(
+                        interval: interval,
+                        state: $state,
+                        settings: $settings
+                    )
+                } else {
+                    if interval.kind == .work {
+                        TimerView.WorkDoneView {
+                            state.next()
+                            state.start()
+                        }
+                    } else {
+                        TimerView.RestOverView {
+                            state.next()
+                            state.start()
+                        }
+                    }
+                }
             } else {
                 TimerView.FinishedView {
                     startBusy()

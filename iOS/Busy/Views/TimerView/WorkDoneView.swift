@@ -2,6 +2,8 @@ import SwiftUI
 
 extension TimerView {
     struct WorkDoneView: View {
+        var action: () -> Void
+
         @Environment(\.appState) var appState
 
         var body: some View {
@@ -22,7 +24,7 @@ extension TimerView {
                     .padding(.top, 12)
 
                 Button {
-                    // appState.wrappedValue = .resting
+                    action()
                 } label: {
                     Text("Start rest")
                         .font(.pragmaticaNextVF(size: 24))
@@ -36,7 +38,7 @@ extension TimerView {
                 Spacer()
 
                 Button {
-                    // appState.wrappedValue = .finished
+                    appState.wrappedValue = .cards
                 } label: {
                     Text("Finish for today")
                         .foregroundStyle(.transparentWhiteInvertPrimary)
@@ -53,6 +55,6 @@ extension TimerView {
 }
 
 #Preview {
-    TimerView.WorkDoneView()
+    TimerView.WorkDoneView {}
         .colorScheme(.light)
 }
