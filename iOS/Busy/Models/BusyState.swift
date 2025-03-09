@@ -51,6 +51,7 @@ class BusyState {
         }
         timer.completion = { [weak self] in
             self?.next()
+            self?.start()
         }
         timer.start(interval.duration)
     }
