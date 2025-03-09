@@ -64,16 +64,13 @@
 /* Begin PBXFileReference section */
 		8B1147282CF8FC3000CA9361 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		8B11472A2CF8FC3000CA9361 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
-		8B1147412CF8FC3C00CA9361 /* BusyWIdgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BusyWIdgetExtension.entitlements; sourceTree = "<group>"; };
 		8B5AB13F2CEC085100211DA5 /* BusyShield.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = BusyShield.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B5AB1412CEC085100211DA5 /* ManagedSettings.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ManagedSettings.framework; path = System/Library/Frameworks/ManagedSettings.framework; sourceTree = SDKROOT; };
 		8B5AB1432CEC085200211DA5 /* ManagedSettingsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ManagedSettingsUI.framework; path = System/Library/Frameworks/ManagedSettingsUI.framework; sourceTree = SDKROOT; };
 		8B638DCE2C610E9400C3458C /* Busy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Busy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B638DDE2C610E9500C3458C /* BusyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BusyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B638DE82C610E9500C3458C /* BusyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BusyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		8B638DFD2C61195E00C3458C /* Busy.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Busy.entitlements; sourceTree = "<group>"; };
 		8B82C3AE2CF8FDC900AE782C /* BusyWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = BusyWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		8BD9D7402C61480C0056FFC7 /* Busy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Busy-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -118,6 +115,13 @@
 			);
 			target = 8B5AB13E2CEC085100211DA5 /* BusyShield */;
 		};
+		8BCCF4F02D7E1715004D0B7C /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 8B638DCD2C610E9400C3458C /* Busy */;
+		};
 		8BE288D42D07CE8F007479A4 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -130,7 +134,7 @@
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		8B3C7F0B2D7AF4510088CC48 /* Shared */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (8BCCF4402D7E139C004D0B7C /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 8BCCF4412D7E139C004D0B7C /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 8BCCF4422D7E139C004D0B7C /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = Shared; sourceTree = "<group>"; };
 		8B5AB1452CEC085200211DA5 /* BusyShield */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (8B5AB14D2CEC085200211DA5 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = BusyShield; sourceTree = "<group>"; };
-		8B638DD02C610E9400C3458C /* iOS */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = iOS; sourceTree = "<group>"; };
+		8B638DD02C610E9400C3458C /* iOS */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (8BCCF4F02D7E1715004D0B7C /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = iOS; sourceTree = "<group>"; };
 		8B638DE12C610E9500C3458C /* Tests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Tests; sourceTree = "<group>"; };
 		8B638DEB2C610E9500C3458C /* UITests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = UITests; sourceTree = "<group>"; };
 		8B82C3B12CF8FDC900AE782C /* BusyWidget */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (8BE288D42D07CE8F007479A4 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 8B82C3C42CF8FDCA00AE782C /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = BusyWidget; sourceTree = "<group>"; };
@@ -193,9 +197,6 @@
 		8B638DC52C610E9400C3458C = {
 			isa = PBXGroup;
 			children = (
-				8B1147412CF8FC3C00CA9361 /* BusyWIdgetExtension.entitlements */,
-				8BD9D7402C61480C0056FFC7 /* Busy-Info.plist */,
-				8B638DFD2C61195E00C3458C /* Busy.entitlements */,
 				8B638DD02C610E9400C3458C /* iOS */,
 				8B3C7F0B2D7AF4510088CC48 /* Shared */,
 				8B638DE12C610E9500C3458C /* Tests */,
@@ -677,7 +678,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = Busy.entitlements;
+				CODE_SIGN_ENTITLEMENTS = iOS/Busy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -685,7 +686,7 @@
 				DEVELOPMENT_TEAM = SXH69675TZ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Busy-Info.plist";
+				INFOPLIST_FILE = iOS/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = BUSY;
 				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "This will allow to connect the app to your Busy Status Bar";
 				INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription = "This will allow to connect the app to your Busy Status Bar";
@@ -721,7 +722,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = Busy.entitlements;
+				CODE_SIGN_ENTITLEMENTS = iOS/Busy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -729,7 +730,7 @@
 				DEVELOPMENT_TEAM = SXH69675TZ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Busy-Info.plist";
+				INFOPLIST_FILE = iOS/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = BUSY;
 				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "This will allow to connect the app to your Busy Status Bar";
 				INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription = "This will allow to connect the app to your Busy Status Bar";
@@ -851,7 +852,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CODE_SIGN_ENTITLEMENTS = BusyWidgetExtension.entitlements;
+				CODE_SIGN_ENTITLEMENTS = BusyWidget/BusyWidgetExtension.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -881,7 +882,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CODE_SIGN_ENTITLEMENTS = BusyWidgetExtension.entitlements;
+				CODE_SIGN_ENTITLEMENTS = BusyWidget/BusyWidgetExtension.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
