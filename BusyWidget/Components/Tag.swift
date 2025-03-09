@@ -47,7 +47,7 @@ extension BusyWidgetLiveActivity {
                     leading: 2,
                     bottom: 8,
                     trailing: 2
-                ),
+                )
             )
         }
     }
