@@ -142,7 +142,7 @@ extension BusyApp.SettingsView {
         var body: some View {
             HStack(spacing: 0) {
                 AppsIcons(settings: settings)
-                Spacer()
+                Spacer(minLength: 12)
                 Text(settings.selectedCountString)
                     .font(.pragmaticaNextVF(size: 14))
                     .foregroundStyle(.transparentWhiteInvertSecondary)
@@ -155,7 +155,7 @@ extension BusyApp.SettingsView {
 
     struct AppsIcons: View {
         let settings: BlockerSettings
-        
+
         var body: some View {
             if settings.isAllSelected {
                 Image(.appsIcon)
@@ -184,7 +184,10 @@ extension BusyApp.SettingsView {
                             }
                         }
                     }
+                    .padding(.horizontal, 12)
                 }
+                .mask(ScrollGradient())
+                .padding(.horizontal, -12)
             }
         }
 
@@ -212,6 +215,36 @@ extension BusyApp.SettingsView {
                                 )
                             )
                     }
+            }
+        }
+
+        struct ScrollGradient: View {
+            func getGradient(isForce: Bool) -> LinearGradient {
+                LinearGradient(
+                    gradient: Gradient(
+                        colors:
+                            [
+                                Color.black,
+                                Color.black.opacity(0.4),
+                                Color.black.opacity(0)
+                            ]
+                    ),
+                    startPoint: isForce ? .leading : .trailing,
+                    endPoint: isForce ? .trailing : .leading
+                )
+            }
+
+            var body: some View {
+                HStack(spacing: 0) {
+                    getGradient(isForce: false)
+                        .frame(width: 12)
+
+                    Rectangle()
+                        .fill(Color.black)
+
+                    getGradient(isForce: true)
+                        .frame(width: 12)
+                }
             }
         }
     }
