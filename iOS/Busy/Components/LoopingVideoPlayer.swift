@@ -16,6 +16,11 @@ struct LoopingVideoPlayer: View {
                 createPlayer(with: url)
                 player?.play()
             }
+            .onChange(of: url) {
+                guard let url else { return }
+                createPlayer(with: url)
+                player?.play()
+            }
             .onDisappear {
                 player?.pause()
             }
