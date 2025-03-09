@@ -20,7 +20,7 @@ extension BusyApp {
 
                     VStack(spacing: 0) {
                         Text("Total time")
-                            .font(.ppNeueMontrealMedium(size: 16))
+                            .font(.pragmaticaNextVF(size: 14))
                             .foregroundStyle(.whiteInvert)
                             .padding(.top, 24)
 
