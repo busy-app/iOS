@@ -5,23 +5,75 @@ import ManagedSettings
 
 extension BusyApp.SettingsView {
     struct AppsSettingsControl: View {
-        @Binding var blockerSettings: BlockerSettings
+        @Binding var settings: BlockerSettings
+
+        @State var isAuthorized: Bool = false
 
         var body: some View {
             VStack(alignment: .leading, spacing: 0) {
-                Toggle(isOn: $blockerSettings.isOn) {
+                Toggle(isOn: $settings.isOn) {
                     Text("Block apps")
                         .font(.pragmaticaNextVF(size: 18))
                         .foregroundStyle(.whiteInvert)
                 }
                 .tint(.accent)
 
-                SelectAppsButton(settings: $blockerSettings)
-                    .padding(.top, 22)
+                Group {
+                    if isAuthorized {
+                        SelectAppsButton(settings: $settings)
+                    } else {
+                        PermissionsButton()
+                    }
+                }
+                .padding(.top, 22)
             }
             .padding(12)
             .background(.transparentWhiteInvertQuinary)
             .clipShape(RoundedRectangle(cornerRadius: 12))
+            .onReceive(AuthorizationCenter.shared.$authorizationStatus) {
+                isAuthorized = $0 == .approved
+            }
+            .task {
+                isAuthorized =
+                    AuthorizationCenter.shared.authorizationStatus == .approved
+            }
+        }
+    }
+
+    struct PermissionsButton: View {
+        var body: some View {
+            Button {
+                Task {
+                    try? await AuthorizationCenter
+                        .shared
+                        .requestAuthorization(for: .individual)
+                }
+            } label: {
+                VStack(spacing: 8) {
+                    HStack(spacing: 0) {
+                        Image(.markInCircle)
+                            .renderingMode(.template)
+                        Text("Permission required")
+                            .padding(.leading, 8)
+                        Spacer()
+                        Image(.arrowIcon)
+                            .renderingMode(.template)
+                            .padding(.leading, 8)
+                    }
+                    .foregroundStyle(.dangerPrimary)
+
+                    Text(
+                        "We use Screen Time to block distracting apps and " +
+                        "notifications during your BUSY time. " +
+                        "Your data remains private and secure."
+                    )
+                    .foregroundStyle(.transparentWhiteInvertPrimary)
+                    .font(.pragmaticaNextVF(size: 16))
+                    .multilineTextAlignment(.leading)
+                    .padding(.top, 8)
+                    .lineSpacing(8)
+                }
+            }
         }
     }
 
@@ -93,6 +145,7 @@ extension BusyApp.SettingsView {
                     .font(.pragmaticaNextVF(size: 14))
                     .foregroundStyle(.transparentWhiteInvertSecondary)
                 Image(.arrowIcon)
+                    .opacity(0.3)
             }
             .padding(.vertical, 4)
         }

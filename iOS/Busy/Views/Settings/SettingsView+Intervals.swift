@@ -130,6 +130,7 @@ extension BusyApp.SettingsView {
                             .foregroundStyle(.transparentWhiteInvertSecondary)
                         Spacer(minLength: 0)
                         Image(.arrowIcon)
+                            .opacity(0.3)
                     }
                 }
                 .padding(.vertical, 12)

@@ -22,9 +22,15 @@ struct BusyView: View {
         .task {
             startBusy()
         }
+        .onDisappear {
+            BusyShield.disable()
+        }
     }
 
     func startBusy() {
+        if settings.blocker.isOn {
+            BusyShield.enable(settings.blocker)
+        }
         state = .init(settings)
         state.start()
     }

@@ -46,7 +46,7 @@ extension BusyApp {
                         .padding(.top, 24)
                         .padding(.horizontal, 16)
 
-                    AppsSettingsControl(blockerSettings: $settings.blocker)
+                    AppsSettingsControl(settings: $settings.blocker)
                         .padding(.top, 24)
                         .padding(.horizontal, 16)
 
