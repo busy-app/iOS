@@ -14,6 +14,7 @@ extension TimerView {
 
                     Text("Start")
                         .font(.pragmaticaNextVF(size: 24))
+                        .offset(y: 2)
                 }
                 .frame(width: 191, height: 64)
                 .foregroundStyle(.blackInvert)
@@ -36,10 +37,11 @@ extension TimerView {
 
                     Text("Pause")
                         .font(.pragmaticaNextVF(size: 24))
+                        .offset(y: 2)
                 }
                 .frame(width: 191, height: 64)
                 .foregroundStyle(.transparentWhiteInvertPrimary)
-                .background(.transparentWhiteInvertQuinary)
+                .background(.transparentWhiteInvertTertiary)
                 .clipShape(RoundedRectangle(cornerRadius: 112))
             }
         }
