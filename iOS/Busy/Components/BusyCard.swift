@@ -3,14 +3,11 @@ import SwiftUI
 extension BusyApp {
     struct BusyCardButton: View {
         @Binding var settings: BusySettings
-
         @State private var isSettingsPresented: Bool = false
 
         var body: some View {
-            Button {
+            BusyCard(settings: $settings) {
                 isSettingsPresented = true
-            } label: {
-                BusyCard(settings: $settings)
             }
             .sheet(isPresented: $isSettingsPresented) {
                 SettingsView(settings: $settings)
@@ -23,6 +20,7 @@ extension BusyApp {
 
 private struct BusyCard: View {
     @Binding var settings: BusySettings
+    let onEdit: () -> Void
 
     var body: some View {
         Group {
@@ -34,9 +32,11 @@ private struct BusyCard: View {
 
                     Spacer()
 
-                    Text("Edit")
-                        .font(.pragmaticaNextVF(size: 18))
-                        .foregroundStyle(.transparentWhiteInvertPrimary)
+                    Button(action: onEdit) {
+                        Text("Edit")
+                            .font(.pragmaticaNextVF(size: 18))
+                            .foregroundStyle(.transparentWhiteInvertPrimary)
+                    }
                 }
 
                 Spacer()
@@ -123,6 +123,6 @@ private struct BusyCard: View {
 #Preview {
     @Previewable @State var settings: BusySettings = .init()
 
-    BusyCard(settings: $settings)
+    BusyCard(settings: $settings) {}
         .colorScheme(.light)
 }
