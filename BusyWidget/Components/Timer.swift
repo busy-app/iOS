@@ -44,10 +44,18 @@ extension BusyWidgetLiveActivity {
         let fontSize: Double
 
         var body: some View {
-            Text(timerInterval: .now...state.deadline)
-                .contentTransition(.numericText())
+            Text("00:00")
                 .font(.jetBrainsMonoRegular(size: fontSize))
-                .foregroundStyle(.blackInvert)
+                .hidden()
+                .overlay(alignment: .leading) {
+                    Text(
+                        timerInterval: .now...state.deadline,
+                        showsHours: false
+                    )
+                    .contentTransition(.numericText())
+                    .font(.jetBrainsMonoRegular(size: fontSize))
+                    .foregroundStyle(.blackInvert)
+                }
         }
     }
 
