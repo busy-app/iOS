@@ -9,6 +9,7 @@ struct ODurationPicker: View {
     @State private var position = ScrollPosition(idType: Int.self)
     @State private var currentIndex: Int?
     @State private var direction: Direction?
+    @State private var allowAnimation = false
 
     enum Role {
         case total
@@ -76,6 +77,7 @@ struct ODurationPicker: View {
                         WheelItem(
                             index: index,
                             text: labels[index],
+                            allowAnimation: allowAnimation,
                             isFirst: index == 0,
                             isLast: index == (minutes.count - 1),
                             outerGeometry: outerGeometry,
@@ -118,6 +120,10 @@ struct ODurationPicker: View {
                 let index = minutes.firstIndex(of: value) ?? 0
                 currentIndex = index
                 position.scrollTo(id: index, anchor: .center)
+                Task {
+                    try await Task.sleep(nanoseconds: 500_000)
+                    allowAnimation = true
+                }
             }
             .simultaneousGesture(
                 DragGesture()
@@ -186,11 +192,17 @@ private struct WheelItem: View {
     let index: Int
     let text: String
 
+    let allowAnimation: Bool
+
     let isFirst: Bool
     let isLast: Bool
 
     let outerGeometry: GeometryProxy
     let onTap: () -> Void
+
+    private var animation: Animation? {
+        allowAnimation ? .spring() : nil
+    }
 
     var body: some View {
         GeometryReader { innerGeometry in
@@ -216,7 +228,7 @@ private struct WheelItem: View {
                     )
                     .scaleEffect(textScale, anchor: .center)
                     .offset(y: yOffset)
-                    .animation(.spring(), value: scale)
+                    .animation(animation, value: scale)
                     .opacity(textOpacity)
                     .contentShape(Rectangle())
                     .onTapGesture { onTap() }
