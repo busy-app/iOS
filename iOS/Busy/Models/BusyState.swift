@@ -8,6 +8,7 @@ class BusyState {
     var timer: Timer
     var intervals: Intervals
 
+    var state: TimerState
     var interval: Interval?
 
     private var autostart: Bool {
@@ -38,27 +39,23 @@ class BusyState {
         }
     }
 
-    struct Interval {
-        let kind: Kind
+    struct Interval: Equatable {
+        let kind: IntervalKind
         let duration: Duration
-
-        enum Kind {
-            case work
-            case rest
-            case longRest
-        }
     }
 
     init(_ settings: BusySettings) {
         self.settings = settings
 
         self.timer = Timer()
+        self.state = .paused
+
         self.intervals = Intervals(settings: settings)
         self.interval = intervals.intervals.first
     }
 
     func start() {
-        guard let interval, timer.state != .running else {
+        guard let interval, state != .running else {
             print("something went wrong")
             return
         }
@@ -79,15 +76,18 @@ class BusyState {
     }
 
     func stop() {
+        state = .finished
         timer.finish()
         timer.completion = nil
     }
 
     func resume() {
+        state = .running
         timer.resume()
     }
 
     func pause() {
+        state = .paused
         timer.pause()
     }
 
@@ -111,7 +111,7 @@ extension BusyState.Intervals {
         var timeLeft = settings.duration
         var intervals = [BusyState.Interval]()
 
-        func add(_ kind: BusyState.Interval.Kind) {
+        func add(_ kind: IntervalKind) {
             let duration = switch kind {
             case .work: settings.intervals.busy.duration
             case .rest: settings.intervals.rest.duration

@@ -4,7 +4,7 @@ extension TimerView {
     struct TimeCard: View {
         let duration: Duration
         let progress: Double
-        let kind: BusyState.Interval.Kind
+        let kind: IntervalKind
 
         var video: String {
             switch kind {
@@ -60,7 +60,7 @@ extension TimerView {
 
     struct Progress: View {
         let value: Double
-        let kind: BusyState.Interval.Kind
+        let kind: IntervalKind
 
         var background: Color {
             foreground.opacity(0.1)

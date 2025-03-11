@@ -5,65 +5,35 @@ import SwiftUI
 struct BusyWidgetLiveActivity: Widget {
     var body: some WidgetConfiguration {
         ActivityConfiguration(for: BusyWidgetAttributes.self) { context in
-            HStack {
-                VStack(alignment: .leading, spacing: 0) {
-                    Image("BusyIcon")
-
-                    Text(timerInterval: .now...context.state.deadline)
-                        .contentTransition(.numericText())
-                        .foregroundStyle(.white)
-                        .font(.system(size: 48))
-                        .padding(.top, 12)
+            VStack(spacing: 28) {
+                HStack {
+                    LargeTag(busy: context.state)
+                    Spacer()
                 }
 
-                Spacer()
-
-                Button(intent: StopBusyIntent()) {
-                    Image("StopButton")
-                }
-                .padding(.top, 4)
-                .buttonStyle(.plain)
+                LargeTimerWithAction(busy: context.state)
             }
             .padding(16)
-            .activityBackgroundTint(.widgetBackground)
-            .activitySystemActionForegroundColor(.white)
         } dynamicIsland: { context in
             DynamicIsland {
                 DynamicIslandExpandedRegion(.leading) {
-                    VStack(alignment: .leading, spacing: 0) {
-                        Image("BusyIcon")
-                            .padding(.top, 8)
-                        Text(timerInterval: .now...context.state.deadline)
-                            .contentTransition(.numericText())
-                            .font(.system(size: 48))
-                    }
+                    LargeTag(busy: context.state)
+                        .padding(4)
                 }
-                DynamicIslandExpandedRegion(.trailing) {
-                    Button(intent: StopBusyIntent()) {
-                        Image("StopButton")
+                DynamicIslandExpandedRegion(.bottom) {
+                    VStack {
+                        Spacer()
+                        LargeTimerWithAction(busy: context.state)
                     }
-                    .padding(.top, 20)
-                    .buttonStyle(.plain)
+                    .padding(4)
                 }
             } compactLeading: {
-                Image("BusyIcon")
-                    .resizable()
-                    .frame(width: 40, height: 18)
-                    .padding(.leading, 4)
+                MediumTag(state: context.state)
             } compactTrailing: {
-                Text(timerInterval: .now...context.state.deadline)
-                    .frame(minWidth: 0, maxWidth: 65)
-                    .multilineTextAlignment(.trailing)
-                    .contentTransition(.numericText())
-                    .padding(.trailing, 4)
+                SmallTimerWithAction(busy: context.state)
             } minimal: {
-                ProgressView(
-                    timerInterval: .now...context.state.deadline,
-                    label: { EmptyView() },
-                    currentValueLabel: { EmptyView() }
-                )
-                .progressViewStyle(.circular)
-                .tint(.tint)
+                SmallTag(state: context.state)
+                    .frame(width: 45)
             }
         }
     }
@@ -76,20 +46,107 @@ extension BusyWidgetAttributes {
 }
 
 extension BusyWidgetAttributes.ContentState {
-    fileprivate static var on: BusyWidgetAttributes.ContentState {
-        BusyWidgetAttributes
-            .ContentState(isOn: true, deadline: .now.addingTimeInterval(30))
-     }
-     
-     fileprivate static var off: BusyWidgetAttributes.ContentState {
-         BusyWidgetAttributes
-             .ContentState(isOn: false, deadline: .now.addingTimeInterval(30))
-     }
+    fileprivate static var workingActive: BusyWidgetAttributes.ContentState {
+        BusyWidgetAttributes.ContentState(
+            state: .running,
+            duration: .seconds(3600),
+            kind: .work
+        )
+    }
+
+    fileprivate static var workingPaused: BusyWidgetAttributes.ContentState {
+        BusyWidgetAttributes.ContentState(
+            state: .paused,
+            duration: .seconds(3600),
+            kind: .work
+        )
+    }
+
+    fileprivate static var workingCompleted: BusyWidgetAttributes.ContentState {
+        BusyWidgetAttributes.ContentState(
+            state: .finished,
+            duration: .seconds(3600),
+            kind: .work
+        )
+    }
+
+    fileprivate static var restingActive: BusyWidgetAttributes.ContentState {
+        BusyWidgetAttributes.ContentState(
+            state: .running,
+            duration: .seconds(1230),
+            kind: .rest
+        )
+    }
+
+    fileprivate static var restingPaused: BusyWidgetAttributes.ContentState {
+        BusyWidgetAttributes.ContentState(
+            state: .paused,
+            duration: .seconds(1230),
+            kind: .rest
+        )
+    }
+
+    fileprivate static var restingCompleted: BusyWidgetAttributes.ContentState {
+        BusyWidgetAttributes.ContentState(
+            state: .finished,
+            duration: .seconds(1230),
+            kind: .rest
+        )
+    }
 }
 
 #Preview("Notification", as: .content, using: BusyWidgetAttributes.preview) {
    BusyWidgetLiveActivity()
 } contentStates: {
-    BusyWidgetAttributes.ContentState.on
-    BusyWidgetAttributes.ContentState.off
+    BusyWidgetAttributes.ContentState.workingActive
+    BusyWidgetAttributes.ContentState.workingPaused
+    BusyWidgetAttributes.ContentState.workingCompleted
+    BusyWidgetAttributes.ContentState.restingActive
+    BusyWidgetAttributes.ContentState.restingPaused
+    BusyWidgetAttributes.ContentState.restingCompleted
+}
+
+#Preview(
+    "Expanded",
+    as: .dynamicIsland(.expanded),
+    using: BusyWidgetAttributes.preview
+) {
+   BusyWidgetLiveActivity()
+} contentStates: {
+    BusyWidgetAttributes.ContentState.workingActive
+    BusyWidgetAttributes.ContentState.workingPaused
+    BusyWidgetAttributes.ContentState.workingCompleted
+    BusyWidgetAttributes.ContentState.restingActive
+    BusyWidgetAttributes.ContentState.restingPaused
+    BusyWidgetAttributes.ContentState.restingCompleted
+}
+
+#Preview(
+    "Compact",
+    as: .dynamicIsland(.compact),
+    using: BusyWidgetAttributes.preview
+) {
+   BusyWidgetLiveActivity()
+} contentStates: {
+    BusyWidgetAttributes.ContentState.workingActive
+    BusyWidgetAttributes.ContentState.workingPaused
+    BusyWidgetAttributes.ContentState.workingCompleted
+    BusyWidgetAttributes.ContentState.restingActive
+    BusyWidgetAttributes.ContentState.restingPaused
+    BusyWidgetAttributes.ContentState.restingCompleted
+}
+
+#Preview(
+    "Minimal",
+    as: .dynamicIsland(.minimal),
+    using: BusyWidgetAttributes.preview
+) {
+   BusyWidgetLiveActivity()
+} contentStates: {
+    BusyWidgetAttributes.ContentState.workingActive
+    BusyWidgetAttributes.ContentState.workingPaused
+    BusyWidgetAttributes.ContentState.workingCompleted
+    BusyWidgetAttributes.ContentState.restingActive
+    BusyWidgetAttributes.ContentState.restingPaused
+    BusyWidgetAttributes.ContentState.restingCompleted
 }
