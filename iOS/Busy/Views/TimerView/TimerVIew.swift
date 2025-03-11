@@ -50,7 +50,7 @@ struct TimerView: View {
                     }
                     .colorScheme(.light)
                     .presentationBackground(.clear)
-                    .presentationDetents([.height(230)])
+                    .presentationDetents([.height(240)])
                 }
 
                 Spacer()
@@ -149,9 +149,10 @@ struct TimerView: View {
         @Environment(\.dismiss) var dismiss
         
         var body: some View {
-            VStack {
-                Text("Stopping will reset this BUSY progress. Are you sure?")
+            VStack(alignment: .leading) {
+                Text("Stopping will reset BUSY progress. Are you sure?")
                     .font(.pragmaticaNextVF(size: 18))
+                    .lineSpacing(18 * 0.3)
                     .foregroundStyle(.whiteInvert)
 
                 HStack(spacing: 12) {

@@ -30,6 +30,7 @@ extension BusyApp.SettingsView {
                     )
                     .padding(.top, 8)
                     .multilineTextAlignment(.leading)
+                    .lineSpacing(18 * 0.3)
                     .font(.pragmaticaNextVF(size: 14))
                     .foregroundStyle(.transparentWhiteInvertSecondary)
                 }

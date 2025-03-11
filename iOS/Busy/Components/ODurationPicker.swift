@@ -9,6 +9,7 @@ struct ODurationPicker: View {
     @State private var position = ScrollPosition(idType: Int.self)
     @State private var currentIndex: Int?
     @State private var direction: Direction?
+    @State private var allowAnimation = false
 
     enum Role {
         case total
@@ -76,6 +77,7 @@ struct ODurationPicker: View {
                         WheelItem(
                             index: index,
                             text: labels[index],
+                            allowAnimation: allowAnimation,
                             isFirst: index == 0,
                             isLast: index == (minutes.count - 1),
                             outerGeometry: outerGeometry,
@@ -118,6 +120,10 @@ struct ODurationPicker: View {
                 let index = minutes.firstIndex(of: value) ?? 0
                 currentIndex = index
                 position.scrollTo(id: index, anchor: .center)
+                Task {
+                    try await Task.sleep(nanoseconds: 500_000)
+                    allowAnimation = true
+                }
             }
             .simultaneousGesture(
                 DragGesture()
@@ -186,11 +192,17 @@ private struct WheelItem: View {
     let index: Int
     let text: String
 
+    let allowAnimation: Bool
+
     let isFirst: Bool
     let isLast: Bool
 
     let outerGeometry: GeometryProxy
     let onTap: () -> Void
+
+    private var animation: Animation? {
+        allowAnimation ? .spring() : nil
+    }
 
     var body: some View {
         GeometryReader { innerGeometry in
@@ -200,13 +212,7 @@ private struct WheelItem: View {
 
             // Increase the scale for infinite symbol
             let textScale = text == "∞" ? scale * 2 : scale
-
-            // Hide even text in default state
-            let textOpacity = index % 2 == 1
-                ? scale > 1.1
-                    ? 1.0
-                    : 0.0
-                : 1.0
+            let textOpacity = calculateTextOpacity(for: scale)
 
             // Offset text up
             let yOffset = (scale - 1) * -50
@@ -222,44 +228,54 @@ private struct WheelItem: View {
                     )
                     .scaleEffect(textScale, anchor: .center)
                     .offset(y: yOffset)
-                    .animation(.spring(), value: scale)
+                    .animation(animation, value: scale)
                     .opacity(textOpacity)
                     .contentShape(Rectangle())
                     .onTapGesture { onTap() }
 
                 HStack(spacing: 0) {
-                    divider(height: secondaryDividerHeight)
+                    secondaryDivider()
                         .opacity(isFirst ? 0 : 1)
 
-                    divider(height: secondaryDividerHeight)
+                    secondaryDivider()
                         .padding(.leading, dividerSpacing)
                         .opacity(isFirst ? 0 : 1)
 
-                    divider(height: primaryDividerHeight, opacity: opacity)
+                    primaryDivider(opacity: opacity)
                         .padding(.horizontal, dividerSpacing)
                         .scaleEffect(scale, anchor: .center)
 
-                    divider(height: secondaryDividerHeight)
+                    secondaryDivider()
                         .padding(.trailing, dividerSpacing)
                         .opacity(isLast ? 0 : 1)
 
-                    divider(height: secondaryDividerHeight)
+                    secondaryDivider()
                         .opacity(isLast ? 0 : 1)
                 }
             }
         }
     }
 
-    @ViewBuilder private func divider(
-        height: CGFloat,
-        opacity: Double = 0.2
-    ) -> some View {
+    @ViewBuilder private func secondaryDivider() -> some View {
         RoundedRectangle(cornerRadius: 2)
-            .fill(.whiteInvert.opacity(opacity))
+            .fill(.whiteInvert.opacity(0.2))
             .frame(
                 width: dividerWidth,
-                height: height
+                height: secondaryDividerHeight
             )
+    }
+
+    @ViewBuilder private func primaryDivider(opacity: Double) -> some View {
+        let fraction = calculateDividerFraction(for: opacity)
+        let color = Color.whiteInvert.mix(with: .accent, by: fraction)
+
+        RoundedRectangle(cornerRadius: 2)
+            .fill(color.opacity(opacity))
+            .frame(
+                width: dividerWidth,
+                height: primaryDividerHeight
+            )
+            .animation(.spring(), value: color)
     }
 
     private func calculateDistance(in inner: GeometryProxy) -> CGFloat {
@@ -274,6 +290,20 @@ private struct WheelItem: View {
 
     private func calculateDynamicScale(for distance: CGFloat) -> CGFloat {
         max(1, 1.5 - distance / 150)
+    }
+
+    private func calculateDividerFraction(for opacity: CGFloat) -> CGFloat {
+        min(1.0, max(0.0, (opacity - 0.4) * 2))
+    }
+
+    private func calculateTextOpacity(for scale: CGFloat) -> CGFloat {
+        guard text.count >= 4 else { return 1.0 }
+
+        return index % 2 == 1
+            ? scale > 1.1
+                ? 1.0
+                : 0.0
+            : 1.0
     }
 }
 
