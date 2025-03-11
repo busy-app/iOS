@@ -3,36 +3,37 @@ import SwiftUI
 
 extension BusyWidgetLiveActivity {
     struct Button: View {
-        let state: BusyWidgetAttributes.ContentState
+        let busy: BusyWidgetAttributes.ContentState
 
         var buttonColor: Color {
-            switch state.event {
+            switch busy.state {
             case .paused: .blackInvert
-            case .active, .completed: .transparentWhiteQuaternary
+            case .running, .finished: .transparentWhiteQuaternary
             }
         }
 
         var contentColor: Color {
-            switch state.event {
+            switch busy.state {
             case .paused: .whiteInvert
-            case .active, .completed: .transparentWhitePrimary
+            case .running, .finished: .transparentWhitePrimary
             }
         }
 
         var buttonText: String {
-            switch (state.event, state.tag) {
-            case (.active, _): "Pause"
+            switch (busy.state, busy.kind) {
+            case (.running, _): "Pause"
             case (.paused, _): "Start"
-            case (.completed, .resting): "Start BUSY"
-            case (.completed, .working): "Start rest"
+            case (.finished, .rest): "Start BUSY"
+            case (.finished, .longRest): "Start BUSY"
+            case (.finished, .work): "Start rest"
             }
         }
 
         var icon: Image? {
-            switch state.event {
-            case .active: Image(.pause)
+            switch busy.state {
             case .paused: Image(.play)
-            case .completed: nil
+            case .running: Image(.pause)
+            case .finished: nil
             }
         }
 

@@ -2,11 +2,11 @@ import SwiftUI
 
 extension BusyWidgetLiveActivity {
     struct LargeTag: View {
-        let state: BusyWidgetAttributes.ContentState
+        let busy: BusyWidgetAttributes.ContentState
 
         var body: some View {
             GeneralTag(
-                state: state,
+                busy: busy,
                 fontSize: 18,
                 insets: EdgeInsets(
                     top: 8,
@@ -23,7 +23,7 @@ extension BusyWidgetLiveActivity {
 
         var body: some View {
             GeneralTag(
-                state: state,
+                busy: state,
                 fontSize: 11,
                 insets: EdgeInsets(
                     top: 8,
@@ -40,7 +40,7 @@ extension BusyWidgetLiveActivity {
 
         var body: some View {
             GeneralTag(
-                state: state,
+                busy: state,
                 fontSize: 11,
                 insets: EdgeInsets(
                     top: 8,
@@ -53,25 +53,21 @@ extension BusyWidgetLiveActivity {
     }
 
     private struct GeneralTag: View {
-        let state: BusyWidgetAttributes.ContentState
+        let busy: BusyWidgetAttributes.ContentState
         let fontSize: Double
         let insets: EdgeInsets
 
         var text: String {
-            switch state.tag {
-            case .working:
-                return "BUSY"
-            case .resting:
-                return "REST"
+            switch busy.kind {
+            case .work: "BUSY"
+            case .rest, .longRest: "REST"
             }
         }
 
         var color: Color {
-            switch state.tag {
-            case .working:
-                return .accentBrandPrimary
-            case .resting:
-                return .greenBrandPrimary
+            switch busy.kind {
+            case .work: .accentBrandPrimary
+            case .rest, .longRest: .greenBrandPrimary
             }
         }
 
@@ -84,18 +80,18 @@ extension BusyWidgetLiveActivity {
                 .background(color)
                 .cornerRadius(120)
                 .overlay {
-                    IconEvent(event: state.event)
+                    IconEvent(state: busy.state)
                 }
         }
     }
 
     private struct IconEvent: View {
-        let event: BusyWidgetAttributes.ContentState.Event
+        let state: TimerState
 
         var icon: Image? {
-            switch event {
-            case .active: nil
-            case .completed: Image(.complete)
+            switch state {
+            case .running: nil
+            case .finished: Image(.complete)
             case .paused: Image(.pause)
             }
         }

@@ -2,36 +2,32 @@ import SwiftUI
 
 extension BusyWidgetLiveActivity {
     struct LargeTimerWithAction: View {
-        let state: BusyWidgetAttributes.ContentState
+        let busy: BusyWidgetAttributes.ContentState
 
         var body: some View {
             HStack(alignment: .center) {
-                switch state.event {
-                case .active, .paused:
-                    Timer(state: state, fontSize: 40)
-                case .completed:
-                    TimerDone(tag: state.tag)
+                switch busy.state {
+                case .paused, .running: Timer(state: busy, fontSize: 40)
+                case .finished: TimerDone(kind: busy.kind)
                 }
 
                 Spacer()
 
-                Button(state: state)
+                Button(busy: busy)
             }
             .frame(height: 40)
         }
     }
 
     struct SmallTimerWithAction: View {
-        let state: BusyWidgetAttributes.ContentState
+        let busy: BusyWidgetAttributes.ContentState
 
         var body: some View {
-            switch state.event {
-            case .active, .paused:
-                Timer(state: state, fontSize: 11)
-                    // FIXME: Timer display on full width when hours are not present
-                    .multilineTextAlignment(.center)
-            case .completed:
-                Text(state.tag.title)
+            switch busy.state {
+            case .paused, .running:
+                Timer(state: busy, fontSize: 11)
+            case .finished:
+                Text(busy.kind.title)
                     .font(.pragmaticaNextVF(size: 11))
                     .foregroundStyle(.blackInvert)
                     .offset(y: 1.2) // Fix variant font alignment
@@ -60,18 +56,18 @@ extension BusyWidgetLiveActivity {
     }
 
     private struct TimerDone: View {
-        let tag: BusyWidgetAttributes.ContentState.Tag
+        let kind: IntervalKind
 
         var body: some View {
             VStack(alignment: .leading) {
-                Text(tag.title)
+                Text(kind.title)
                     .font(.pragmaticaNextVF(size: 20))
                     .foregroundStyle(.blackInvert)
                     .offset(y: 1.2) // Fix variant font alignment
 
                 Spacer()
 
-                Text(tag.description)
+                Text(kind.description)
                     .font(.pragmaticaNextVF(size: 12))
                     .foregroundStyle(.blackInvert.opacity(0.5))
                     .offset(y: 1.2) // Fix variant font alignment
@@ -80,18 +76,18 @@ extension BusyWidgetLiveActivity {
     }
 }
 
-fileprivate extension BusyWidgetAttributes.ContentState.Tag {
+fileprivate extension IntervalKind {
     var title: String {
         switch self {
-        case .working(let current, let all): "BUSY \(current)/\(all) done"
-        case .resting: "Rest is over"
+        case .work: "BUSY done"
+        case .rest, .longRest: "Rest is over"
         }
     }
 
     var description: String {
         switch self {
-        case .working: "It’s time to have a rest"
-        case .resting: "Time to get back to work"
+        case .work: "It’s time to have a rest"
+        case .rest, .longRest: "Time to get back to work"
         }
     }
 }

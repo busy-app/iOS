@@ -2,44 +2,38 @@ import ActivityKit
 import WidgetKit
 import SwiftUI
 
+enum TimerState: Codable {
+    case paused
+    case running
+    case finished
+}
+
+enum IntervalKind: Codable {
+    case work
+    case rest
+    case longRest
+}
+
 struct BusyWidgetAttributes: ActivityAttributes {
     public struct ContentState: Codable, Hashable {
 
         // Dynamic stateful properties about your activity go here!
-        var isOn: Bool
-        var deadline: Date
-        var tag: Tag
-        var event: Event
+        var state: TimerState
+        var duration: Duration
+        var kind: IntervalKind
 
-        enum Tag: Codable, Hashable {
-            case working(current: Int, all: Int)
-            case resting
-        }
-
-        enum Event: Codable {
-            case active
-            case paused
-            case completed
-        }
-
-
-        init(isOn: Bool, deadline: Date) {
-            self.isOn = isOn
-            self.deadline = deadline
-            self.tag = .resting
-            self.event = .active
+        var deadline: Date {
+            .now + Double(duration.components.seconds)
         }
 
         init(
-            isOn: Bool,
-            deadline: Date,
-            tag: Tag,
-            event: Event
+            state: TimerState,
+            duration: Duration,
+            kind: IntervalKind
         ) {
-            self.isOn = isOn
-            self.deadline = deadline
-            self.tag = tag
-            self.event = event
+            self.state = state
+            self.duration = duration
+            self.kind = kind
         }
     }
     // Fixed non-changing properties about your activity go here!

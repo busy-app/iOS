@@ -3,7 +3,7 @@ import SwiftUI
 struct TimerView: View {
     let interval: BusyState.Interval
 
-    @Binding var state: BusyState
+    @Binding var busy: BusyState
     @Binding var settings: BusySettings
 
     @State var showConfirmationDialog: Bool = false
@@ -20,13 +20,13 @@ struct TimerView: View {
 
     var description: String {
         switch interval.kind {
-        case .work: "\(state.intervalNumber)/\(state.intervalTotal)"
+        case .work: "\(busy.intervalNumber)/\(busy.intervalTotal)"
         case .rest, .longRest: ""
         }
     }
 
     var showPause: Bool {
-        state.timer.state == .paused
+        busy.state == .paused
     }
 
     var colors: [Color] {
@@ -45,7 +45,7 @@ struct TimerView: View {
                 }
                 .sheet(isPresented: $showConfirmationDialog) {
                     ConfirmationDialog {
-                        state.stop()
+                        busy.stop()
                         appState.wrappedValue = .cards
                     }
                     .colorScheme(.light)
@@ -56,7 +56,7 @@ struct TimerView: View {
                 Spacer()
 
                 SkipButton {
-                    state.skip()
+                    busy.skip()
                 }
             }
             .padding(.top, 12)
@@ -71,8 +71,8 @@ struct TimerView: View {
             Spacer()
 
             TimeCard(
-                duration: state.timer.timeLeft,
-                progress: state.timer.timeLeft / interval.duration,
+                duration: busy.timer.timeLeft,
+                progress: busy.timer.timeLeft / interval.duration,
                 kind: interval.kind
             )
             .padding(24)
@@ -80,7 +80,7 @@ struct TimerView: View {
             Spacer()
 
             PauseButton {
-                state.pause()
+                busy.pause()
             }
             .padding(.top, 16)
             .padding(.bottom, 64)
@@ -94,7 +94,7 @@ struct TimerView: View {
         )
         .overlay(
             PauseOverlayView {
-                state.resume()
+                busy.resume()
             }
             .opacity(showPause ? 1 : 0)
         )
@@ -223,16 +223,16 @@ struct TimerView: View {
 
 #Preview("Working") {
     @Previewable @State var settings = BusySettings()
-    @Previewable @State var state = BusyState.preview
+    @Previewable @State var busy = BusyState.preview
 
     TimerView(
         interval: .init(kind: .work, duration: .minutes(15)),
-        state: $state,
+        busy: $busy,
         settings: $settings
     )
     .colorScheme(.light)
     .task {
-        state.start()
+        busy.start()
     }
 }
 

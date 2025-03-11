@@ -4,13 +4,6 @@ import Observation
 @MainActor
 @Observable
 class Timer {
-    enum State {
-        case finished
-        case running
-        case paused
-    }
-
-    private(set) var state: State = .paused
     private(set) var timeLeft: Duration = .seconds(0)
 
     @ObservationIgnored var completion: (() -> Void)?
@@ -25,18 +18,16 @@ class Timer {
     }
 
     func start(_ duration: Duration) {
-        precondition(state != .running)
+        precondition(timer == nil)
         timeLeft = duration
         resume()
     }
 
     func pause() {
         timer?.invalidate()
-        state = .paused
     }
 
     func resume() {
-        state = .running
         deadline = .now.addingTimeInterval(.init(timeLeft.seconds))
         timer = .scheduledTimer(
             withTimeInterval: 1,
@@ -51,7 +42,6 @@ class Timer {
 
     func finish() {
         timer?.invalidate()
-        state = .finished
         completion?()
     }
 
