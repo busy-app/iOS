@@ -14,6 +14,7 @@ struct BusyWidgetLiveActivity: Widget {
                 LargeTimerWithAction(busy: context.state)
             }
             .padding(16)
+            .activityBackgroundTint(.activityBackground)
         } dynamicIsland: { context in
             DynamicIsland {
                 DynamicIslandExpandedRegion(.leading) {
