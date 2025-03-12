@@ -7,8 +7,11 @@ extension BusyWidgetLiveActivity {
         var body: some View {
             HStack(alignment: .center) {
                 switch busy.state {
-                case .paused, .running: Timer(state: busy, fontSize: 40)
-                case .finished: TimerDone(kind: busy.kind)
+                case .paused, .running:
+                    Timer(deadline: busy.deadline)
+                        .font(.jetBrainsMonoRegular(size: 40))
+                case .finished:
+                    TimerDone(kind: busy.kind)
                 }
 
                 Spacer()
@@ -25,7 +28,8 @@ extension BusyWidgetLiveActivity {
         var body: some View {
             switch busy.state {
             case .paused, .running:
-                Timer(state: busy, fontSize: 11)
+                Timer(deadline: busy.deadline)
+                    .font(.jetBrainsMonoRegular(size: 11))
             case .finished:
                 Text(busy.kind.title)
                     .font(.pragmaticaNextVF(size: 11))
@@ -36,12 +40,10 @@ extension BusyWidgetLiveActivity {
     }
 
     private struct Timer: View {
-        let state: BusyWidgetAttributes.ContentState
-        let fontSize: Double
+        let deadline: Date
 
         var body: some View {
             Text("00:00")
-                .font(.jetBrainsMonoRegular(size: fontSize))
                 .hidden()
                 .overlay(alignment: .leading) {
                     Text(
@@ -49,7 +51,6 @@ extension BusyWidgetLiveActivity {
                         showsHours: false
                     )
                     .contentTransition(.numericText())
-                    .font(.jetBrainsMonoRegular(size: fontSize))
                     .foregroundStyle(.blackInvert)
                 }
         }

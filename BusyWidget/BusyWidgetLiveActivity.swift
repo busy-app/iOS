@@ -34,7 +34,6 @@ struct BusyWidgetLiveActivity: Widget {
                 SmallTimerWithAction(busy: context.state)
             } minimal: {
                 SmallTag(state: context.state)
-                    .frame(width: 45)
             }
         }
     }
