@@ -25,8 +25,7 @@ extension TimerView {
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(
-                DarkBlur()
-                    .ignoresSafeArea(.all)
+                Blur(.dark).ignoresSafeArea(.all)
             )
         }
     }
