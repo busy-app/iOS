@@ -17,22 +17,18 @@ class ShieldConfigurationExtension: ShieldConfigurationDataSource {
     ) -> ShieldConfiguration {
         blocked += 1
         return .init(
-            backgroundBlurStyle: nil,
+            backgroundBlurStyle: .systemUltraThinMaterialDark,
             backgroundColor: .background,
-            icon: .blocked,
+            icon: .appIcon,
             title: .init(
-                text: "Blocked by BUSY",
+                text: "\(name) 🔒 blocked",
                 color: .label
             ),
             subtitle: .init(
-                text:
-                    """
-                    You can’t use \(name) while BUSY is active. 
-                    To unblock: open BUSY app ➔ press ‘STOP’.
-                    """,
+                text: "\(blocked)x today",
                 color: .label
             ),
-            primaryButtonLabel: .init(text: "OK", color: .white),
+            primaryButtonLabel: .init(text: "Keep BUSY", color: .white),
             primaryButtonBackgroundColor: .buttonBackground,
             secondaryButtonLabel: nil
         )
