@@ -74,6 +74,8 @@ class BusyState {
         self.interval = intervals.intervals.first
     }
 
+    let tickTock = TickTock()
+
     func start() {
         guard state != .running else {
             print("something went wrong")
@@ -91,6 +93,7 @@ class BusyState {
 
     func onTick(_ elapsed: Duration) {
         interval?.elapsed = elapsed
+        tickTock.play()
 
         guard let interval, !interval.isInfinite else { return }
 
