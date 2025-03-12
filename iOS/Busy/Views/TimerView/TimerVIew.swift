@@ -164,7 +164,7 @@ struct TimerView: View {
                 .padding(.top, 48)
             }
             .padding(24)
-            .background(DarkBlur())
+            .background(Blur(.systemUltraThinMaterialDark))
             .clipShape(RoundedRectangle(cornerRadius: 32))
             .padding(16)
             .onDisappear {
