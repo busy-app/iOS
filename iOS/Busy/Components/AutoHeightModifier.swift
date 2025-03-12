@@ -11,6 +11,13 @@ struct AutoHeightModifier: ViewModifier {
         }
     }
 
+    // Fix presentationDetents height issue
+    private var detents: Set<PresentationDetent> {
+        height == 0
+            ? [.medium]
+            : [.height(height)]
+    }
+
     func body(content: Content) -> some View {
         content
             .overlay {
@@ -26,7 +33,7 @@ struct AutoHeightModifier: ViewModifier {
                     self.height = height
                 }
             }
-            .presentationDetents([.height(height)])
+            .presentationDetents(detents)
     }
 }
 
