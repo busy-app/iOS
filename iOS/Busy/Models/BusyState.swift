@@ -5,13 +5,19 @@ import Observation
 class BusyState {
     let settings: BusySettings
 
-    var timer: Timer
     var intervals: Intervals
 
     var state: TimerState
     var interval: Interval?
 
+    private var ticker: Ticker?
+
+    private var isStopwatch: Bool {
+        interval?.isInfinite ?? false
+    }
+
     private var autostart: Bool {
+        guard settings.intervals.isOn else { return false }
         return switch interval?.kind {
         case .work: settings.intervals.busy.autostart
         case .rest: settings.intervals.rest.autostart
@@ -42,12 +48,26 @@ class BusyState {
     struct Interval: Equatable {
         let kind: IntervalKind
         let duration: Duration
+        var elapsed: Duration
+
+        var isInfinite: Bool {
+            duration == .zero
+        }
+
+        init(
+            kind: IntervalKind,
+            duration: Duration,
+            elapsed: Duration = .seconds(0)
+        ) {
+            self.kind = kind
+            self.duration = duration
+            self.elapsed = elapsed
+        }
     }
 
     init(_ settings: BusySettings) {
         self.settings = settings
 
-        self.timer = Timer()
         self.state = .paused
 
         self.intervals = Intervals(settings: settings)
@@ -55,21 +75,39 @@ class BusyState {
     }
 
     func start() {
-        guard let interval, state != .running else {
+        guard state != .running else {
             print("something went wrong")
             return
         }
-        timer.completion = { [weak self] in
+
+        ticker = Stopwatch { [weak self] in
             guard let self else { return }
+            self.onTick($0)
+        }
+
+        state = .running
+        ticker?.start()
+    }
+
+    func onTick(_ elapsed: Duration) {
+        interval?.elapsed = elapsed
+
+        guard let interval, !interval.isInfinite else { return }
+
+        if interval.duration - interval.elapsed <= .seconds(0) {
+            stop()
             if autostart {
                 next()
                 start()
             }
         }
-        timer.start(interval.duration)
     }
 
     func skip() {
+        guard !isStopwatch else {
+            print("something went wrong, stopwatch is not supported")
+            return
+        }
         stop()
         next()
         start()
@@ -77,18 +115,17 @@ class BusyState {
 
     func stop() {
         state = .finished
-        timer.finish()
-        timer.completion = nil
+        ticker?.pause()
     }
 
     func resume() {
         state = .running
-        timer.resume()
+        ticker?.resume()
     }
 
     func pause() {
         state = .paused
-        timer.pause()
+        ticker?.pause()
     }
 
     func next() {

@@ -70,12 +70,8 @@ struct TimerView: View {
 
             Spacer()
 
-            TimeCard(
-                duration: busy.timer.timeLeft,
-                progress: busy.timer.timeLeft / interval.duration,
-                kind: interval.kind
-            )
-            .padding(24)
+            TimeCard(interval: interval)
+                .padding(24)
 
             Spacer()
 

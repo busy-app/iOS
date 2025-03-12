@@ -43,10 +43,4 @@ extension Binding where Value == BusyState {
         get { wrappedValue.intervals }
         nonmutating set { wrappedValue.intervals = newValue }
     }
-
-    @MainActor
-    var timer: Busy.Timer {
-        get { wrappedValue.timer }
-        nonmutating set { wrappedValue.timer = newValue }
-    }
 }

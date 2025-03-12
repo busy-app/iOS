@@ -2,19 +2,27 @@ import SwiftUI
 
 extension TimerView {
     struct TimeCard: View {
-        let duration: Duration
-        let progress: Double
-        let kind: IntervalKind
+        let interval: BusyState.Interval
+
+        var progress: Double {
+            interval.isInfinite ? 0 : interval.elapsed / interval.duration
+        }
+
+        var time: Duration {
+            interval.isInfinite
+                ? interval.elapsed
+                : interval.duration - interval.elapsed
+        }
 
         var video: String {
-            switch kind {
+            switch interval.kind {
             case .work: "Fire.mp4"
             case .rest, .longRest: "Smoke.mp4"
             }
         }
 
         var videoOpacity: Double {
-            switch kind {
+            switch interval.kind {
             case .work: 0.2
             case .rest, .longRest: 0.3
             }
@@ -34,9 +42,10 @@ extension TimerView {
                     .opacity(0)
                 }
 
-                Time(duration: duration)
+                Time(time, countsDown: !interval.isInfinite)
 
-                Progress(value: progress, kind: kind)
+                Progress(value: progress, kind: interval.kind)
+                    .opacity(interval.isInfinite ? 0 : 1)
             }
             .padding(24)
             .background {
@@ -79,7 +88,7 @@ extension TimerView {
                 background
                 GeometryReader { proxy in
                     foreground
-                        .padding(.trailing, proxy.size.width * (1 - value))
+                        .padding(.trailing, proxy.size.width * value)
                 }
             }
             .frame(height: 6)
@@ -88,6 +97,12 @@ extension TimerView {
 
     struct Time: View {
         let duration: Duration
+        let countsDown: Bool
+
+        init(_ duration: Duration, countsDown: Bool) {
+            self.duration = duration
+            self.countsDown = countsDown
+        }
 
         var minutes: Int {
             duration.seconds / 60
@@ -119,7 +134,7 @@ extension TimerView {
             .font(.jetBrainsMonoRegular(size: 64))
             .foregroundStyle(.surfacePrimary)
             .animation(.linear, value: duration)
-            .contentTransition(.numericText(countsDown: false))
+            .contentTransition(.numericText(countsDown: countsDown))
         }
     }
 }
@@ -127,9 +142,11 @@ extension TimerView {
 #Preview {
     VStack {
         TimerView.TimeCard(
-            duration: .seconds(15 * 60 + 05),
-            progress: 0.8,
-            kind: .work
+            interval: .init(
+                kind: .work,
+                duration: .seconds(15 * 60 + 05),
+                elapsed: .seconds(15 * 60 + 05) * 0.8
+            )
         )
         .colorScheme(.light)
         .padding(24)
