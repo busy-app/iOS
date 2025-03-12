@@ -20,3 +20,15 @@ struct DarkBlur: View {
         VisualEffectView(effect: UIBlurEffect(style: .dark))
     }
 }
+
+struct Blur: View {
+    let style: UIBlurEffect.Style
+
+    init(_ style: UIBlurEffect.Style) {
+        self.style = style
+    }
+
+    var body: some View {
+        VisualEffectView(effect: UIBlurEffect(style: style))
+    }
+}
