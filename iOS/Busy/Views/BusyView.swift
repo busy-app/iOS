@@ -83,7 +83,7 @@ extension BusyView {
             attributes: .init(),
             content: .init(
                 state: contentState,
-                staleDate: contentState.deadline
+                staleDate: deadline
             )
         )
     }
@@ -94,7 +94,7 @@ extension BusyView {
             await activity?.update(
                 .init(
                     state: contentState,
-                    staleDate: contentState.deadline
+                    staleDate: deadline
                 )
             )
         }
