@@ -19,20 +19,16 @@ struct BusyWidgetAttributes: ActivityAttributes {
 
         // Dynamic stateful properties about your activity go here!
         var state: TimerState
-        var duration: Duration
+        var time: ClosedRange<Date>
         var kind: IntervalKind
-
-        var deadline: Date {
-            .now + Double(duration.components.seconds)
-        }
 
         init(
             state: TimerState,
-            duration: Duration,
+            time: ClosedRange<Date>,
             kind: IntervalKind
         ) {
             self.state = state
-            self.duration = duration
+            self.time = time
             self.kind = kind
         }
     }

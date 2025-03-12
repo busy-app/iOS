@@ -54,6 +54,10 @@ class BusyState {
             duration == .zero
         }
 
+        var remaining: Duration {
+            isInfinite ? .seconds(0) : duration - elapsed
+        }
+
         init(
             kind: IntervalKind,
             duration: Duration,

@@ -40,9 +40,6 @@ struct BusyView: View {
         .onChange(of: busy.state) {
             onStateChange()
         }
-        .onChange(of: busy.interval) {
-            onIntervalChange()
-        }
         .task {
             startBusy()
         }
@@ -66,20 +63,17 @@ struct BusyView: View {
         case .finished: stopActivity()
         }
     }
-
-    func onIntervalChange() {
-        if activity == nil {
-            print("something went wrong, activity is nil")
-        }
-        updateActivity()
-    }
 }
 
 extension BusyView {
+    var deadline: Date {
+        .now.advanced(by: Double(busy.interval?.remaining.seconds ?? 0))
+    }
+
     var contentState: BusyWidgetAttributes.ContentState {
         .init(
             state: busy.state,
-            duration: busy.interval?.duration ?? .zero,
+            time: .now...deadline,
             kind: busy.interval?.kind ?? .work
         )
     }

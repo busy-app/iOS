@@ -46,6 +46,24 @@ extension BusyWidgetAttributes {
 }
 
 extension BusyWidgetAttributes.ContentState {
+    init(
+        state: TimerState,
+        duration: Duration,
+        kind: IntervalKind
+    ) {
+        self.init(
+            state: state,
+            time: .now...(
+                .now.advanced(
+                    by: .init(duration.components.seconds)
+                )
+            ),
+            kind: kind
+        )
+    }
+}
+
+extension BusyWidgetAttributes.ContentState {
     fileprivate static var workingActive: BusyWidgetAttributes.ContentState {
         BusyWidgetAttributes.ContentState(
             state: .running,

@@ -45,7 +45,7 @@ extension BusyWidgetLiveActivity {
                 .hidden()
                 .overlay(alignment: .leading) {
                     Text(
-                        timerInterval: .now...state.deadline,
+                        timerInterval: state.time,
                         showsHours: false
                     )
                     .contentTransition(.numericText())
