@@ -22,11 +22,11 @@ class ShieldConfigurationExtension: ShieldConfigurationDataSource {
             icon: .appIcon,
             title: .init(
                 text: "\(name) 🔒 blocked",
-                color: .label
+                color: .white
             ),
             subtitle: .init(
                 text: "\(blocked)x today",
-                color: .label
+                color: .white
             ),
             primaryButtonLabel: .init(text: "Keep BUSY", color: .white),
             primaryButtonBackgroundColor: .buttonBackground,
