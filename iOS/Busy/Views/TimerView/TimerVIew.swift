@@ -6,6 +6,7 @@ struct TimerView: View {
     @Binding var busy: BusyState
     @Binding var settings: BusySettings
 
+    @State var showPause: Bool = false
     @State var showConfirmationDialog: Bool = false
 
     @Environment(\.appState) var appState
@@ -23,10 +24,6 @@ struct TimerView: View {
         case .work: "\(busy.intervalNumber)/\(busy.intervalTotal)"
         case .rest, .longRest: ""
         }
-    }
-
-    var showPause: Bool {
-        busy.state == .paused
     }
 
     var colors: [Color] {
@@ -93,6 +90,9 @@ struct TimerView: View {
                 busy.resume()
             }
             .opacity(showPause ? 1 : 0)
+            .onChange(of: busy.state) {
+                showPause = busy.state == .paused
+            }
         )
     }
 
