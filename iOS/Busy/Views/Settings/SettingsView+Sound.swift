@@ -4,35 +4,46 @@ extension BusyApp.SettingsView {
     struct SoundSettingsControl: View {
         @Binding var soundSettings: SoundSettings
 
-        var isOn: Binding<Bool> {
-            .init(
-                get: {
-                    soundSettings.alertBeforeWork || 
-                    soundSettings.alertBeforeRest
-                },
-                set: {
-                    soundSettings.alertBeforeWork = $0
-                    soundSettings.alertBeforeRest = $0
-                }
-            )
+        var body: some View {
+            VStack(spacing: 22) {
+                SoundSettingControl(
+                    title: "Sound",
+                    description:
+                        "Get notified when current interval ends and " +
+                        "it's time to start the next one",
+                    isOn: $soundSettings.intervals
+                )
+
+                SoundSettingControl(
+                    title: "Metronome",
+                    description: "Play a ticking sound during work interval",
+                    isOn: $soundSettings.metronome
+                )
+            }
+            .padding(12)
+            .background(.transparentWhiteInvertQuinary)
+            .clipShape(RoundedRectangle(cornerRadius: 12))
         }
+    }
+
+    struct SoundSettingControl: View {
+        let title: String
+        let description: String
+        let isOn: Binding<Bool>
 
         var body: some View {
             HStack(alignment: .top, spacing: 12) {
                 VStack(alignment: .leading, spacing: 0) {
-                    Text("Sound")
+                    Text(title)
                         .font(.pragmaticaNextVF(size: 18))
                         .foregroundStyle(.whiteInvert)
 
-                    Text(
-                        "Get notified when current interval ends and " +
-                        "it's time to start the next one"
-                    )
-                    .padding(.top, 8)
-                    .multilineTextAlignment(.leading)
-                    .lineSpacing(18 * 0.3)
-                    .font(.pragmaticaNextVF(size: 14))
-                    .foregroundStyle(.transparentWhiteInvertSecondary)
+                    Text(description)
+                        .padding(.top, 8)
+                        .multilineTextAlignment(.leading)
+                        .lineSpacing(18 * 0.3)
+                        .font(.pragmaticaNextVF(size: 14))
+                        .foregroundStyle(.transparentWhiteInvertSecondary)
                 }
 
                 Spacer()
@@ -43,9 +54,6 @@ extension BusyApp.SettingsView {
                 .labelsHidden()
                 .tint(.accent)
             }
-            .padding(12)
-            .background(.transparentWhiteInvertQuinary)
-            .clipShape(RoundedRectangle(cornerRadius: 12))
         }
     }
 }

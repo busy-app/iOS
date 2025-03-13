@@ -74,30 +74,38 @@ struct BusyView: View {
         guard let interval = busy.interval, !interval.isInfinite else {
             return
         }
-        if interval.remaining >= .seconds(0) &&
-            interval.remaining <= .seconds(3)
+        if settings.sound.intervals,
+           interval.remaining >= .seconds(0),
+           interval.remaining <= .seconds(3)
         {
             var name = interval.kind == .work ? "work" : "rest"
             name.append(
                 interval.remaining == .seconds(0)
-                ? "_finished"
-                : "_countdown"
+                    ? "_finished"
+                    : "_countdown"
             )
-            guard let path = Bundle.main.path(
-                forResource: name,
-                ofType:"mp3"
-            ) else {
-                return
-            }
+            print(name)
+            play(name)
+        } else if settings.sound.metronome {
+            play("tick")
+        }
+    }
 
-            let url = URL(fileURLWithPath: path)
+    func play(_ name: String, onType type: String = "mp3") {
+        guard let path = Bundle.main.path(
+            forResource: name,
+            ofType: type
+        ) else {
+            return
+        }
 
-            do {
-                player = try AVAudioPlayer(contentsOf: url)
-                player?.play()
-            } catch let error {
-                print(error.localizedDescription)
-            }
+        let url = URL(fileURLWithPath: path)
+
+        do {
+            player = try AVAudioPlayer(contentsOf: url)
+            player?.play()
+        } catch let error {
+            print(error.localizedDescription)
         }
     }
 }

@@ -40,8 +40,8 @@ struct BusySettings: Codable, RawRepresentable {
 }
 
 struct SoundSettings: Codable {
-    var alertBeforeWork: Bool = true
-    var alertBeforeRest: Bool = true
+    var intervals: Bool = true
+    var metronome: Bool = true
 }
 
 struct BlockerSettings: Codable {
