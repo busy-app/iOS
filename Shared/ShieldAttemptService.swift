@@ -19,31 +19,15 @@ final class ShieldAttemptService: @unchecked Sendable {
     private let container: ModelContainer
     private let context: ModelContext
 
-    private var lastAttemptTimestamps: [String: Date] = [:]
-
     private init() {
         container = try! ModelContainer(for: Attempt.self)
         context = ModelContext(container)
     }
 
     func add(by name: String) {
-        let currentTime = Date()
-        if shouldDebounce(name: name, time: currentTime) { return }
-
-        let attempt = Attempt(name: name, timestamp: currentTime)
+        let attempt = Attempt(name: name, timestamp: .now)
         context.insert(attempt)
         try? context.save()
-    }
-
-    // Workaround for the double open issue
-    private func shouldDebounce(name: String, time: Date) -> Bool {
-        if let lastAttemptTime = lastAttemptTimestamps[name] {
-            if time.timeIntervalSince(lastAttemptTime) < 0.5 {
-                return true
-            }
-        }
-        lastAttemptTimestamps[name] = time
-        return false
     }
 
     func getCount(by name: String) -> Int {
