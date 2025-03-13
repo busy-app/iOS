@@ -62,7 +62,10 @@ struct BusyView: View {
         if settings.blocker.isOn {
             BusyShield.enable(settings.blocker)
         }
+
         busy = .init(settings)
+        BusyState.Holder.shared.set(busy)
+
         busy.start()
         startActivity()
     }
