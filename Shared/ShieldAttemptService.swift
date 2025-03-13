@@ -30,21 +30,13 @@ final class ShieldAttemptService: @unchecked Sendable {
         try? context.save()
     }
 
-    func getCount(by name: String) -> Int {
-        let startOfToday = Calendar.current.startOfDay(for: .now)
-
-        let predicate = #Predicate<Attempt> {
-            $0.name == name && $0.timestamp >= startOfToday
-        }
-        let descriptor = FetchDescriptor<Attempt>(predicate: predicate)
-        return (try? context.fetchCount(descriptor)) ?? 0
-    }
-
-    func getAllCount() -> Int {
-        let startOfToday = Calendar.current.startOfDay(for: .now)
-
-        let predicate = #Predicate<Attempt> {
-            $0.timestamp >= startOfToday
+    func count(
+        for name: String? = nil,
+        since date: Date? = nil
+    ) -> Int {
+        let predicate = #Predicate<Attempt> { attempt in
+            (name == nil || attempt.name == name!) &&
+            (date == nil || attempt.timestamp >= date!)
         }
 
         let descriptor = FetchDescriptor<Attempt>(predicate: predicate)
