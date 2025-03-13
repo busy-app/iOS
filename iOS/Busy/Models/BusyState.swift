@@ -16,6 +16,10 @@ class BusyState {
         interval?.isInfinite ?? false
     }
 
+    private var isInfinite: Bool {
+        settings.intervals.isOn && settings.duration == .infinity
+    }
+
     private var autostart: Bool {
         guard settings.intervals.isOn else { return false }
         return switch interval?.kind {
@@ -36,9 +40,13 @@ class BusyState {
                 : [.init(kind: .work, duration: .seconds(0))]
         }
 
-        mutating func next() -> Interval? {
+        mutating func next(loop: Bool) -> Interval? {
             guard index + 1 < intervals.count else {
-                return nil
+                guard loop else {
+                    return nil
+                }
+                index = 0
+                return intervals[index]
             }
             index += 1
             return intervals[index]
@@ -136,12 +144,19 @@ class BusyState {
     }
 
     func next() {
-        interval = intervals.next()
+        interval = intervals.next(loop: isInfinite)
     }
 }
 
 extension BusyState.Intervals {
+    var technique: [IntervalKind] {
+        [.work, .rest, .work, .rest, .work, .longRest]
+    }
+
+    // TODO: you know what
     init(settings: BusySettings) {
+        // MARK: No intervals
+
         guard settings.intervals.isOn else {
             self.intervals = [
                 .init(
@@ -152,27 +167,41 @@ extension BusyState.Intervals {
             return
         }
 
-        var timeLeft = settings.duration
-        var intervals = [BusyState.Interval]()
+        // MARK: Infinite intervals
 
-        func add(_ kind: IntervalKind) {
-            let duration = switch kind {
+        func duration(for kind: IntervalKind) -> Duration {
+            switch kind {
             case .work: settings.intervals.busy.duration
             case .rest: settings.intervals.rest.duration
             case .longRest: settings.intervals.longRest.duration
             }
+        }
+
+        guard settings.duration > .seconds(0) else {
+            for kind in technique {
+                let duration = duration(for: kind)
+                self.intervals.append(.init(kind: kind, duration: duration))
+            }
+            return
+        }
+
+        // MARK: Finite intervals
+
+        var timeLeft = settings.duration
+        var intervals = [BusyState.Interval]()
+
+        func add(_ kind: IntervalKind) {
+            let duration = duration(for: kind)
             intervals.append(.init(kind: kind, duration: duration))
             timeLeft = .seconds(timeLeft.seconds - duration.seconds)
         }
 
-        // <(^_^)>
         while timeLeft > .seconds(0) {
-            if timeLeft > .seconds(0) { add(.work) }
-            if timeLeft > .seconds(0) { add(.rest) }
-            if timeLeft > .seconds(0) { add(.work) }
-            if timeLeft > .seconds(0) { add(.rest) }
-            if timeLeft > .seconds(0) { add(.work) }
-            if timeLeft > .seconds(0) { add(.longRest) }
+            for kind in technique {
+                if timeLeft > .seconds(0) {
+                    add(kind)
+                }
+            }
         }
 
         self.intervals = intervals
