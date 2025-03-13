@@ -43,3 +43,9 @@ final class ShieldAttemptService: @unchecked Sendable {
         return (try? context.fetchCount(descriptor)) ?? 0
     }
 }
+
+extension Date {
+    static var today: Date {
+        Calendar.current.startOfDay(for: .now)
+    }
+}

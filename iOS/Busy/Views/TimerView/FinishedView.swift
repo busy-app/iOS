@@ -8,12 +8,8 @@ extension TimerView {
 
         @AppStorage("completed", store: .group) var completed: Int = 0
 
-        private var today: Date {
-            Calendar.current.startOfDay(for: .now)
-        }
-
         private var blocked: Int {
-            ShieldAttemptService.shared.count(since: today)
+            ShieldAttemptService.shared.count(since: .today)
         }
 
         var body: some View {

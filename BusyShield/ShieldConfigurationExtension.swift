@@ -6,15 +6,11 @@ import SwiftUI
 class ShieldConfigurationExtension: ShieldConfigurationDataSource {
     let shieldAttemptService = ShieldAttemptService.shared
 
-    private var today: Date {
-        Calendar.current.startOfDay(for: .now)
-    }
-
     func configuration(
         shielding name: String
     ) -> ShieldConfiguration {
         shieldAttemptService.add(by: name)
-        let blocked = shieldAttemptService.count(for: name, since: today)
+        let blocked = shieldAttemptService.count(for: name, since: .today)
 
         return .init(
             backgroundBlurStyle: .systemUltraThinMaterialDark,
