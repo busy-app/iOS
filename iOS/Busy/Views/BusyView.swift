@@ -41,7 +41,10 @@ struct BusyView: View {
             }
         }
         .onChange(of: busy.state) {
-            onStateChange()
+            updateActivity()
+        }
+        .onChange(of: busy.interval?.kind) {
+            updateActivity()
         }
         .onChange(of: busy.interval?.remaining) {
             playSoundIfNeeded()
@@ -51,6 +54,7 @@ struct BusyView: View {
         }
         .onDisappear {
             BusyShield.disable()
+            stopActivity()
         }
     }
 
@@ -60,14 +64,7 @@ struct BusyView: View {
         }
         busy = .init(settings)
         busy.start()
-    }
-
-    func onStateChange() {
-        switch busy.state {
-        case .running: startActivity()
-        case .paused: stopActivity() //updateActivity()
-        case .finished: stopActivity()
-        }
+        startActivity()
     }
 
     func playSoundIfNeeded() {
