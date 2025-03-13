@@ -1,6 +1,7 @@
 import SwiftUI
 
 import ActivityKit
+import AVFoundation
 
 struct BusyView: View {
     @Binding var settings: BusySettings
@@ -8,6 +9,8 @@ struct BusyView: View {
     @State private var busy: BusyState = .init(.init())
 
     @State private var activity: Activity<BusyWidgetAttributes>?
+
+    @State private var player: AVAudioPlayer?
 
     var body: some View {
         Group {
@@ -40,6 +43,9 @@ struct BusyView: View {
         .onChange(of: busy.state) {
             onStateChange()
         }
+        .onChange(of: busy.interval?.remaining) {
+            playSoundIfNeeded()
+        }
         .task {
             startBusy()
         }
@@ -61,6 +67,37 @@ struct BusyView: View {
         case .running: startActivity()
         case .paused: stopActivity() //updateActivity()
         case .finished: stopActivity()
+        }
+    }
+
+    func playSoundIfNeeded() {
+        guard let interval = busy.interval, !interval.isInfinite else {
+            return
+        }
+        if interval.remaining >= .seconds(0) &&
+            interval.remaining <= .seconds(3)
+        {
+            var name = interval.kind == .work ? "work" : "rest"
+            name.append(
+                interval.remaining == .seconds(0)
+                ? "_finished"
+                : "_countdown"
+            )
+            guard let path = Bundle.main.path(
+                forResource: name,
+                ofType:"mp3"
+            ) else {
+                return
+            }
+
+            let url = URL(fileURLWithPath: path)
+
+            do {
+                player = try AVAudioPlayer(contentsOf: url)
+                player?.play()
+            } catch let error {
+                print(error.localizedDescription)
+            }
         }
     }
 }
