@@ -7,7 +7,10 @@ extension TimerView {
         @Environment(\.appState) var appState
 
         @AppStorage("completed", store: .group) var completed: Int = 0
-        @AppStorage("blocked", store: .group) var blocked: Int = 0
+
+        private var blocked: Int {
+            ShieldAttemptService.shared.count(since: .today)
+        }
 
         var body: some View {
             VStack {

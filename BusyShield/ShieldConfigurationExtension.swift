@@ -4,18 +4,14 @@ import UIKit
 import SwiftUI
 
 class ShieldConfigurationExtension: ShieldConfigurationDataSource {
-    var blocked: Int {
-        get {
-            UserDefaults.group.integer(forKey: "blocked")
-        } set {
-            UserDefaults.group.set(newValue, forKey: "blocked")
-        }
-    }
+    let shieldAttemptService = ShieldAttemptService.shared
 
     func configuration(
         shielding name: String
     ) -> ShieldConfiguration {
-        blocked += 1
+        shieldAttemptService.add(by: name)
+        let blocked = shieldAttemptService.count(for: name, since: .today)
+
         return .init(
             backgroundBlurStyle: .systemUltraThinMaterialDark,
             backgroundColor: .background,
