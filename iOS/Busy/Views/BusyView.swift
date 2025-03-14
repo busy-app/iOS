@@ -46,6 +46,11 @@ struct BusyView: View {
         .onChange(of: busy.interval?.kind) {
             updateActivity()
         }
+        .onChange(of: busy.interval) {
+            if busy.interval == nil {
+                stopActivity()
+            }
+        }
         .onChange(of: busy.interval?.remaining) {
             playSoundIfNeeded()
         }
