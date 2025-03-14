@@ -8,7 +8,7 @@ extension BusyWidgetLiveActivity {
             HStack(alignment: .center) {
                 switch busy.state {
                 case .paused, .running:
-                    Timer(time: busy.time)
+                    Timer(busy: busy)
                         .font(.jetBrainsMonoRegular(size: 40))
                 case .finished:
                     TimerDone(kind: busy.kind)
@@ -28,7 +28,7 @@ extension BusyWidgetLiveActivity {
         var body: some View {
             switch busy.state {
             case .paused, .running:
-                Timer(time: busy.time)
+                Timer(busy: busy)
                     .font(.jetBrainsMonoRegular(size: 11))
             case .finished:
                 Text(busy.kind.title)
@@ -40,16 +40,22 @@ extension BusyWidgetLiveActivity {
     }
 
     private struct Timer: View {
-        let time: ClosedRange<Date>
+        let busy: BusyWidgetAttributes.ContentState
 
         var body: some View {
             Text("00:00")
                 .hidden()
                 .overlay(alignment: .leading) {
-                    Text(
-                        timerInterval: time,
-                        showsHours: false
-                    )
+                    Group {
+                        if busy.state == .paused {
+                            Text(busy.time.idle)
+                        } else {
+                            Text(
+                                timerInterval: busy.time,
+                                showsHours: false
+                            )
+                        }
+                    }
                     .contentTransition(.numericText())
                     .foregroundStyle(.blackInvert)
                 }
@@ -90,5 +96,14 @@ fileprivate extension IntervalKind {
         case .work: "It’s time to have a rest"
         case .rest, .longRest: "Time to get back to work"
         }
+    }
+}
+
+fileprivate extension ClosedRange<Date> {
+    var idle: String {
+        let seconds = Int(upperBound.timeIntervalSince(lowerBound))
+        let minutes = seconds / 60
+        let remainingSeconds = seconds % 60
+        return String(format: "%d:%02d", minutes, remainingSeconds)
     }
 }

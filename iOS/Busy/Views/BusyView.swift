@@ -41,7 +41,15 @@ struct BusyView: View {
             }
         }
         .onChange(of: busy.state) {
-            onStateChange()
+            updateActivity()
+        }
+        .onChange(of: busy.interval?.kind) {
+            updateActivity()
+        }
+        .onChange(of: busy.interval) {
+            if busy.interval == nil {
+                stopActivity()
+            }
         }
         .onChange(of: busy.interval?.remaining) {
             playSoundIfNeeded()
@@ -51,6 +59,7 @@ struct BusyView: View {
         }
         .onDisappear {
             BusyShield.disable()
+            stopActivity()
         }
     }
 
@@ -58,16 +67,12 @@ struct BusyView: View {
         if settings.blocker.isOn {
             BusyShield.enable(settings.blocker)
         }
-        busy = .init(settings)
-        busy.start()
-    }
 
-    func onStateChange() {
-        switch busy.state {
-        case .running: startActivity()
-        case .paused: stopActivity() //updateActivity()
-        case .finished: stopActivity()
-        }
+        busy = .init(settings)
+        BusyState.Holder.shared.set(busy)
+
+        busy.start()
+        startActivity()
     }
 
     func playSoundIfNeeded() {

@@ -213,3 +213,15 @@ extension BusyState {
         .init(.init())
     }
 }
+
+extension BusyState {
+    class Holder {
+        @MainActor static let shared = Holder()
+
+        private(set) var current: BusyState?
+
+        func set(_ state: BusyState) {
+            self.current = state
+        }
+    }
+}

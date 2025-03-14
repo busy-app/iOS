@@ -1,4 +1,5 @@
 import ActivityKit
+import AppIntents
 import SwiftUI
 
 extension BusyWidgetLiveActivity {
@@ -37,8 +38,16 @@ extension BusyWidgetLiveActivity {
             }
         }
 
+        var intent: any AppIntent {
+            switch busy.state {
+            case .paused: StartBusyIntent()
+            case .running: PauseBusyIntent()
+            case .finished: NextBusyIntent()
+            }
+        }
+
         var body: some View {
-            SwiftUI.Button(intent: StopBusyIntent()) {
+            SwiftUI.Button(intent: intent) {
                 HStack(alignment: .center, spacing: 8) {
                     if let icon {
                         icon
