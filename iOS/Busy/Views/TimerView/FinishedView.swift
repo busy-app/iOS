@@ -9,7 +9,7 @@ extension TimerView {
         @AppStorage("completed", store: .group) var completed: Int = 0
 
         private var blocked: Int {
-            ShieldAttemptService.shared.count(since: .today)
+            ShieldAttemptService.shared.count()
         }
 
         var body: some View {

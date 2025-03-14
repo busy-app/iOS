@@ -1,7 +1,5 @@
 import ManagedSettings
 import ManagedSettingsUI
-import UIKit
-import SwiftUI
 
 class ShieldConfigurationExtension: ShieldConfigurationDataSource {
     let shieldAttemptService = ShieldAttemptService.shared
@@ -9,8 +7,7 @@ class ShieldConfigurationExtension: ShieldConfigurationDataSource {
     func configuration(
         shielding name: String
     ) -> ShieldConfiguration {
-        shieldAttemptService.add(by: name)
-        let blocked = shieldAttemptService.count(for: name, since: .today)
+        let blocked = shieldAttemptService.add(by: name)
 
         return .init(
             backgroundBlurStyle: .systemUltraThinMaterialDark,
