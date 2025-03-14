@@ -8,7 +8,7 @@ extension BusyWidgetLiveActivity {
             HStack(alignment: .center) {
                 switch busy.state {
                 case .paused, .running:
-                    Timer(deadline: busy.deadline)
+                    Timer(time: busy.time)
                         .font(.jetBrainsMonoRegular(size: 40))
                 case .finished:
                     TimerDone(kind: busy.kind)
@@ -28,7 +28,7 @@ extension BusyWidgetLiveActivity {
         var body: some View {
             switch busy.state {
             case .paused, .running:
-                Timer(deadline: busy.deadline)
+                Timer(time: busy.time)
                     .font(.jetBrainsMonoRegular(size: 11))
             case .finished:
                 Text(busy.kind.title)
@@ -40,14 +40,14 @@ extension BusyWidgetLiveActivity {
     }
 
     private struct Timer: View {
-        let deadline: Date
+        let time: ClosedRange<Date>
 
         var body: some View {
             Text("00:00")
                 .hidden()
                 .overlay(alignment: .leading) {
                     Text(
-                        timerInterval: state.time,
+                        timerInterval: time,
                         showsHours: false
                     )
                     .contentTransition(.numericText())
