@@ -151,8 +151,24 @@ extension BusyApp.SettingsView {
         let icon: ImageResource
         let name: String
         let description: String
-        @Binding var interval: Interval
         let role: DurationPicker.Role
+
+        @Binding var savedInterval: Interval
+        @State var interval: Interval = .init(.zero)
+
+        init(
+            icon: ImageResource,
+            name: String,
+            description: String,
+            interval: Binding<Interval>,
+            role: DurationPicker.Role
+        ) {
+            self.icon = icon
+            self.name = name
+            self.description = description
+            self._savedInterval = interval
+            self.role = role
+        }
 
         @Environment(\.dismiss) private var dismiss
 
@@ -195,9 +211,13 @@ extension BusyApp.SettingsView {
                 .padding(.horizontal, 16)
 
                 SaveButton {
+                    savedInterval = interval
                     dismiss()
                 }
                 .padding(.vertical, 16)
+            }
+            .onAppear {
+                interval = savedInterval
             }
         }
     }
