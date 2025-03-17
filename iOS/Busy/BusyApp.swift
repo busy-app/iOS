@@ -31,6 +31,7 @@ struct BusyApp: View {
             notifications.authorize()
             #endif
             disableShieldOnTerminate()
+            disableActivitiesOnTerminate()
         }
     }
 
@@ -42,6 +43,20 @@ struct BusyApp: View {
         ) { _ in
             MainActor.assumeIsolated {
                 BusyShield.disable()
+            }
+        }
+    }
+
+    func disableActivitiesOnTerminate() {
+        NotificationCenter.default.addObserver(
+            forName: UIApplication.willTerminateNotification,
+            object: nil,
+            queue: .main
+        ) { _ in
+            Task {
+                for activity in Activity<BusyWidgetAttributes>.activities {
+                    await activity.end(.none, dismissalPolicy: .immediate)
+                }
             }
         }
     }
