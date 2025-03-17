@@ -124,9 +124,25 @@
 			);
 			target = 8B82C3AD2CF8FDC900AE782C /* BusyWidgetExtension */;
 		};
+		8BB465E82D873A3400518CF1 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Connectivity.swift,
+			);
+			target = 8B82C3AD2CF8FDC900AE782C /* BusyWidgetExtension */;
+		};
+		8BB465E92D873A3400518CF1 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Connectivity.swift,
+				State.swift,
+			);
+			target = 8B9457EE2D848193009DDEEC /* Busy Watch App */;
+		};
 		8BCCF4402D7E139C004D0B7C /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				Connectivity.swift,
 				Font.swift,
 				"Fonts/JetBrainsMono-Regular.ttf",
 				"Fonts/pragmatica-next_vf.ttf",
@@ -136,6 +152,7 @@
 		8BCCF4412D7E139C004D0B7C /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				Connectivity.swift,
 				Font.swift,
 				"Fonts/JetBrainsMono-Regular.ttf",
 				"Fonts/pragmatica-next_vf.ttf",
@@ -145,6 +162,7 @@
 		8BCCF4422D7E139C004D0B7C /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				Connectivity.swift,
 				Font.swift,
 				"Fonts/JetBrainsMono-Regular.ttf",
 				"Fonts/pragmatica-next_vf.ttf",
@@ -168,7 +186,7 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		8B3C7F0B2D7AF4510088CC48 /* Shared */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (8BCCF4402D7E139C004D0B7C /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 8BCCF4412D7E139C004D0B7C /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 8BCCF4422D7E139C004D0B7C /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = Shared; sourceTree = "<group>"; };
+		8B3C7F0B2D7AF4510088CC48 /* Shared */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (8BCCF4402D7E139C004D0B7C /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 8BCCF4412D7E139C004D0B7C /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 8BCCF4422D7E139C004D0B7C /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 8BB465E82D873A3400518CF1 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 8BB465E92D873A3400518CF1 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = Shared; sourceTree = "<group>"; };
 		8B5AB1452CEC085200211DA5 /* BusyShield */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (8B5AB14D2CEC085200211DA5 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = BusyShield; sourceTree = "<group>"; };
 		8B638DD02C610E9400C3458C /* iOS */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (8BCCF4F02D7E1715004D0B7C /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = iOS; sourceTree = "<group>"; };
 		8B638DE12C610E9500C3458C /* Tests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Tests; sourceTree = "<group>"; };
@@ -1126,7 +1144,7 @@
 				DEVELOPMENT_TEAM = SXH69675TZ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = BusyWatch;
+				INFOPLIST_KEY_CFBundleDisplayName = BUSY;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = app.busy;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1157,7 +1175,7 @@
 				DEVELOPMENT_TEAM = SXH69675TZ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = BusyWatch;
+				INFOPLIST_KEY_CFBundleDisplayName = BUSY;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = app.busy;
 				LD_RUNPATH_SEARCH_PATHS = (
