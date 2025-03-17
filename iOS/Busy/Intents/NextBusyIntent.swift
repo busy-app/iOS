@@ -2,10 +2,10 @@ import Foundation
 import AppIntents
 import WidgetKit
 
-struct NextBusyIntent: AppIntent {
+struct NextBusyIntent: LiveActivityIntent {
     static var title: LocalizedStringResource { "NextBusy" }
 
-    static var openAppWhenRun: Bool { true }
+    static var openAppWhenRun: Bool { false }
 
     init() {
     }
