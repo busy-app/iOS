@@ -10,10 +10,11 @@ struct Attempt: Codable {
     }
 }
 
-final class ShieldAttemptService: @unchecked Sendable {
+final class ShieldAttemptService: Sendable {
     static let shared = ShieldAttemptService()
 
     private var key: String { "access_attempts" }
+    private var delay: TimeInterval { 5 }
 
     private var attempts: [Attempt] {
         get {
@@ -36,7 +37,18 @@ final class ShieldAttemptService: @unchecked Sendable {
 
     func add(by name: String) -> Int {
         var attempts = self.attempts.filter { $0.timestamp >= .today }
-        attempts.append(.init(name: name, timestamp: .now))
+
+        let prevAttempt = attempts.last { $0.name == name }
+        let attempt = Attempt(name: name, timestamp: .now)
+
+        if
+            let prevAttempt = prevAttempt,
+            attempt.timestamp.timeIntervalSince(prevAttempt.timestamp) < delay
+        {
+            return attempts.count(where: { $0.name == name })
+        }
+
+        attempts.append(attempt)
         self.attempts = attempts
         return attempts.count(where: { $0.name == name })
     }
