@@ -2,10 +2,10 @@ import Foundation
 import AppIntents
 import WidgetKit
 
-struct PauseBusyIntent: AppIntent {
+struct PauseBusyIntent: LiveActivityIntent {
     static var title: LocalizedStringResource { "PauseBusy" }
 
-    static var openAppWhenRun: Bool { true }
+    static var openAppWhenRun: Bool { false }
 
     init() {
     }
