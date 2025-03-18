@@ -7,7 +7,12 @@ extension BusyApp {
     struct SettingsView: View {
         typealias DurationPicker = ODurationPicker
 
-        @Binding var settings: BusySettings
+        @Binding var savedSettings: BusySettings
+        @State var settings: BusySettings = .init()
+
+        init(settings: Binding<BusySettings>) {
+            self._savedSettings = settings
+        }
 
         @Environment(\.dismiss) private var dismiss
 
@@ -51,6 +56,7 @@ extension BusyApp {
                         .padding(.horizontal, 16)
 
                     SaveButton {
+                        savedSettings = settings
                         dismiss()
                     }
                     .padding(.top, 24)
@@ -59,6 +65,9 @@ extension BusyApp {
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(.backgroundDark)
+            .onAppear {
+                settings = savedSettings
+            }
         }
     }
 }
