@@ -52,13 +52,9 @@ final class ShieldAttemptService: Sendable {
         self.attempts = attempts
         return attempts.count(where: { $0.name == name })
     }
-
-    func count() -> Int {
-        attempts.count { $0.timestamp >= .today }
-    }
 }
 
-extension Date {
+fileprivate extension Date {
     static var today: Date {
         Calendar.current.startOfDay(for: .now)
     }
