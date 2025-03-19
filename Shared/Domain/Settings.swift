@@ -46,9 +46,16 @@ struct SoundSettings: Codable {
 
 struct BlockerSettings: Codable {
     var isOn: Bool = false
+
+    #if os(iOS)
     var applicationTokens: Set<ApplicationToken> = .init()
     var categoryTokens: Set<ActivityCategoryToken> = []
     var domainTokens: Set<WebDomainToken> = []
+    #else
+    var applicationTokens: Set<String> = []
+    var categoryTokens: Set<String> = []
+    var domainTokens: Set<String> = []
+    #endif
 
     var selectedCount: Int {
         applicationTokens.count + categoryTokens.count + domainTokens.count

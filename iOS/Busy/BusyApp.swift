@@ -11,11 +11,6 @@ struct BusyApp: View {
     @AppStorage("busySettings")
     var busySettings: BusySettings = .init()
 
-    indirect enum AppState {
-        case cards
-        case busy
-    }
-
     @State var appState: AppState = .cards
 
     var body: some View {
