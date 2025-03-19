@@ -1,5 +1,10 @@
 import Foundation
 
+public enum AppState {
+    case cards
+    case busy
+}
+
 public enum TimerState: Codable, Sendable {
     case paused
     case running

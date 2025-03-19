@@ -107,6 +107,7 @@
 		8B9457EF2D848193009DDEEC /* Busy Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Busy Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B9457FE2D848194009DDEEC /* Busy Watch AppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Busy Watch AppTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B9458082D848194009DDEEC /* Busy Watch AppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Busy Watch AppUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8BFFA7FE2D8AF37D00E0F7CE /* Shared */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Shared; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -127,45 +128,70 @@
 		8BB465E82D873A3400518CF1 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Connectivity.swift,
+				Domain/Connectivity.swift,
+				Domain/RawRepresentable.swift,
+				Domain/Settings.swift,
+				"UI/String+Extensions.swift",
+				"UI/Text+Extensions.swift",
 			);
 			target = 8B82C3AD2CF8FDC900AE782C /* BusyWidgetExtension */;
 		};
 		8BB465E92D873A3400518CF1 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Connectivity.swift,
-				State.swift,
+				Domain/Connectivity.swift,
+				Domain/RawRepresentable.swift,
+				Domain/Settings.swift,
+				Domain/ShieldAttemptService.swift,
+				Domain/State.swift,
+				Domain/UserDefaults.swift,
+				"Fonts/JetBrainsMono-Regular.ttf",
+				"Fonts/pragmatica-next_vf.ttf",
+				UI/Font.swift,
+				"UI/String+Extensions.swift",
+				"UI/Text+Extensions.swift",
 			);
 			target = 8B9457EE2D848193009DDEEC /* Busy Watch App */;
 		};
 		8BCCF4402D7E139C004D0B7C /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Connectivity.swift,
-				Font.swift,
+				Domain/Connectivity.swift,
+				Domain/RawRepresentable.swift,
+				Domain/Settings.swift,
 				"Fonts/JetBrainsMono-Regular.ttf",
 				"Fonts/pragmatica-next_vf.ttf",
+				UI/Font.swift,
+				"UI/String+Extensions.swift",
+				"UI/Text+Extensions.swift",
 			);
 			target = 8B638DDD2C610E9500C3458C /* BusyTests */;
 		};
 		8BCCF4412D7E139C004D0B7C /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Connectivity.swift,
-				Font.swift,
+				Domain/Connectivity.swift,
+				Domain/RawRepresentable.swift,
+				Domain/Settings.swift,
 				"Fonts/JetBrainsMono-Regular.ttf",
 				"Fonts/pragmatica-next_vf.ttf",
+				UI/Font.swift,
+				"UI/String+Extensions.swift",
+				"UI/Text+Extensions.swift",
 			);
 			target = 8B638DE72C610E9500C3458C /* BusyUITests */;
 		};
 		8BCCF4422D7E139C004D0B7C /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Connectivity.swift,
-				Font.swift,
+				Domain/Connectivity.swift,
+				Domain/RawRepresentable.swift,
+				Domain/Settings.swift,
 				"Fonts/JetBrainsMono-Regular.ttf",
 				"Fonts/pragmatica-next_vf.ttf",
+				UI/Font.swift,
+				"UI/String+Extensions.swift",
+				"UI/Text+Extensions.swift",
 			);
 			target = 8B5AB13E2CEC085100211DA5 /* BusyShield */;
 		};
@@ -275,6 +301,7 @@
 		8B638DC52C610E9400C3458C = {
 			isa = PBXGroup;
 			children = (
+				8BFFA7FE2D8AF37D00E0F7CE /* Shared */,
 				8B638DD02C610E9400C3458C /* iOS */,
 				8B3C7F0B2D7AF4510088CC48 /* Shared */,
 				8B638DE12C610E9500C3458C /* Tests */,
