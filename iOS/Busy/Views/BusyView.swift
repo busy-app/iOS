@@ -23,7 +23,7 @@ struct BusyView: View {
                     )
                 } else {
                     if interval.kind == .work {
-                        TimerView.WorkDoneView {
+                        TimerView.WorkDoneView(busy: $busy) {
                             busy.next()
                             busy.start()
                         }
