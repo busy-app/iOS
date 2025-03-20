@@ -20,7 +20,7 @@ final class ShieldAttemptService: Sendable {
         get {
             let decoder = JSONDecoder()
             guard
-                let data = UserDefaults.group.data(forKey: key),
+                let data = UserDefaults.standard.data(forKey: key),
                 let decoded = try? decoder.decode([Attempt].self, from: data)
             else { return [] }
             return decoded
@@ -28,7 +28,7 @@ final class ShieldAttemptService: Sendable {
         set {
             let encoder = JSONEncoder()
             guard let data = try? encoder.encode(newValue) else { return }
-            UserDefaults.group.set(data, forKey: key)
+            UserDefaults.standard.set(data, forKey: key)
         }
     }
 

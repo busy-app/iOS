@@ -112,6 +112,7 @@
 				Font.swift,
 				"Fonts/JetBrainsMono-Regular.ttf",
 				"Fonts/pragmatica-next_vf.ttf",
+				UserDefaults.swift,
 			);
 			target = 8B5AB13E2CEC085100211DA5 /* BusyShield */;
 		};
