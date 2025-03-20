@@ -86,7 +86,9 @@ class BusyState {
         self.interval = intervals.intervals.first
     }
 
+    #if os(iOS)
     let tickTock = TickTock()
+    #endif
 
     func start() {
         guard state != .running else {
@@ -105,7 +107,9 @@ class BusyState {
 
     func onTick(_ elapsed: Duration) {
         interval?.elapsed = elapsed
+        #if os(iOS)
         tickTock.play()
+        #endif
 
         guard let interval, !interval.isInfinite else { return }
 

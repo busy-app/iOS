@@ -111,6 +111,27 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		8B5377F02D8C8463000C0068 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Busy/Domain/TickTock.swift,
+			);
+			target = 8B638DDD2C610E9500C3458C /* BusyTests */;
+		};
+		8B5377F22D8C846E000C0068 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Busy/Domain/TickTock.swift,
+			);
+			target = 8B638DE72C610E9500C3458C /* BusyUITests */;
+		};
+		8B5377F42D8C8481000C0068 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Busy/Domain/TickTock.swift,
+			);
+			target = 8B82C3AD2CF8FDC900AE782C /* BusyWidgetExtension */;
+		};
 		8B5AB14D2CEC085200211DA5 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -129,8 +150,6 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Domain/Connectivity.swift,
-				Domain/RawRepresentable.swift,
-				Domain/Settings.swift,
 				"UI/String+Extensions.swift",
 				"UI/Text+Extensions.swift",
 			);
@@ -139,14 +158,19 @@
 		8BB465E92D873A3400518CF1 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				Domain/BusyState.swift,
 				Domain/Connectivity.swift,
+				Domain/Duration.swift,
 				Domain/RawRepresentable.swift,
 				Domain/Settings.swift,
-				Domain/ShieldAttemptService.swift,
 				Domain/State.swift,
+				Domain/Timers/Stopwatch.swift,
+				Domain/Timers/Ticker.swift,
+				Domain/Timers/Timer.swift,
 				Domain/UserDefaults.swift,
 				"Fonts/JetBrainsMono-Regular.ttf",
 				"Fonts/pragmatica-next_vf.ttf",
+				UI/Environment.swift,
 				UI/Font.swift,
 				"UI/String+Extensions.swift",
 				"UI/Text+Extensions.swift",
@@ -184,11 +208,18 @@
 		8BCCF4422D7E139C004D0B7C /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				Domain/BusyState.swift,
 				Domain/Connectivity.swift,
+				Domain/Duration.swift,
 				Domain/RawRepresentable.swift,
 				Domain/Settings.swift,
+				Domain/State.swift,
+				Domain/Timers/Stopwatch.swift,
+				Domain/Timers/Ticker.swift,
+				Domain/Timers/Timer.swift,
 				"Fonts/JetBrainsMono-Regular.ttf",
 				"Fonts/pragmatica-next_vf.ttf",
+				UI/Environment.swift,
 				UI/Font.swift,
 				"UI/String+Extensions.swift",
 				"UI/Text+Extensions.swift",
@@ -214,7 +245,7 @@
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		8B3C7F0B2D7AF4510088CC48 /* Shared */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (8BCCF4402D7E139C004D0B7C /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 8BCCF4412D7E139C004D0B7C /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 8BCCF4422D7E139C004D0B7C /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 8BB465E82D873A3400518CF1 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 8BB465E92D873A3400518CF1 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = Shared; sourceTree = "<group>"; };
 		8B5AB1452CEC085200211DA5 /* BusyShield */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (8B5AB14D2CEC085200211DA5 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = BusyShield; sourceTree = "<group>"; };
-		8B638DD02C610E9400C3458C /* iOS */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (8BCCF4F02D7E1715004D0B7C /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = iOS; sourceTree = "<group>"; };
+		8B638DD02C610E9400C3458C /* iOS */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (8BCCF4F02D7E1715004D0B7C /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 8B5377F02D8C8463000C0068 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 8B5377F22D8C846E000C0068 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 8B5377F42D8C8481000C0068 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = iOS; sourceTree = "<group>"; };
 		8B638DE12C610E9500C3458C /* Tests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Tests; sourceTree = "<group>"; };
 		8B638DEB2C610E9500C3458C /* UITests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = UITests; sourceTree = "<group>"; };
 		8B82C3B12CF8FDC900AE782C /* BusyWidget */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (8BE288D42D07CE8F007479A4 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 8B82C3C42CF8FDCA00AE782C /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = BusyWidget; sourceTree = "<group>"; };
