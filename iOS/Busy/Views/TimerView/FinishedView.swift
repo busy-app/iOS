@@ -8,10 +8,6 @@ extension TimerView {
 
         @AppStorage("completed", store: .group) var completed: Int = 0
 
-        private var blocked: Int {
-            ShieldAttemptService.shared.count()
-        }
-
         var body: some View {
             VStack {
                 VStack(spacing: 12) {
@@ -29,7 +25,7 @@ extension TimerView {
                 }
                 .padding(.top, 54)
 
-                StatsView(completed: completed, blocked: blocked)
+                StatsView(completed: completed)
                     .padding(.top, 10)
 
                 Spacer()
@@ -71,7 +67,6 @@ extension TimerView {
 
         struct StatsView: View {
             let completed: Int
-            let blocked: Int
 
             struct Card<Content: View>: View {
                 @ViewBuilder var content: () -> Content
@@ -100,18 +95,6 @@ extension TimerView {
                             Text("\(completed)X")
                                 .font(.pragmaticaNextVF(size: 40))
                                 .foregroundStyle(.whiteInvert)
-                        }
-                    }
-
-                    Card {
-                        VStack(alignment: .leading, spacing: 16) {
-                            Text("Blocked app attempts")
-                                .font(.pragmaticaNextVF(size: 18))
-                                .foregroundStyle(.transparentWhiteInvertPrimary)
-
-                            Text("\(blocked)X")
-                                .font(.pragmaticaNextVF(size: 40))
-                                .foregroundStyle(.e5)
                         }
                     }
                 }
