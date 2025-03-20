@@ -2,6 +2,7 @@ import SwiftUI
 
 extension TimerView {
     struct WorkDoneView: View {
+        @Binding var busy: BusyState
         var action: () -> Void
 
         @Environment(\.appState) var appState
@@ -14,7 +15,7 @@ extension TimerView {
                     .resizable()
                     .frame(width: 132, height: 132)
 
-                Text("BUSY 1/3 done!")
+                Text("BUSY \(busy.intervalNumber)/\(busy.intervalTotal) done!")
                     .font(.pragmaticaNextVF(size: 32))
                     .foregroundStyle(.whiteInvert)
                     .padding(.top, 12)
@@ -55,6 +56,8 @@ extension TimerView {
 }
 
 #Preview {
-    TimerView.WorkDoneView {}
+    @Previewable @State var busy = BusyState.preview
+
+    TimerView.WorkDoneView(busy: $busy) {}
         .colorScheme(.light)
 }
