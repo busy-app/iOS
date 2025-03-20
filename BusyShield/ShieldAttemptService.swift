@@ -14,7 +14,7 @@ final class ShieldAttemptService: Sendable {
     static let shared = ShieldAttemptService()
 
     private var key: String { "access_attempts" }
-    private var delay: TimeInterval { 0.25 }
+    private var delay: TimeInterval { 0.1 }
 
     private var attempts: [Attempt] {
         get {
