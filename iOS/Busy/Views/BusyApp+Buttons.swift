@@ -1,6 +1,6 @@
 import SwiftUI
 
-extension TimerView {
+extension BusyApp {
     struct StartButton: View {
         var action: () -> Void
 
@@ -88,13 +88,13 @@ extension TimerView {
 
 #Preview {
     VStack(spacing: 24) {
-        TimerView.StartButton {}
+        BusyApp.StartButton {}
 
-        TimerView.PauseButton {}
+        BusyApp.PauseButton {}
 
-        TimerView.FinishButton {}
+        BusyApp.FinishButton {}
 
-        TimerView.RestartButton {}
+        BusyApp.RestartButton {}
     }
     .frame(maxWidth: .infinity, maxHeight: .infinity)
     .colorScheme(.light)
