@@ -1,5 +1,12 @@
 import SwiftUI
 
+extension BusyView {
+    typealias StartButton = BusyApp.StartButton
+    typealias PauseButton = BusyApp.PauseButton
+    typealias FinishButton = BusyApp.FinishButton
+    typealias RestartButton = BusyApp.RestartButton
+}
+
 extension BusyApp {
     struct StartButton: View {
         var action: () -> Void

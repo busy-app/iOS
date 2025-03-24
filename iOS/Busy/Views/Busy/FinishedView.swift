@@ -1,6 +1,6 @@
 import SwiftUI
 
-extension TimerView {
+extension BusyView {
     struct FinishedView: View {
         var restart: () -> Void
 
@@ -104,5 +104,5 @@ extension TimerView {
 }
 
 #Preview {
-    TimerView.FinishedView {}
+    BusyView.FinishedView {}
 }

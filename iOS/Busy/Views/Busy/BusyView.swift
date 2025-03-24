@@ -35,7 +35,7 @@ struct BusyView: View {
                     }
                 }
             } else {
-                TimerView.FinishedView {
+                FinishedView {
                     startBusy()
                 }
             }

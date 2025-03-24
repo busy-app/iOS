@@ -10,7 +10,7 @@ extension BusyApp {
             VStack(spacing: 0) {
                 BusyCard(settings: $settings)
 
-                TimerView.StartButton {
+                StartButton {
                     appState.wrappedValue = .busy
                 }
                 .padding(.top, 100)
