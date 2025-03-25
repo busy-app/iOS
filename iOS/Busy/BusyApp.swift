@@ -32,6 +32,7 @@ struct BusyApp: View {
             #endif
             disableShieldOnTerminate()
             disableActivitiesOnTerminate()
+            recordAppOpen()
         }
     }
 
@@ -59,6 +60,10 @@ struct BusyApp: View {
                 }
             }
         }
+    }
+
+    func recordAppOpen() {
+        analytics.appLaunched()
     }
 }
 

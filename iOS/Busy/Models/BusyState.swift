@@ -1,3 +1,4 @@
+import Foundation
 import Observation
 
 @MainActor
@@ -9,6 +10,8 @@ class BusyState {
 
     var state: TimerState
     var interval: Interval?
+
+    var startTime: Date?
 
     private var ticker: Ticker?
 
@@ -99,6 +102,7 @@ class BusyState {
             self.onTick($0)
         }
 
+        startTime = Date.now
         state = .running
         ticker?.start()
     }

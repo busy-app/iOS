@@ -1,6 +1,8 @@
 import ManagedSettings
 import ManagedSettingsUI
 
+import BusyAnalytics
+
 class ShieldConfigurationExtension: ShieldConfigurationDataSource {
     let shieldAttemptService = ShieldAttemptService.shared
 
@@ -8,6 +10,7 @@ class ShieldConfigurationExtension: ShieldConfigurationDataSource {
         shielding name: String
     ) -> ShieldConfiguration {
         let blocked = shieldAttemptService.add(by: name)
+        recordBlockedAppAttempt(count: blocked)
 
         return .init(
             backgroundBlurStyle: .systemUltraThinMaterialDark,
@@ -25,6 +28,10 @@ class ShieldConfigurationExtension: ShieldConfigurationDataSource {
             primaryButtonBackgroundColor: .buttonBackground,
             secondaryButtonLabel: nil
         )
+    }
+
+    private func recordBlockedAppAttempt(count: Int) {
+        analytics.blockedAppAttempt(attemptCount: count)
     }
 
     override func configuration(
