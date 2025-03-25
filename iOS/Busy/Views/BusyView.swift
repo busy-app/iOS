@@ -107,6 +107,7 @@ struct BusyView: View {
         let url = URL(fileURLWithPath: path)
 
         do {
+            player?.stop()
             player = try AVAudioPlayer(contentsOf: url)
             player?.play()
         } catch let error {
