@@ -73,7 +73,7 @@ struct BusyView: View {
 
         busy.start()
         startActivity()
-        busy.recordTimerStarted()
+        AppAnalytics.shared.recordTimerStarted(busy)
     }
 
     func playSoundIfNeeded() {

@@ -44,7 +44,7 @@ struct TimerView: View {
                     ConfirmationDialog {
                         busy.stop()
                         appState.wrappedValue = .cards
-                        busy.recordTimerAborted()
+                        AppAnalytics.shared.recordTimerAborted(busy)
                     }
                     .colorScheme(.light)
                     .presentationBackground(.clear)
@@ -55,7 +55,7 @@ struct TimerView: View {
 
                 SkipButton {
                     busy.skip()
-                    busy.recordTimerSkipped()
+                    AppAnalytics.shared.recordTimerSkipped(busy)
                 }
             }
             .padding(.top, 12)
@@ -76,7 +76,7 @@ struct TimerView: View {
 
             PauseButton {
                 busy.pause()
-                busy.recordTimerPaused()
+                AppAnalytics.shared.recordTimerPaused(busy)
             }
             .padding(.top, 16)
             .padding(.bottom, 64)
@@ -91,7 +91,7 @@ struct TimerView: View {
         .overlay(
             PauseOverlayView {
                 busy.resume()
-                busy.recordTimerResumed()
+                AppAnalytics.shared.recordTimerResumed(busy)
             }
             .opacity(showPause ? 1 : 0)
             .onChange(of: busy.state) {

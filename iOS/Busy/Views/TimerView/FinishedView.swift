@@ -63,7 +63,7 @@ extension TimerView {
             )
             .task {
                 completed += 1
-                busy.recordTimerCompleted()
+                AppAnalytics.shared.recordTimerCompleted(busy)
             }
         }
 
