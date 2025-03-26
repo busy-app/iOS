@@ -96,6 +96,38 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		655226C22D957B19001F11EB /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"GoogleService-Info-Debug.plist",
+				"GoogleService-Info-Release.plist",
+			);
+			target = 8B638DDD2C610E9500C3458C /* BusyTests */;
+		};
+		655226C32D957B19001F11EB /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"GoogleService-Info-Debug.plist",
+				"GoogleService-Info-Release.plist",
+			);
+			target = 8B638DE72C610E9500C3458C /* BusyUITests */;
+		};
+		655226C42D957B19001F11EB /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"GoogleService-Info-Debug.plist",
+				"GoogleService-Info-Release.plist",
+			);
+			target = 8B5AB13E2CEC085100211DA5 /* BusyShield */;
+		};
+		655226C52D957B19001F11EB /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"GoogleService-Info-Debug.plist",
+				"GoogleService-Info-Release.plist",
+			);
+			target = 8B82C3AD2CF8FDC900AE782C /* BusyWidgetExtension */;
+		};
 		8B5AB14D2CEC085200211DA5 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -155,6 +187,7 @@
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		65521F702D92FA3E001F11EB /* BusyAnalytics */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = BusyAnalytics; sourceTree = "<group>"; };
+		655226C12D957B0F001F11EB /* Configs */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (655226C22D957B19001F11EB /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 655226C32D957B19001F11EB /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 655226C42D957B19001F11EB /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 655226C52D957B19001F11EB /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = Configs; sourceTree = "<group>"; };
 		8B3C7F0B2D7AF4510088CC48 /* Shared */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (8BCCF4402D7E139C004D0B7C /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 8BCCF4412D7E139C004D0B7C /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 8BCCF4422D7E139C004D0B7C /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = Shared; sourceTree = "<group>"; };
 		8B5AB1452CEC085200211DA5 /* BusyShield */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (8B5AB14D2CEC085200211DA5 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = BusyShield; sourceTree = "<group>"; };
 		8B638DD02C610E9400C3458C /* iOS */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (8BCCF4F02D7E1715004D0B7C /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = iOS; sourceTree = "<group>"; };
@@ -229,6 +262,7 @@
 		8B638DC52C610E9400C3458C = {
 			isa = PBXGroup;
 			children = (
+				655226C12D957B0F001F11EB /* Configs */,
 				8B638DD02C610E9400C3458C /* iOS */,
 				8B3C7F0B2D7AF4510088CC48 /* Shared */,
 				8B638DE12C610E9500C3458C /* Tests */,
@@ -304,6 +338,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
+				655226C12D957B0F001F11EB /* Configs */,
 				8B3C7F0B2D7AF4510088CC48 /* Shared */,
 				8B5AB1452CEC085200211DA5 /* BusyShield */,
 			);
@@ -318,6 +353,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8B638DF22C610E9500C3458C /* Build configuration list for PBXNativeTarget "Busy" */;
 			buildPhases = (
+				655226C02D95773E001F11EB /* Copy Firebase Configuration */,
 				8B638DCA2C610E9400C3458C /* Sources */,
 				8B638DCB2C610E9400C3458C /* Frameworks */,
 				8B638DCC2C610E9400C3458C /* Resources */,
@@ -332,6 +368,7 @@
 				65521F742D92FA3E001F11EB /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
+				655226C12D957B0F001F11EB /* Configs */,
 				8B3C7F0B2D7AF4510088CC48 /* Shared */,
 				8B638DD02C610E9400C3458C /* iOS */,
 			);
@@ -356,6 +393,7 @@
 				8B638DE02C610E9500C3458C /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
+				655226C12D957B0F001F11EB /* Configs */,
 				8B3C7F0B2D7AF4510088CC48 /* Shared */,
 				8B638DE12C610E9500C3458C /* Tests */,
 			);
@@ -380,6 +418,7 @@
 				8B638DEA2C610E9500C3458C /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
+				655226C12D957B0F001F11EB /* Configs */,
 				8B3C7F0B2D7AF4510088CC48 /* Shared */,
 				8B638DEB2C610E9500C3458C /* UITests */,
 			);
@@ -403,6 +442,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
+				655226C12D957B0F001F11EB /* Configs */,
 				8B3C7F0B2D7AF4510088CC48 /* Shared */,
 				8B82C3B12CF8FDC900AE782C /* BusyWidget */,
 			);
@@ -515,6 +555,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		655226C02D95773E001F11EB /* Copy Firebase Configuration */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 12;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Firebase Configuration";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "DEBUG_FIREBASE_PLIST=\"${PROJECT_DIR}/Configs/GoogleService-Info-Debug.plist\"\nRELEASE_FIREBASE_PLIST=\"${PROJECT_DIR}/Configs/GoogleService-Info-Release.plist\"\n\nDESTINATION_PLIST=\"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist\"\n\nif [ \"${CONFIGURATION}\" == \"Debug\" ]; then\n    SOURCE_PLIST=$DEBUG_FIREBASE_PLIST\nelif [ \"${CONFIGURATION}\" == \"Release\" ]; then\n    SOURCE_PLIST=$RELEASE_FIREBASE_PLIST\nelse\n    //\nfi\n\ncp \"${SOURCE_PLIST}\" \"${DESTINATION_PLIST}\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		65521F6B2D92FA3E001F11EB /* Sources */ = {
@@ -871,6 +932,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"iOS/Preview Content\"";
 				DEVELOPMENT_TEAM = SXH69675TZ;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = iOS/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = BUSY;
@@ -915,6 +977,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"iOS/Preview Content\"";
 				DEVELOPMENT_TEAM = SXH69675TZ;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = iOS/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = BUSY;
