@@ -1,7 +1,7 @@
 
 import SwiftUI
 
-extension TimerView {
+extension BusyView {
     struct RestOverView: View {
         var action: () -> Void
 
@@ -54,6 +54,6 @@ extension TimerView {
 }
 
 #Preview {
-    TimerView.RestOverView {}
+    BusyView.RestOverView {}
         .colorScheme(.light)
 }

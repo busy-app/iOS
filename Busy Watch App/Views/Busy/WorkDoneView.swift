@@ -1,15 +1,15 @@
 import SwiftUI
 
 extension BusyView {
-    struct FinishedView: View {
-        var restart: () -> Void
+    struct WorkDoneView: View {
+        var next: () -> Void
 
         @Environment(\.appState) var appState
 
         var body: some View {
             VStack(spacing: 0) {
                 HStack {
-                    RestartNavButton {
+                    StopButton {
                         appState.wrappedValue = .cards
                     }
                     Spacer()
@@ -18,18 +18,21 @@ extension BusyView {
                 VStack(spacing: 0) {
                     Image(.checkmarkGreen)
 
-                    Text("SUPERB!")
+                    Text("BUSY 1/3 done")
                         .font(.pragmaticaNextVF(size: 20))
                         .foregroundStyle(.white)
                         .padding(.top, 2)
 
-                    Text("You’ve done this BUSY")
+                    Text("It’s time to have a rest")
                         .font(.pragmaticaNextVF(size: 12))
-                        .foregroundStyle(.white)
+                        .foregroundStyle(.white.opacity(0.5))
                         .padding(.top, 2)
 
-                    FinishButton {
-                        appState.wrappedValue = .cards
+                    WhiteButton {
+                        next()
+                    } label: {
+                        Text("Start REST")
+                            .font(.pragmaticaNextVF(size: 16))
                     }
                     .padding(.top, 20)
                 }
@@ -38,20 +41,11 @@ extension BusyView {
             }
             .padding(20)
             .edgesIgnoringSafeArea(.all)
-            .background(
-                LinearGradient(
-                    stops: [
-                        Gradient.Stop(color: .black, location: 0.00),
-                        Gradient.Stop(color: Color(red: 0.06, green: 0.08, blue: 0.28), location: 1.00),
-                    ],
-                    startPoint: UnitPoint(x: 1.12, y: -0.28),
-                    endPoint: UnitPoint(x: -0.06, y: 1.05)
-                )
-            )
+            .background(Color(red: 0.13, green: 0.13, blue: 0.13))
         }
     }
 }
 
 #Preview {
-    BusyView.FinishedView {}
+    BusyView.WorkDoneView {}
 }

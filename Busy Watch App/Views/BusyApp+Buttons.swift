@@ -2,8 +2,9 @@ import SwiftUI
 
 extension BusyView {
     typealias StartButton = BusyApp.StartButton
+    typealias StopButton = BusyApp.StopButton
     typealias FinishButton = BusyApp.FinishButton
-    typealias RestartButton = BusyApp.RestartButton
+    typealias WhiteButton = BusyApp.WhiteButton
 }
 
 extension BusyApp {
@@ -11,7 +12,7 @@ extension BusyApp {
         var action: () -> Void
 
         var body: some View {
-            Button {
+            WhiteButton {
                 action()
             } label: {
                 HStack(spacing: 10) {
@@ -19,6 +20,49 @@ extension BusyApp {
 
                     Text("Start")
                         .font(.pragmaticaNextVF(size: 16))
+                }
+            }
+        }
+    }
+
+    struct StopButton: View {
+        var action: () -> Void
+
+        var body: some View {
+            BlurButton {
+                action()
+            } label: {
+                HStack(spacing: 10) {
+                    Image(.stopIcon)
+
+                    Text("Stop")
+                        .font(.pragmaticaNextVF(size: 16))
+                }
+            }
+        }
+    }
+
+    struct FinishButton: View {
+        var action: () -> Void
+
+        var body: some View {
+            BlurButton(action: action) {
+                Text("Finish")
+                    .font(.pragmaticaNextVF(size: 16))
+            }
+        }
+    }
+
+    struct WhiteButton<Label: View>: View {
+        var action: () -> Void
+        let label: () -> Label
+
+        var body: some View {
+            Button {
+                action()
+            } label: {
+                HStack(spacing: 10) {
+                    label()
                 }
                 .padding(.vertical, 15)
                 .padding(.horizontal, 26)
@@ -30,38 +74,22 @@ extension BusyApp {
         }
     }
 
-    struct FinishButton: View {
+    struct BlurButton<Label: View>: View {
         var action: () -> Void
+        let label: () -> Label
 
         var body: some View {
             Button {
                 action()
             } label: {
-                HStack {
-                    Text("Finish")
-                        .font(.pragmaticaNextVF(size: 16))
+                HStack(spacing: 10) {
+                    label()
                 }
-                .frame(width: 96, height: 46)
-                .foregroundStyle(.white)
+                .padding(.vertical, 15)
+                .padding(.horizontal, 26)
+                .foregroundStyle(.black)
                 .background(.white.opacity(0.05))
                 .clipShape(RoundedRectangle(cornerRadius: 112))
-            }
-            .buttonStyle(.borderless)
-        }
-    }
-
-    struct RestartButton: View {
-        var action: () -> Void
-
-        var body: some View {
-            Button {
-                action()
-            } label: {
-                Image(.navRepeatIcon)
-                    .padding(.vertical, 8)
-                    .padding(.horizontal, 9)
-                    .background(.white.opacity(0.1))
-                    .clipShape(Circle())
             }
             .buttonStyle(.borderless)
         }
@@ -72,9 +100,9 @@ extension BusyApp {
     VStack(spacing: 24) {
         BusyApp.StartButton {}
 
-        BusyApp.FinishButton {}
+        BusyApp.StopButton {}
 
-        BusyApp.RestartButton {}
+        BusyApp.FinishButton {}
     }
     .frame(maxWidth: .infinity, maxHeight: .infinity)
     .colorScheme(.light)

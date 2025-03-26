@@ -1,6 +1,6 @@
 import SwiftUI
 
-extension TimerView {
+extension BusyView {
     struct WorkDoneView: View {
         @Binding var busy: BusyState
         var action: () -> Void
@@ -58,6 +58,6 @@ extension TimerView {
 #Preview {
     @Previewable @State var busy = BusyState.preview
 
-    TimerView.WorkDoneView(busy: $busy) {}
+    BusyView.WorkDoneView(busy: $busy) {}
         .colorScheme(.light)
 }
