@@ -1,6 +1,6 @@
 import SwiftUI
 
-extension TimerView {
+extension BusyView.TimerView {
     struct Title: View {
         let name: String
         let description: String

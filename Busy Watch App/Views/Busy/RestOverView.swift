@@ -9,7 +9,7 @@ extension BusyView {
         var body: some View {
             VStack(spacing: 0) {
                 HStack {
-                    StopButton {
+                    StopNavButton {
                         appState.wrappedValue = .cards
                     }
                     Spacer()

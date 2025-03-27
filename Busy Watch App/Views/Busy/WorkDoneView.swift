@@ -2,6 +2,8 @@ import SwiftUI
 
 extension BusyView {
     struct WorkDoneView: View {
+        @Binding var busy: BusyState
+
         var next: () -> Void
 
         @Environment(\.appState) var appState
@@ -9,7 +11,7 @@ extension BusyView {
         var body: some View {
             VStack(spacing: 0) {
                 HStack {
-                    StopButton {
+                    StopNavButton {
                         appState.wrappedValue = .cards
                     }
                     Spacer()
@@ -47,5 +49,8 @@ extension BusyView {
 }
 
 #Preview {
-    BusyView.WorkDoneView {}
+    @Previewable @State var busy = BusyState.preview
+
+    BusyView.WorkDoneView(busy: $busy) {}
+        .colorScheme(.light)
 }

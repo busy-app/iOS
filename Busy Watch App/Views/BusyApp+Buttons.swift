@@ -3,6 +3,7 @@ import SwiftUI
 extension BusyView {
     typealias StartButton = BusyApp.StartButton
     typealias StopButton = BusyApp.StopButton
+    typealias PauseButton = BusyApp.PauseButton
     typealias FinishButton = BusyApp.FinishButton
     typealias WhiteButton = BusyApp.WhiteButton
 }
@@ -12,9 +13,7 @@ extension BusyApp {
         var action: () -> Void
 
         var body: some View {
-            WhiteButton {
-                action()
-            } label: {
+            WhiteButton(action: action) {
                 HStack(spacing: 10) {
                     Image(.playIcon)
 
@@ -29,14 +28,28 @@ extension BusyApp {
         var action: () -> Void
 
         var body: some View {
-            BlurButton {
-                action()
-            } label: {
+            WhiteButton(action: action) {
                 HStack(spacing: 10) {
                     Image(.stopIcon)
 
                     Text("Stop")
                         .font(.pragmaticaNextVF(size: 16))
+                }
+            }
+        }
+    }
+
+    struct PauseButton: View {
+        var action: () -> Void
+
+        var body: some View {
+            BlurButton(action: action) {
+                HStack(spacing: 10) {
+                    Image(.pauseIcon)
+
+                    Text("Pause")
+                        .font(.pragmaticaNextVF(size: 16))
+                        .foregroundStyle(.white.opacity(0.5))
                 }
             }
         }
@@ -49,6 +62,7 @@ extension BusyApp {
             BlurButton(action: action) {
                 Text("Finish")
                     .font(.pragmaticaNextVF(size: 16))
+                    .foregroundStyle(.white)
             }
         }
     }
@@ -58,9 +72,7 @@ extension BusyApp {
         let label: () -> Label
 
         var body: some View {
-            Button {
-                action()
-            } label: {
+            Button(action: action) {
                 HStack(spacing: 10) {
                     label()
                 }
@@ -101,6 +113,8 @@ extension BusyApp {
         BusyApp.StartButton {}
 
         BusyApp.StopButton {}
+
+        BusyApp.PauseButton {}
 
         BusyApp.FinishButton {}
     }

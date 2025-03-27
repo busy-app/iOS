@@ -1,6 +1,6 @@
 import SwiftUI
 
-extension TimerView {
+extension BusyView.TimerView {
     struct TimeCard: View {
         let interval: BusyState.Interval
 
@@ -141,7 +141,7 @@ extension TimerView {
 
 #Preview {
     VStack {
-        TimerView.TimeCard(
+        BusyView.TimerView.TimeCard(
             interval: .init(
                 kind: .work,
                 duration: .seconds(15 * 60 + 05),
