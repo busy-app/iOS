@@ -32,6 +32,7 @@ struct BusyApp: View {
             #endif
             disableShieldOnTerminate()
             disableActivitiesOnTerminate()
+            AppAnalytics.shared.recordAppOpen()
         }
     }
 

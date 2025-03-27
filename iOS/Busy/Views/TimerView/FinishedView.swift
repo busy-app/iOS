@@ -2,6 +2,7 @@ import SwiftUI
 
 extension TimerView {
     struct FinishedView: View {
+        @Binding var busy: BusyState
         var restart: () -> Void
 
         @Environment(\.appState) var appState
@@ -62,6 +63,7 @@ extension TimerView {
             )
             .task {
                 completed += 1
+                AppAnalytics.shared.recordTimerCompleted(busy)
             }
         }
 
@@ -104,5 +106,6 @@ extension TimerView {
 }
 
 #Preview {
-    TimerView.FinishedView {}
+    @Previewable @State var busy = BusyState.preview
+    TimerView.FinishedView(busy: $busy) {}
 }

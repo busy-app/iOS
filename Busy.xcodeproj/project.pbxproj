@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		65521F752D92FA3E001F11EB /* BusyAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65521F6F2D92FA3E001F11EB /* BusyAnalytics.framework */; };
+		65521F762D92FA3E001F11EB /* BusyAnalytics.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 65521F6F2D92FA3E001F11EB /* BusyAnalytics.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		65521F9F2D92FACB001F11EB /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = 65521F9E2D92FACB001F11EB /* FirebaseAnalyticsWithoutAdIdSupport */; };
 		8B5AB1422CEC085200211DA5 /* ManagedSettings.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B5AB1412CEC085100211DA5 /* ManagedSettings.framework */; };
 		8B5AB1442CEC085200211DA5 /* ManagedSettingsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B5AB1432CEC085200211DA5 /* ManagedSettingsUI.framework */; };
 		8B5AB14C2CEC085200211DA5 /* BusyShield.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 8B5AB13F2CEC085100211DA5 /* BusyShield.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -16,6 +19,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		65521F732D92FA3E001F11EB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8B638DC62C610E9400C3458C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 65521F6E2D92FA3E001F11EB;
+			remoteInfo = BusyAnalytics;
+		};
 		8B5AB14A2CEC085200211DA5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 8B638DC62C610E9400C3458C /* Project object */;
@@ -47,6 +57,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		65521F772D92FA3E001F11EB /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				65521F762D92FA3E001F11EB /* BusyAnalytics.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8B5AB1512CEC085200211DA5 /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -62,6 +83,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		65521F6F2D92FA3E001F11EB /* BusyAnalytics.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BusyAnalytics.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B1147282CF8FC3000CA9361 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		8B11472A2CF8FC3000CA9361 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		8B5AB13F2CEC085100211DA5 /* BusyShield.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = BusyShield.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -74,6 +96,38 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		655226C22D957B19001F11EB /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"GoogleService-Info-Debug.plist",
+				"GoogleService-Info-Release.plist",
+			);
+			target = 8B638DDD2C610E9500C3458C /* BusyTests */;
+		};
+		655226C32D957B19001F11EB /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"GoogleService-Info-Debug.plist",
+				"GoogleService-Info-Release.plist",
+			);
+			target = 8B638DE72C610E9500C3458C /* BusyUITests */;
+		};
+		655226C42D957B19001F11EB /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"GoogleService-Info-Debug.plist",
+				"GoogleService-Info-Release.plist",
+			);
+			target = 8B5AB13E2CEC085100211DA5 /* BusyShield */;
+		};
+		655226C52D957B19001F11EB /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"GoogleService-Info-Debug.plist",
+				"GoogleService-Info-Release.plist",
+			);
+			target = 8B82C3AD2CF8FDC900AE782C /* BusyWidgetExtension */;
+		};
 		8B5AB14D2CEC085200211DA5 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -132,6 +186,8 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		65521F702D92FA3E001F11EB /* BusyAnalytics */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = BusyAnalytics; sourceTree = "<group>"; };
+		655226C12D957B0F001F11EB /* Configs */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (655226C22D957B19001F11EB /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 655226C32D957B19001F11EB /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 655226C42D957B19001F11EB /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 655226C52D957B19001F11EB /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = Configs; sourceTree = "<group>"; };
 		8B3C7F0B2D7AF4510088CC48 /* Shared */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (8BCCF4402D7E139C004D0B7C /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 8BCCF4412D7E139C004D0B7C /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 8BCCF4422D7E139C004D0B7C /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = Shared; sourceTree = "<group>"; };
 		8B5AB1452CEC085200211DA5 /* BusyShield */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (8B5AB14D2CEC085200211DA5 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = BusyShield; sourceTree = "<group>"; };
 		8B638DD02C610E9400C3458C /* iOS */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (8BCCF4F02D7E1715004D0B7C /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = iOS; sourceTree = "<group>"; };
@@ -141,6 +197,14 @@
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		65521F6C2D92FA3E001F11EB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				65521F9F2D92FACB001F11EB /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8B5AB13C2CEC085100211DA5 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -154,6 +218,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				65521F752D92FA3E001F11EB /* BusyAnalytics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -197,12 +262,14 @@
 		8B638DC52C610E9400C3458C = {
 			isa = PBXGroup;
 			children = (
+				655226C12D957B0F001F11EB /* Configs */,
 				8B638DD02C610E9400C3458C /* iOS */,
 				8B3C7F0B2D7AF4510088CC48 /* Shared */,
 				8B638DE12C610E9500C3458C /* Tests */,
 				8B638DEB2C610E9500C3458C /* UITests */,
 				8B5AB1452CEC085200211DA5 /* BusyShield */,
 				8B82C3B12CF8FDC900AE782C /* BusyWidget */,
+				65521F702D92FA3E001F11EB /* BusyAnalytics */,
 				8B5AB1402CEC085100211DA5 /* Frameworks */,
 				8B638DCF2C610E9400C3458C /* Products */,
 			);
@@ -216,13 +283,48 @@
 				8B638DE82C610E9500C3458C /* BusyUITests.xctest */,
 				8B5AB13F2CEC085100211DA5 /* BusyShield.appex */,
 				8B82C3AE2CF8FDC900AE782C /* BusyWidgetExtension.appex */,
+				65521F6F2D92FA3E001F11EB /* BusyAnalytics.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		65521F6A2D92FA3E001F11EB /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
+		65521F6E2D92FA3E001F11EB /* BusyAnalytics */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 65521F7A2D92FA3E001F11EB /* Build configuration list for PBXNativeTarget "BusyAnalytics" */;
+			buildPhases = (
+				65521F6A2D92FA3E001F11EB /* Headers */,
+				65521F6B2D92FA3E001F11EB /* Sources */,
+				65521F6C2D92FA3E001F11EB /* Frameworks */,
+				65521F6D2D92FA3E001F11EB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				65521F702D92FA3E001F11EB /* BusyAnalytics */,
+			);
+			name = BusyAnalytics;
+			packageProductDependencies = (
+				65521F9E2D92FACB001F11EB /* FirebaseAnalyticsWithoutAdIdSupport */,
+			);
+			productName = BusyAnalytics;
+			productReference = 65521F6F2D92FA3E001F11EB /* BusyAnalytics.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 		8B5AB13E2CEC085100211DA5 /* BusyShield */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8B5AB14E2CEC085200211DA5 /* Build configuration list for PBXNativeTarget "BusyShield" */;
@@ -236,6 +338,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
+				655226C12D957B0F001F11EB /* Configs */,
 				8B3C7F0B2D7AF4510088CC48 /* Shared */,
 				8B5AB1452CEC085200211DA5 /* BusyShield */,
 			);
@@ -250,18 +353,22 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8B638DF22C610E9500C3458C /* Build configuration list for PBXNativeTarget "Busy" */;
 			buildPhases = (
+				655226C02D95773E001F11EB /* Copy Firebase Configuration */,
 				8B638DCA2C610E9400C3458C /* Sources */,
 				8B638DCB2C610E9400C3458C /* Frameworks */,
 				8B638DCC2C610E9400C3458C /* Resources */,
 				8B5AB1512CEC085200211DA5 /* Embed Foundation Extensions */,
+				65521F772D92FA3E001F11EB /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				8B5AB14B2CEC085200211DA5 /* PBXTargetDependency */,
 				8B82C3C02CF8FDCA00AE782C /* PBXTargetDependency */,
+				65521F742D92FA3E001F11EB /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
+				655226C12D957B0F001F11EB /* Configs */,
 				8B3C7F0B2D7AF4510088CC48 /* Shared */,
 				8B638DD02C610E9400C3458C /* iOS */,
 			);
@@ -286,6 +393,7 @@
 				8B638DE02C610E9500C3458C /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
+				655226C12D957B0F001F11EB /* Configs */,
 				8B3C7F0B2D7AF4510088CC48 /* Shared */,
 				8B638DE12C610E9500C3458C /* Tests */,
 			);
@@ -310,6 +418,7 @@
 				8B638DEA2C610E9500C3458C /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
+				655226C12D957B0F001F11EB /* Configs */,
 				8B3C7F0B2D7AF4510088CC48 /* Shared */,
 				8B638DEB2C610E9500C3458C /* UITests */,
 			);
@@ -333,6 +442,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
+				655226C12D957B0F001F11EB /* Configs */,
 				8B3C7F0B2D7AF4510088CC48 /* Shared */,
 				8B82C3B12CF8FDC900AE782C /* BusyWidget */,
 			);
@@ -350,9 +460,12 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1610;
+				LastSwiftUpdateCheck = 1630;
 				LastUpgradeCheck = 1600;
 				TargetAttributes = {
+					65521F6E2D92FA3E001F11EB = {
+						CreatedOnToolsVersion = 16.3;
+					};
 					8B5AB13E2CEC085100211DA5 = {
 						CreatedOnToolsVersion = 16.1;
 					};
@@ -381,6 +494,9 @@
 				Base,
 			);
 			mainGroup = 8B638DC52C610E9400C3458C;
+			packageReferences = (
+				65521F9D2D92FACB001F11EB /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			productRefGroup = 8B638DCF2C610E9400C3458C /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -390,11 +506,19 @@
 				8B638DE72C610E9500C3458C /* BusyUITests */,
 				8B5AB13E2CEC085100211DA5 /* BusyShield */,
 				8B82C3AD2CF8FDC900AE782C /* BusyWidgetExtension */,
+				65521F6E2D92FA3E001F11EB /* BusyAnalytics */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		65521F6D2D92FA3E001F11EB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8B5AB13D2CEC085100211DA5 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -432,7 +556,35 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		655226C02D95773E001F11EB /* Copy Firebase Configuration */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 12;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Firebase Configuration";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "DEBUG_FIREBASE_PLIST=\"${PROJECT_DIR}/Configs/GoogleService-Info-Debug.plist\"\nRELEASE_FIREBASE_PLIST=\"${PROJECT_DIR}/Configs/GoogleService-Info-Release.plist\"\n\nDESTINATION_PLIST=\"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist\"\n\nif [ \"${CONFIGURATION}\" == \"Debug\" ]; then\n    SOURCE_PLIST=$DEBUG_FIREBASE_PLIST\nelif [ \"${CONFIGURATION}\" == \"Release\" ]; then\n    SOURCE_PLIST=$RELEASE_FIREBASE_PLIST\nelse\n    //\nfi\n\ncp \"${SOURCE_PLIST}\" \"${DESTINATION_PLIST}\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
+		65521F6B2D92FA3E001F11EB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8B5AB13B2CEC085100211DA5 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -471,6 +623,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		65521F742D92FA3E001F11EB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 65521F6E2D92FA3E001F11EB /* BusyAnalytics */;
+			targetProxy = 65521F732D92FA3E001F11EB /* PBXContainerItemProxy */;
+		};
 		8B5AB14B2CEC085200211DA5 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 8B5AB13E2CEC085100211DA5 /* BusyShield */;
@@ -494,6 +651,96 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		65521F782D92FA3E001F11EB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = SXH69675TZ;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = (
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 15.3;
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = app.busy.BusyAnalytics;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = auto;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_INSTALL_MODULE = YES;
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+				XROS_DEPLOYMENT_TARGET = 2.4;
+			};
+			name = Debug;
+		};
+		65521F792D92FA3E001F11EB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = SXH69675TZ;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = (
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 15.3;
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = app.busy.BusyAnalytics;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = auto;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_INSTALL_MODULE = YES;
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+				XROS_DEPLOYMENT_TARGET = 2.4;
+			};
+			name = Release;
+		};
 		8B5AB14F2CEC085200211DA5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -685,6 +932,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"iOS/Preview Content\"";
 				DEVELOPMENT_TEAM = SXH69675TZ;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = iOS/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = BUSY;
@@ -729,6 +977,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"iOS/Preview Content\"";
 				DEVELOPMENT_TEAM = SXH69675TZ;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = iOS/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = BUSY;
@@ -910,6 +1159,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		65521F7A2D92FA3E001F11EB /* Build configuration list for PBXNativeTarget "BusyAnalytics" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				65521F782D92FA3E001F11EB /* Debug */,
+				65521F792D92FA3E001F11EB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		8B5AB14E2CEC085200211DA5 /* Build configuration list for PBXNativeTarget "BusyShield" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -965,6 +1223,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		65521F9D2D92FACB001F11EB /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.10.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		65521F9E2D92FACB001F11EB /* FirebaseAnalyticsWithoutAdIdSupport */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 65521F9D2D92FACB001F11EB /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsWithoutAdIdSupport;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 8B638DC62C610E9400C3458C /* Project object */;
 }

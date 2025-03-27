@@ -35,7 +35,7 @@ struct BusyView: View {
                     }
                 }
             } else {
-                TimerView.FinishedView {
+                TimerView.FinishedView(busy: $busy) {
                     startBusy()
                 }
             }
@@ -73,6 +73,7 @@ struct BusyView: View {
 
         busy.start()
         startActivity()
+        AppAnalytics.shared.recordTimerStarted(busy)
     }
 
     func playSoundIfNeeded() {
