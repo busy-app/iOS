@@ -54,11 +54,4 @@ final public class Analytics: Sendable {
         let event = TimerAbortedEvent(interval, parameters)
         services.forEach { $0.track(event: event) }
     }
-
-    public func blockedAppAttempt(
-        attemptCount: Int
-    ) {
-        let event = BlockedAppAttemptEvent(attemptCount)
-        services.forEach { $0.track(event: event) }
-    }
 }
