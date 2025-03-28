@@ -46,6 +46,7 @@ extension BusyView {
 
                     SkipNavButton {
                         busy.skip()
+                        sendState()
                     }
                 }
                 .padding(.top, 20)
@@ -65,6 +66,7 @@ extension BusyView {
 
                 PauseButton {
                     busy.pause()
+                    sendState()
                 }
                 .padding(.top, 13)
             }
@@ -79,6 +81,7 @@ extension BusyView {
                 ConfirmationDialog {
                     busy.stop()
                     appState.wrappedValue = .cards
+                    sendState()
                 } onCancel: {
                     showConfirmationDialog = false
                 }
@@ -88,6 +91,7 @@ extension BusyView {
             .overlay(
                 PauseOverlayView {
                     busy.resume()
+                    sendState()
                 }
                 .opacity(showPause ? 1 : 0)
                 .onChange(of: busy.state) {
@@ -95,6 +99,18 @@ extension BusyView {
                 }
             )
             .edgesIgnoringSafeArea(.all)
+        }
+
+        func sendState() {
+            Connectivity.shared.send(
+                settings: settings,
+                appState: appState.wrappedValue,
+                busyState: .init(
+                    timerState: busy.state,
+                    interval: busy.intervals.index,
+                    elapsed: busy.interval?.elapsed ?? .seconds(0)
+                )
+            )
         }
     }
 }

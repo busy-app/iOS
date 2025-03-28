@@ -19,8 +19,22 @@ struct BusyApp: View {
                 self.settings = settings
             }
         }
+        .onReceive(Connectivity.shared.$appState) { appState in
+            if let appState {
+                self.appState = appState
+            }
+        }
+    }
+
+    func sendState() {
+        Connectivity.shared.send(
+            settings: settings,
+            appState: appState,
+            busyState: nil
+        )
     }
 }
+
 #Preview {
     BusyApp()
 }

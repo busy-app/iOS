@@ -12,6 +12,8 @@ struct BusyView: View {
 
     @State private var player: AVAudioPlayer?
 
+    @Environment(\.appState) var appState
+
     var body: some View {
         Group {
             if let interval = busy.interval {
@@ -37,6 +39,9 @@ struct BusyView: View {
             } else {
                 FinishedView {
                     startBusy()
+                } finish: {
+                    appState.wrappedValue = .cards
+                    sendState()
                 }
             }
         }
@@ -61,6 +66,21 @@ struct BusyView: View {
             BusyShield.disable()
             stopActivity()
         }
+        .onReceive(Connectivity.shared.$busyState) { busyState in
+            if let busyState {
+                switch busyState.timerState {
+                case .paused: busy.pause()
+                case .running: busy.stop()
+                case .finished: busy.stop()
+                }
+
+                busy.jump(to: busyState.interval, at: busyState.elapsed)
+
+                if busyState.timerState == .running {
+                    busy.start()
+                }
+            }
+        }
     }
 
     func startBusy() {
@@ -73,6 +93,19 @@ struct BusyView: View {
 
         busy.start()
         startActivity()
+        sendState()
+    }
+
+    func sendState() {
+        Connectivity.shared.send(
+            settings: settings,
+            appState: appState.wrappedValue,
+            busyState: .init(
+                timerState: busy.state,
+                interval: busy.intervals.index,
+                elapsed: busy.interval?.elapsed ?? .seconds(0)
+            )
+        )
     }
 
     func playSoundIfNeeded() {

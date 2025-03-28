@@ -4,6 +4,8 @@ final class Connectivity: NSObject, @unchecked Sendable {
     static let shared = Connectivity()
 
     @Published var settings: BusySettings?
+    @Published var appState: AppState?
+    @Published var busyState: BState?
 
     private override init() {
         super.init()
@@ -40,7 +42,11 @@ extension Connectivity: WCSessionDelegate {
     }
     #endif
 
-    public func send(settings: BusySettings) {
+    public func send(
+        settings: BusySettings,
+        appState: AppState,
+        busyState: BState?
+    ) {
         #if os(watchOS)
         guard WCSession.default.isCompanionAppInstalled else {
             print("compation app is not installed")
@@ -53,14 +59,17 @@ extension Connectivity: WCSessionDelegate {
         }
         #endif
 
-        if let settings = try? JSONEncoder().encode(settings) {
-            do {
-                try WCSession.default.updateApplicationContext(
-                    ["settings": settings]
-                )
-            } catch {
-                print("failed to update application context:", error)
+        do {
+            var context: [String : Any] = [
+                "settings": try JSONEncoder().encode(settings),
+                "app_state": try JSONEncoder().encode(appState)
+            ]
+            if let busyState {
+                context["busy_state"] = try JSONEncoder().encode(busyState)
             }
+            try WCSession.default.updateApplicationContext(context)
+        } catch {
+            print("failed to update application context:", error)
         }
     }
 
@@ -68,7 +77,7 @@ extension Connectivity: WCSessionDelegate {
         _ session: WCSession,
         didReceiveApplicationContext applicationContext: [String : Any]
     ) {
-        print("didReceiveApplicationContext", applicationContext)
+        print("didReceiveApplicationContext", applicationContext.keys)
         handle(applicationContext)
     }
 
@@ -84,6 +93,14 @@ extension Connectivity: WCSessionDelegate {
         if let data = context["settings"] as? Data {
             handle(settings: data)
         }
+
+        if let data = context["app_state"] as? Data {
+            handle(appState: data)
+        }
+
+        if let data = context["busy_state"] as? Data {
+            handle(busyState: data)
+        }
     }
 
     func handle(settings data: Data) {
@@ -95,6 +112,30 @@ extension Connectivity: WCSessionDelegate {
             }
         } catch {
             print("error decoding settings:", error)
+        }
+    }
+
+    func handle(appState data: Data) {
+        do {
+            let appState = try JSONDecoder()
+                .decode(AppState.self, from: data)
+            Task { @MainActor in
+                self.appState = appState
+            }
+        } catch {
+            print("error decoding app state:", error)
+        }
+    }
+
+    func handle(busyState data: Data) {
+        do {
+            let busyState = try JSONDecoder()
+                .decode(BState.self, from: data)
+            Task { @MainActor in
+                self.busyState = busyState
+            }
+        } catch {
+            print("error decoding busy state:", error)
         }
     }
 }

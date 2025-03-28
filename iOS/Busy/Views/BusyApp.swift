@@ -9,15 +9,15 @@ struct BusyApp: View {
     private var notifications: Notifications { .shared }
 
     @AppStorage("busySettings")
-    var busySettings: BusySettings = .init()
+    var settings: BusySettings = .init()
 
     @State var appState: AppState = .cards
 
     var body: some View {
         Group {
             switch appState {
-            case .cards: CardsView(settings: $busySettings)
-            case .busy: BusyView(settings: $busySettings)
+            case .cards: CardsView(settings: $settings)
+            case .busy: BusyView(settings: $settings)
             }
         }
         .environment(\.appState, $appState)
@@ -27,12 +27,25 @@ struct BusyApp: View {
             #endif
             disableShieldOnTerminate()
             disableActivitiesOnTerminate()
+        }
+        .onReceive(Connectivity.shared.$settings) { settings in
+            if let settings {
+                self.settings = settings
+            }
+        }
+        .onReceive(Connectivity.shared.$appState) { appState in
+            if let appState {
+                self.appState = appState
+            }
+        }
+    }
 
-            Connectivity.shared.send(settings: busySettings)
-        }
-        .onChange(of: busySettings) {
-            Connectivity.shared.send(settings: busySettings)
-        }
+    func sendState() {
+        Connectivity.shared.send(
+            settings: settings,
+            appState: appState,
+            busyState: nil
+        )
     }
 
     func disableShieldOnTerminate() {

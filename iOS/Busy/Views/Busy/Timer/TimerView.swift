@@ -55,6 +55,7 @@ extension BusyView {
 
                     SkipButton {
                         busy.skip()
+                        sendState()
                     }
                 }
                 .padding(.top, 12)
@@ -75,6 +76,7 @@ extension BusyView {
 
                 PauseButton {
                     busy.pause()
+                    sendState()
                 }
                 .padding(.top, 16)
                 .padding(.bottom, 64)
@@ -89,11 +91,24 @@ extension BusyView {
             .overlay(
                 PauseOverlayView {
                     busy.resume()
+                    sendState()
                 }
                 .opacity(showPause ? 1 : 0)
                 .onChange(of: busy.state) {
                     showPause = busy.state == .paused
                 }
+            )
+        }
+
+        func sendState() {
+            Connectivity.shared.send(
+                settings: settings,
+                appState: appState.wrappedValue,
+                busyState: .init(
+                    timerState: busy.state,
+                    interval: busy.intervals.index,
+                    elapsed: busy.interval?.elapsed ?? .seconds(0)
+                )
             )
         }
     }

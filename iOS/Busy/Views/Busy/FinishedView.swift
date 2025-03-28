@@ -3,8 +3,7 @@ import SwiftUI
 extension BusyView {
     struct FinishedView: View {
         var restart: () -> Void
-
-        @Environment(\.appState) var appState
+        var finish: () -> Void
 
         @AppStorage("completed", store: .group) var completed: Int = 0
 
@@ -31,7 +30,7 @@ extension BusyView {
                 Spacer()
 
                 FinishButton {
-                    appState.wrappedValue = .cards
+                    finish()
                 }
 
                 RestartButton {
@@ -104,5 +103,9 @@ extension BusyView {
 }
 
 #Preview {
-    BusyView.FinishedView {}
+    BusyView.FinishedView {
+
+    } finish: {
+
+    }
 }

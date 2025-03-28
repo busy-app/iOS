@@ -1,6 +1,6 @@
 import Foundation
 
-public enum AppState {
+public enum AppState: Codable, Sendable {
     case cards
     case busy
 }
@@ -36,4 +36,10 @@ public struct IntervalState: Codable, Hashable, Sendable {
         self.time = time
         self.kind = kind
     }
+}
+
+struct BState: Codable {
+    let timerState: TimerState
+    let interval: Int
+    let elapsed: Duration
 }

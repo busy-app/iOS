@@ -8,6 +8,8 @@ extension BusyApp {
 
         var body: some View {
             VStack(spacing: 0) {
+                Spacer()
+
                 BusyCard(settings: $settings)
 
                 StartButton {
@@ -15,6 +17,8 @@ extension BusyApp {
                 }
                 .padding(.top, 5)
             }
+            .padding(.bottom, 12)
+            .edgesIgnoringSafeArea(.all)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             // TODO: 1E1E1E
             .background(.black)

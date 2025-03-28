@@ -12,7 +12,8 @@ class Stopwatch: Ticker, @unchecked Sendable {
     private var started: Date = .now
     private var timer: Foundation.Timer?
 
-    init(callback: @escaping Callback) {
+    init(initialValue duration: Duration, callback: @escaping Callback) {
+        self.elapsed = duration
         self.callback = callback
     }
 

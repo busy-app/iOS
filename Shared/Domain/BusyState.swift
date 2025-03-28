@@ -51,6 +51,14 @@ class BusyState {
             index += 1
             return intervals[index]
         }
+
+        mutating func jump(to index: Int) -> Interval? {
+            guard index < intervals.count else {
+                return nil
+            }
+            self.index = index
+            return intervals[index]
+        }
     }
 
     struct Interval: Equatable {
@@ -91,12 +99,12 @@ class BusyState {
     #endif
 
     func start() {
-        guard state != .running else {
+        guard let interval, state != .running else {
             print("something went wrong")
             return
         }
 
-        ticker = Stopwatch { [weak self] in
+        ticker = Stopwatch(initialValue: interval.elapsed) { [weak self] in
             guard let self else { return }
             self.onTick($0)
         }
@@ -149,6 +157,15 @@ class BusyState {
 
     func next() {
         interval = intervals.next(loop: isInfinite)
+    }
+
+    func jump(to index: Int, at elapsed: Duration) {
+        guard var interval = intervals.jump(to: index) else {
+            return
+        }
+        print(elapsed)
+        interval.elapsed = elapsed
+        self.interval = interval
     }
 }
 

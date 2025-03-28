@@ -3,14 +3,13 @@ import SwiftUI
 extension BusyView {
     struct FinishedView: View {
         var restart: () -> Void
-
-        @Environment(\.appState) var appState
+        var finish: () -> Void
 
         var body: some View {
             VStack(spacing: 0) {
                 HStack {
                     RestartNavButton {
-                        appState.wrappedValue = .cards
+                        restart()
                     }
                     Spacer()
                 }
@@ -29,7 +28,7 @@ extension BusyView {
                         .padding(.top, 2)
 
                     FinishButton {
-                        appState.wrappedValue = .cards
+                        finish()
                     }
                     .padding(.top, 20)
                 }
@@ -53,5 +52,9 @@ extension BusyView {
 }
 
 #Preview {
-    BusyView.FinishedView {}
+    BusyView.FinishedView {
+
+    } finish: {
+
+    }
 }
