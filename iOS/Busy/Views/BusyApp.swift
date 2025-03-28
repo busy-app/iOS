@@ -28,11 +28,6 @@ struct BusyApp: View {
             disableShieldOnTerminate()
             disableActivitiesOnTerminate()
         }
-        .onReceive(Connectivity.shared.$settings) { settings in
-            if let settings {
-                self.settings = settings
-            }
-        }
         .onReceive(Connectivity.shared.$appState) { appState in
             if let appState {
                 self.appState = appState
