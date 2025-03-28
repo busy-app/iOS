@@ -125,13 +125,6 @@
 			);
 			target = 8B82C3AD2CF8FDC900AE782C /* BusyWidgetExtension */;
 		};
-		8B884A2C2D96F96700E149FC /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Info.plist,
-			);
-			target = 8B9457EE2D848193009DDEEC /* Busy Watch App */;
-		};
 		8BB465E82D873A3400518CF1 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -236,7 +229,7 @@
 		8B638DE12C610E9500C3458C /* Tests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Tests; sourceTree = "<group>"; };
 		8B638DEB2C610E9500C3458C /* UITests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = UITests; sourceTree = "<group>"; };
 		8B82C3B12CF8FDC900AE782C /* BusyWidget */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (8BE288D42D07CE8F007479A4 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 8B82C3C42CF8FDCA00AE782C /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = BusyWidget; sourceTree = "<group>"; };
-		8B9457F02D848193009DDEEC /* Busy Watch App */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (8B884A2C2D96F96700E149FC /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = "Busy Watch App"; sourceTree = "<group>"; };
+		8B9457F02D848193009DDEEC /* Busy Watch App */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "Busy Watch App"; sourceTree = "<group>"; };
 		8B9458012D848194009DDEEC /* Busy Watch AppTests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "Busy Watch AppTests"; sourceTree = "<group>"; };
 		8B94580B2D848194009DDEEC /* Busy Watch AppUITests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "Busy Watch AppUITests"; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -1189,7 +1182,7 @@
 				DEVELOPMENT_TEAM = SXH69675TZ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Info.plist";
+				INFOPLIST_FILE = "Busy Watch App/Info_.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = BUSY;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = app.busy;
@@ -1221,7 +1214,7 @@
 				DEVELOPMENT_TEAM = SXH69675TZ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Info.plist";
+				INFOPLIST_FILE = "Busy Watch App/Info_.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = BUSY;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = app.busy;
