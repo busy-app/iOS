@@ -1,7 +1,8 @@
 import SwiftUI
 
 struct BusyApp: View {
-    @State var settings: BusySettings = .init()
+    @AppStorage("settings")
+    var settings: BusySettings = .init()
 
     @State var appState: AppState = .cards
 
@@ -13,6 +14,11 @@ struct BusyApp: View {
             }
         }
         .environment(\.appState, $appState)
+        .onReceive(Connectivity.shared.$settings) { settings in
+            if let settings {
+                self.settings = settings
+            }
+        }
     }
 }
 #Preview {

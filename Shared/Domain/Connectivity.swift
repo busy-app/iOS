@@ -3,7 +3,7 @@ import WatchConnectivity
 final class Connectivity: NSObject, @unchecked Sendable {
     static let shared = Connectivity()
 
-    @Published var state: IntervalState?
+    @Published var settings: BusySettings?
 
     private override init() {
         super.init()
@@ -40,7 +40,7 @@ extension Connectivity: WCSessionDelegate {
     }
     #endif
 
-    public func send(state: TimerState) {
+    public func send(settings: BusySettings) {
         #if os(watchOS)
         guard WCSession.default.isCompanionAppInstalled else {
             print("compation app is not installed")
@@ -53,9 +53,11 @@ extension Connectivity: WCSessionDelegate {
         }
         #endif
 
-        if let state = try? JSONEncoder().encode(state) {
+        if let settings = try? JSONEncoder().encode(settings) {
             do {
-                try WCSession.default.updateApplicationContext(["state": state])
+                try WCSession.default.updateApplicationContext(
+                    ["settings": settings]
+                )
             } catch {
                 print("failed to update application context:", error)
             }
@@ -79,17 +81,20 @@ extension Connectivity: WCSessionDelegate {
     }
 
     func handle(_ context: [String : Any]) {
-        if let data = context["state"] as? Data {
-            handle(state: data)
-        } else {
-            print("no state")
+        if let data = context["settings"] as? Data {
+            handle(settings: data)
         }
     }
 
-    func handle(state: Data) {
-        let state = try? JSONDecoder().decode(IntervalState.self, from: state)
-        Task { @MainActor in
-            self.state = state
+    func handle(settings data: Data) {
+        do {
+            let settings = try JSONDecoder()
+                .decode(BusySettings.self, from: data)
+            Task { @MainActor in
+                self.settings = settings
+            }
+        } catch {
+            print("error decoding settings:", error)
         }
     }
 }

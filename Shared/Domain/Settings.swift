@@ -1,7 +1,7 @@
 import ManagedSettings
 import FamilyControls
 
-struct BusySettings: Codable, RawRepresentable {
+struct BusySettings: Codable, Equatable, RawRepresentable {
     var name: String = "BUSY"
     var duration: Duration = .minutes(90)
     var intervals: IntervalsSettings = .init()
@@ -55,10 +55,21 @@ struct BlockerSettings: Codable {
     var applicationTokens: Set<String> = []
     var categoryTokens: Set<String> = []
     var domainTokens: Set<String> = []
+
+    init(from decoder: any Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.isOn = try container.decode(Bool.self, forKey: .isOn)
+        self.applicationTokens = []
+        self.categoryTokens = []
+        self.domainTokens = []
+    }
     #endif
 
     var selectedCount: Int {
         applicationTokens.count + categoryTokens.count + domainTokens.count
+    }
+
+    init() {
     }
 }
 

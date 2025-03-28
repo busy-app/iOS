@@ -27,6 +27,11 @@ struct BusyApp: View {
             #endif
             disableShieldOnTerminate()
             disableActivitiesOnTerminate()
+
+            Connectivity.shared.send(settings: busySettings)
+        }
+        .onChange(of: busySettings) {
+            Connectivity.shared.send(settings: busySettings)
         }
     }
 
