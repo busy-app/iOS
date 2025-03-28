@@ -54,7 +54,6 @@ extension BusyView {
                     Spacer()
 
                     SkipButton {
-                        feedbackOnSkip()
                         busy.skip()
                         sendState()
                     }
@@ -111,10 +110,6 @@ extension BusyView {
                     elapsed: busy.interval?.elapsed ?? .seconds(0)
                 )
             )
-        }
-
-        func feedbackOnSkip() {
-            UIImpactFeedbackGenerator(style: .light).impactOccurred()
         }
     }
 }
