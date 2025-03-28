@@ -45,6 +45,7 @@ extension BusyView {
                         ConfirmationDialog {
                             busy.stop()
                             appState.wrappedValue = .cards
+                            sendState()
                         }
                         .colorScheme(.light)
                         .presentationBackground(.clear)
