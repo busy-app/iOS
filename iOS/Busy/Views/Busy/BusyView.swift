@@ -152,7 +152,7 @@ struct BusyView: View {
     func feedbackIfNeeded() {
         guard let interval = busy.interval else { return }
 
-        if interval.remaining == .seconds(1) {
+        if interval.remaining == .seconds(0) {
             UINotificationFeedbackGenerator().notificationOccurred(.success)
         }
     }

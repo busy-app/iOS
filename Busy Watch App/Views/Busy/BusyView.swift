@@ -41,16 +41,8 @@ struct BusyView: View {
                 }
             }
         }
-        .onChange(of: busy.state) {
-            if busy.state == .finished {
-                feedback()
-            }
-        }
-        .onChange(of: busy.interval) { old, new in
-            guard let old, let new else { return }
-            if old.kind != new.kind {
-                feedback()
-            }
+        .onChange(of: busy.interval?.remaining) {
+            feedbackIfNeeded()
         }
         .task {
             startBusy()
@@ -78,8 +70,12 @@ struct BusyView: View {
         sendState()
     }
 
-    func feedback() {
-        WKInterfaceDevice.current().play(.success)
+    func feedbackIfNeeded() {
+        guard let interval = busy.interval else { return }
+
+        if interval.remaining == .seconds(0) {
+            WKInterfaceDevice.current().play(.success)
+        }
     }
 
     func sendState() {

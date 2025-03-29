@@ -45,6 +45,7 @@ extension BusyView {
                     Spacer()
 
                     SkipNavButton {
+                        feedbackOnSkip()
                         busy.skip()
                         sendState()
                     }
@@ -99,6 +100,10 @@ extension BusyView {
                 }
             )
             .edgesIgnoringSafeArea(.all)
+        }
+
+        func feedbackOnSkip() {
+            WKInterfaceDevice.current().play(.click)
         }
 
         func sendState() {
