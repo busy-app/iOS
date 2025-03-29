@@ -13,7 +13,6 @@
 		8B82C3AF2CF8FDC900AE782C /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B1147282CF8FC3000CA9361 /* WidgetKit.framework */; };
 		8B82C3B02CF8FDC900AE782C /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B11472A2CF8FC3000CA9361 /* SwiftUI.framework */; };
 		8B82C3C12CF8FDCA00AE782C /* BusyWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 8B82C3AE2CF8FDC900AE782C /* BusyWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		8B9458122D848194009DDEEC /* Busy Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 8B9457EF2D848193009DDEEC /* Busy Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,27 +44,6 @@
 			remoteGlobalIDString = 8B82C3AD2CF8FDC900AE782C;
 			remoteInfo = BusyWidgetExtension;
 		};
-		8B9457FF2D848194009DDEEC /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 8B638DC62C610E9400C3458C /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 8B9457EE2D848193009DDEEC;
-			remoteInfo = "Busy Watch App";
-		};
-		8B9458092D848194009DDEEC /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 8B638DC62C610E9400C3458C /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 8B9457EE2D848193009DDEEC;
-			remoteInfo = "Busy Watch App";
-		};
-		8B9458102D848194009DDEEC /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 8B638DC62C610E9400C3458C /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 8B9457EE2D848193009DDEEC;
-			remoteInfo = "Busy Watch App";
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -87,7 +65,6 @@
 			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
 			dstSubfolderSpec = 16;
 			files = (
-				8B9458122D848194009DDEEC /* Busy Watch App.app in Embed Watch Content */,
 			);
 			name = "Embed Watch Content";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -104,9 +81,6 @@
 		8B638DDE2C610E9500C3458C /* BusyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BusyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B638DE82C610E9500C3458C /* BusyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BusyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B82C3AE2CF8FDC900AE782C /* BusyWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = BusyWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		8B9457EF2D848193009DDEEC /* Busy Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Busy Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8B9457FE2D848194009DDEEC /* Busy Watch AppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Busy Watch AppTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8B9458082D848194009DDEEC /* Busy Watch AppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Busy Watch AppUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BFFA7FE2D8AF37D00E0F7CE /* Shared */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Shared; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -125,13 +99,6 @@
 			);
 			target = 8B82C3AD2CF8FDC900AE782C /* BusyWidgetExtension */;
 		};
-		8B8856CF2D97217F00E149FC /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Info.plist,
-			);
-			target = 8B9457EE2D848193009DDEEC /* Busy Watch App */;
-		};
 		8BB465E82D873A3400518CF1 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -140,29 +107,6 @@
 				"UI/Text+Extensions.swift",
 			);
 			target = 8B82C3AD2CF8FDC900AE782C /* BusyWidgetExtension */;
-		};
-		8BB465E92D873A3400518CF1 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Domain/BusyState.swift,
-				Domain/Connectivity.swift,
-				Domain/Duration.swift,
-				Domain/RawRepresentable.swift,
-				Domain/Settings.swift,
-				Domain/State.swift,
-				Domain/TickTock.swift,
-				Domain/Timers/Stopwatch.swift,
-				Domain/Timers/Ticker.swift,
-				Domain/Timers/Timer.swift,
-				Domain/UserDefaults.swift,
-				"Fonts/JetBrainsMono-Regular.ttf",
-				"Fonts/pragmatica-next_vf.ttf",
-				UI/Environment.swift,
-				UI/Font.swift,
-				"UI/String+Extensions.swift",
-				"UI/Text+Extensions.swift",
-			);
-			target = 8B9457EE2D848193009DDEEC /* Busy Watch App */;
 		};
 		8BCCF4402D7E139C004D0B7C /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
@@ -230,15 +174,12 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		8B3C7F0B2D7AF4510088CC48 /* Shared */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (8BCCF4402D7E139C004D0B7C /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 8BCCF4412D7E139C004D0B7C /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 8BCCF4422D7E139C004D0B7C /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 8BB465E82D873A3400518CF1 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 8BB465E92D873A3400518CF1 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = Shared; sourceTree = "<group>"; };
+		8B3C7F0B2D7AF4510088CC48 /* Shared */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (8BCCF4402D7E139C004D0B7C /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 8BCCF4412D7E139C004D0B7C /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 8BCCF4422D7E139C004D0B7C /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 8BB465E82D873A3400518CF1 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = Shared; sourceTree = "<group>"; };
 		8B5AB1452CEC085200211DA5 /* BusyShield */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (8B5AB14D2CEC085200211DA5 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = BusyShield; sourceTree = "<group>"; };
 		8B638DD02C610E9400C3458C /* iOS */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (8BCCF4F02D7E1715004D0B7C /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = iOS; sourceTree = "<group>"; };
 		8B638DE12C610E9500C3458C /* Tests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Tests; sourceTree = "<group>"; };
 		8B638DEB2C610E9500C3458C /* UITests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = UITests; sourceTree = "<group>"; };
 		8B82C3B12CF8FDC900AE782C /* BusyWidget */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (8BE288D42D07CE8F007479A4 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 8B82C3C42CF8FDCA00AE782C /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = BusyWidget; sourceTree = "<group>"; };
-		8B9457F02D848193009DDEEC /* Busy Watch App */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (8B8856CF2D97217F00E149FC /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = "Busy Watch App"; sourceTree = "<group>"; };
-		8B9458012D848194009DDEEC /* Busy Watch AppTests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "Busy Watch AppTests"; sourceTree = "<group>"; };
-		8B94580B2D848194009DDEEC /* Busy Watch AppUITests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "Busy Watch AppUITests"; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -281,27 +222,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		8B9457EC2D848193009DDEEC /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		8B9457FB2D848194009DDEEC /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		8B9458052D848194009DDEEC /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -326,9 +246,6 @@
 				8B638DEB2C610E9500C3458C /* UITests */,
 				8B5AB1452CEC085200211DA5 /* BusyShield */,
 				8B82C3B12CF8FDC900AE782C /* BusyWidget */,
-				8B9457F02D848193009DDEEC /* Busy Watch App */,
-				8B9458012D848194009DDEEC /* Busy Watch AppTests */,
-				8B94580B2D848194009DDEEC /* Busy Watch AppUITests */,
 				8B5AB1402CEC085100211DA5 /* Frameworks */,
 				8B638DCF2C610E9400C3458C /* Products */,
 			);
@@ -342,9 +259,6 @@
 				8B638DE82C610E9500C3458C /* BusyUITests.xctest */,
 				8B5AB13F2CEC085100211DA5 /* BusyShield.appex */,
 				8B82C3AE2CF8FDC900AE782C /* BusyWidgetExtension.appex */,
-				8B9457EF2D848193009DDEEC /* Busy Watch App.app */,
-				8B9457FE2D848194009DDEEC /* Busy Watch AppTests.xctest */,
-				8B9458082D848194009DDEEC /* Busy Watch AppUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -390,7 +304,6 @@
 			dependencies = (
 				8B5AB14B2CEC085200211DA5 /* PBXTargetDependency */,
 				8B82C3C02CF8FDCA00AE782C /* PBXTargetDependency */,
-				8B9458112D848194009DDEEC /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				8B3C7F0B2D7AF4510088CC48 /* Shared */,
@@ -474,74 +387,6 @@
 			productReference = 8B82C3AE2CF8FDC900AE782C /* BusyWidgetExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
-		8B9457EE2D848193009DDEEC /* Busy Watch App */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 8B94581A2D848194009DDEEC /* Build configuration list for PBXNativeTarget "Busy Watch App" */;
-			buildPhases = (
-				8B9457EB2D848193009DDEEC /* Sources */,
-				8B9457EC2D848193009DDEEC /* Frameworks */,
-				8B9457ED2D848193009DDEEC /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			fileSystemSynchronizedGroups = (
-				8B9457F02D848193009DDEEC /* Busy Watch App */,
-			);
-			name = "Busy Watch App";
-			packageProductDependencies = (
-			);
-			productName = "Busy Watch App";
-			productReference = 8B9457EF2D848193009DDEEC /* Busy Watch App.app */;
-			productType = "com.apple.product-type.application";
-		};
-		8B9457FD2D848194009DDEEC /* Busy Watch AppTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 8B94581B2D848194009DDEEC /* Build configuration list for PBXNativeTarget "Busy Watch AppTests" */;
-			buildPhases = (
-				8B9457FA2D848194009DDEEC /* Sources */,
-				8B9457FB2D848194009DDEEC /* Frameworks */,
-				8B9457FC2D848194009DDEEC /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				8B9458002D848194009DDEEC /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				8B9458012D848194009DDEEC /* Busy Watch AppTests */,
-			);
-			name = "Busy Watch AppTests";
-			packageProductDependencies = (
-			);
-			productName = "Busy Watch AppTests";
-			productReference = 8B9457FE2D848194009DDEEC /* Busy Watch AppTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		8B9458072D848194009DDEEC /* Busy Watch AppUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 8B94581C2D848194009DDEEC /* Build configuration list for PBXNativeTarget "Busy Watch AppUITests" */;
-			buildPhases = (
-				8B9458042D848194009DDEEC /* Sources */,
-				8B9458052D848194009DDEEC /* Frameworks */,
-				8B9458062D848194009DDEEC /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				8B94580A2D848194009DDEEC /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				8B94580B2D848194009DDEEC /* Busy Watch AppUITests */,
-			);
-			name = "Busy Watch AppUITests";
-			packageProductDependencies = (
-			);
-			productName = "Busy Watch AppUITests";
-			productReference = 8B9458082D848194009DDEEC /* Busy Watch AppUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -569,17 +414,6 @@
 					8B82C3AD2CF8FDC900AE782C = {
 						CreatedOnToolsVersion = 16.1;
 					};
-					8B9457EE2D848193009DDEEC = {
-						CreatedOnToolsVersion = 16.2;
-					};
-					8B9457FD2D848194009DDEEC = {
-						CreatedOnToolsVersion = 16.2;
-						TestTargetID = 8B9457EE2D848193009DDEEC;
-					};
-					8B9458072D848194009DDEEC = {
-						CreatedOnToolsVersion = 16.2;
-						TestTargetID = 8B9457EE2D848193009DDEEC;
-					};
 				};
 			};
 			buildConfigurationList = 8B638DC92C610E9400C3458C /* Build configuration list for PBXProject "Busy" */;
@@ -600,9 +434,6 @@
 				8B638DE72C610E9500C3458C /* BusyUITests */,
 				8B5AB13E2CEC085100211DA5 /* BusyShield */,
 				8B82C3AD2CF8FDC900AE782C /* BusyWidgetExtension */,
-				8B9457EE2D848193009DDEEC /* Busy Watch App */,
-				8B9457FD2D848194009DDEEC /* Busy Watch AppTests */,
-				8B9458072D848194009DDEEC /* Busy Watch AppUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -637,27 +468,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		8B82C3AC2CF8FDC900AE782C /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		8B9457ED2D848193009DDEEC /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		8B9457FC2D848194009DDEEC /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		8B9458062D848194009DDEEC /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -702,27 +512,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		8B9457EB2D848193009DDEEC /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		8B9457FA2D848194009DDEEC /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		8B9458042D848194009DDEEC /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -745,21 +534,6 @@
 			isa = PBXTargetDependency;
 			target = 8B82C3AD2CF8FDC900AE782C /* BusyWidgetExtension */;
 			targetProxy = 8B82C3BF2CF8FDCA00AE782C /* PBXContainerItemProxy */;
-		};
-		8B9458002D848194009DDEEC /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 8B9457EE2D848193009DDEEC /* Busy Watch App */;
-			targetProxy = 8B9457FF2D848194009DDEEC /* PBXContainerItemProxy */;
-		};
-		8B94580A2D848194009DDEEC /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 8B9457EE2D848193009DDEEC /* Busy Watch App */;
-			targetProxy = 8B9458092D848194009DDEEC /* PBXContainerItemProxy */;
-		};
-		8B9458112D848194009DDEEC /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 8B9457EE2D848193009DDEEC /* Busy Watch App */;
-			targetProxy = 8B9458102D848194009DDEEC /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1177,150 +951,6 @@
 			};
 			name = Release;
 		};
-		8B9458142D848194009DDEEC /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Busy Watch App/Preview Content\"";
-				DEVELOPMENT_TEAM = SXH69675TZ;
-				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Busy Watch App/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = BUSY;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = app.busy;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.1;
-				PRODUCT_BUNDLE_IDENTIFIER = app.busy.watchkitapp;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 11.0;
-			};
-			name = Debug;
-		};
-		8B9458152D848194009DDEEC /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Busy Watch App/Preview Content\"";
-				DEVELOPMENT_TEAM = SXH69675TZ;
-				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Busy Watch App/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = BUSY;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = app.busy;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.1;
-				PRODUCT_BUNDLE_IDENTIFIER = app.busy.watchkitapp;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 11.0;
-			};
-			name = Release;
-		};
-		8B9458162D848194009DDEEC /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = SXH69675TZ;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "app.Busy-Watch-AppTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = watchos;
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Busy Watch App.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Busy Watch App";
-				WATCHOS_DEPLOYMENT_TARGET = 11.2;
-			};
-			name = Debug;
-		};
-		8B9458172D848194009DDEEC /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = SXH69675TZ;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "app.Busy-Watch-AppTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = watchos;
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Busy Watch App.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Busy Watch App";
-				WATCHOS_DEPLOYMENT_TARGET = 11.2;
-			};
-			name = Release;
-		};
-		8B9458182D848194009DDEEC /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = SXH69675TZ;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "app.Busy-Watch-AppUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = watchos;
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				TEST_TARGET_NAME = "Busy Watch App";
-				WATCHOS_DEPLOYMENT_TARGET = 11.2;
-			};
-			name = Debug;
-		};
-		8B9458192D848194009DDEEC /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = SXH69675TZ;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "app.Busy-Watch-AppUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = watchos;
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				TEST_TARGET_NAME = "Busy Watch App";
-				WATCHOS_DEPLOYMENT_TARGET = 11.2;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1374,33 +1004,6 @@
 			buildConfigurations = (
 				8B82C3C22CF8FDCA00AE782C /* Debug */,
 				8B82C3C32CF8FDCA00AE782C /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		8B94581A2D848194009DDEEC /* Build configuration list for PBXNativeTarget "Busy Watch App" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				8B9458142D848194009DDEEC /* Debug */,
-				8B9458152D848194009DDEEC /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		8B94581B2D848194009DDEEC /* Build configuration list for PBXNativeTarget "Busy Watch AppTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				8B9458162D848194009DDEEC /* Debug */,
-				8B9458172D848194009DDEEC /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		8B94581C2D848194009DDEEC /* Build configuration list for PBXNativeTarget "Busy Watch AppUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				8B9458182D848194009DDEEC /* Debug */,
-				8B9458192D848194009DDEEC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
