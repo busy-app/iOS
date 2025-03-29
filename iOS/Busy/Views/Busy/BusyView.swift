@@ -58,17 +58,7 @@ struct BusyView: View {
         }
         .onChange(of: busy.interval?.remaining) {
             playSoundIfNeeded()
-        }
-        .onChange(of: busy.state) {
-            if busy.state == .finished {
-                feedback()
-            }
-        }
-        .onChange(of: busy.interval) { old, new in
-            guard let old, let new else { return }
-            if old.kind != new.kind {
-                feedback()
-            }
+            feedbackIfNeeded()
         }
         .task {
             startBusy()
@@ -159,8 +149,12 @@ struct BusyView: View {
         }
     }
 
-    func feedback() {
-        UINotificationFeedbackGenerator().notificationOccurred(.success)
+    func feedbackIfNeeded() {
+        guard let interval = busy.interval else { return }
+
+        if interval.remaining == .seconds(0) {
+            UINotificationFeedbackGenerator().notificationOccurred(.success)
+        }
     }
 }
 

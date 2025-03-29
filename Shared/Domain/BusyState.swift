@@ -108,20 +108,27 @@ class BusyState {
         }
 
         state = .running
-        ticker?.start()
+
+        Task {
+            try? await Task.sleep(for: .seconds(0.5))
+            ticker?.start()
+        }
     }
 
     func onTick(_ elapsed: Duration) {
-        interval?.elapsed = elapsed
-        tickTock.play()
+        Task {
+            interval?.elapsed = elapsed
+            tickTock.play()
 
-        guard let interval, !interval.isInfinite else { return }
+            guard let interval, !interval.isInfinite else { return }
 
-        if interval.duration - interval.elapsed <= .seconds(0) {
-            stop()
-            if autostart {
-                next()
-                start()
+            if interval.duration - interval.elapsed <= .seconds(0) {
+                try? await Task.sleep(for: .seconds(0.5))
+                stop()
+                if autostart {
+                    next()
+                    start()
+                }
             }
         }
     }
