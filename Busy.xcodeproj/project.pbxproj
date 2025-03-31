@@ -1193,6 +1193,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = BUSY;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = app.busy;
+				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = NO;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1226,6 +1227,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = BUSY;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = app.busy;
+				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = NO;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1252,7 +1254,7 @@
 				DEVELOPMENT_TEAM = SXH69675TZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "app.Busy-Watch-AppTests";
+				PRODUCT_BUNDLE_IDENTIFIER = app.busy.watchkitapp.tests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SWIFT_EMIT_LOC_STRINGS = NO;
@@ -1272,7 +1274,7 @@
 				DEVELOPMENT_TEAM = SXH69675TZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "app.Busy-Watch-AppTests";
+				PRODUCT_BUNDLE_IDENTIFIER = app.busy.watchkitapp.tests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SWIFT_EMIT_LOC_STRINGS = NO;
@@ -1291,7 +1293,7 @@
 				DEVELOPMENT_TEAM = SXH69675TZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "app.Busy-Watch-AppUITests";
+				PRODUCT_BUNDLE_IDENTIFIER = app.busy.watchkitapp.uitests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SWIFT_EMIT_LOC_STRINGS = NO;
@@ -1310,7 +1312,7 @@
 				DEVELOPMENT_TEAM = SXH69675TZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "app.Busy-Watch-AppUITests";
+				PRODUCT_BUNDLE_IDENTIFIER = app.busy.watchkitapp.uitests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SWIFT_EMIT_LOC_STRINGS = NO;
