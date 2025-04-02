@@ -50,18 +50,16 @@ extension BusyView {
                         sendState()
                     }
                 }
-                .padding(.top, 20)
-                .padding(.horizontal, 20)
 
                 Title(
                     name: name,
                     description: description
                 )
-                .padding(.top, 12)
+                .padding(.top, 8)
+
+                Spacer(minLength: 0)
 
                 TimeCard(interval: interval)
-                    .padding(.horizontal, 20)
-                    .padding(.top, 16)
 
                 Spacer()
 
@@ -69,8 +67,8 @@ extension BusyView {
                     busy.pause()
                     sendState()
                 }
-                .padding(.top, 13)
             }
+            .padding(isAppleWatchLarge ? 20 : 12)
             .background(
                 LinearGradient(
                     colors: colors,
@@ -100,6 +98,7 @@ extension BusyView {
                 }
             )
             .edgesIgnoringSafeArea(.all)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
 
         func feedbackOnSkip() {

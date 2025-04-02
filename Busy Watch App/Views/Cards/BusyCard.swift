@@ -20,6 +20,7 @@ extension BusyApp {
                         Text(settings.duration)
                             .font(.pragmaticaNextVF(size: 20))
                             .foregroundStyle(.white)
+                            .padding(.bottom, settings.intervals.isOn ? 4 : 0)
 
                         if settings.intervals.isOn {
                             IntervalsCard(settings: settings.intervals)
@@ -29,7 +30,7 @@ extension BusyApp {
                     Spacer()
 
                     if settings.blocker.selectedCount != 0 {
-                        BlockedAppsCard(settings: settings.blocker)
+                        BlockedAppsCard()
                     }
                 }
                 .padding(.top, 20)
@@ -54,7 +55,8 @@ extension BusyApp {
 
                     Color.white.opacity(0.2)
                         .frame(width: 0.6)
-                        .padding(5.25)
+                        .padding(.vertical, 5.25)
+                        .padding(.horizontal, 4.75)
 
                     HStack(spacing: 2.3) {
                         Image(.restIcon)
@@ -67,18 +69,11 @@ extension BusyApp {
     }
 
     struct BlockedAppsCard: View {
-        let settings: BlockerSettings
 
         var body: some View {
             SmallCard {
-                HStack(spacing: 4) {
-                    Image(.blockedIcon)
-                        .renderingMode(.template)
-                    Text(
-                        settings.selectedCountString
-                    )
-                }
-                .frame(minHeight: 0)
+                Image(.blockedIcon)
+                    .renderingMode(.template)
             }
         }
     }
@@ -91,11 +86,11 @@ extension BusyApp {
                 content()
             }
             .frame(height: 20)
-            .padding(.horizontal, 12)
+            .padding(.horizontal, 4)
             .background(.white.opacity(0.2))
             .font(.pragmaticaNextVF(size: 11))
             .foregroundStyle(.white.opacity(0.5))
-            .clipShape(RoundedRectangle(cornerRadius: 5.6))
+            .clipShape(RoundedRectangle(cornerRadius: 6))
         }
     }
 }

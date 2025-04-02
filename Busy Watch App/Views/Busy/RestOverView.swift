@@ -15,32 +15,31 @@ extension BusyView {
                     Spacer()
                 }
 
-                VStack(spacing: 0) {
-                    Image(.compukter)
+                Image(.compukter)
+                    .resizable()
+                    .frame(width: 56, height: 56)
 
-                    Text("Rest is over")
-                        .font(.pragmaticaNextVF(size: 20))
-                        .foregroundStyle(.white)
-                        .padding(.top, 2)
+                Text("Rest is over")
+                    .font(.pragmaticaNextVF(size: 20))
+                    .foregroundStyle(.white)
 
-                    Text("Time to get back to work")
-                        .font(.pragmaticaNextVF(size: 12))
-                        .foregroundStyle(.white.opacity(0.5))
-                        .padding(.top, 2)
+                Text("Time to get back to work")
+                    .font(.pragmaticaNextVF(size: 12))
+                    .foregroundStyle(.white.opacity(0.5))
+                    .padding(.top, 2)
 
-                    WhiteButton {
-                        next()
-                    } label: {
-                        Text("Start BUSY")
-                            .font(.pragmaticaNextVF(size: 16))
-                    }
-                    .padding(.top, 20)
+                Spacer(minLength: 0)
+
+                WhiteButton {
+                    next()
+                } label: {
+                    Text("Start BUSY")
+                        .font(.pragmaticaNextVF(size: 16))
                 }
-                .padding(.top, 4)
-                .padding(.bottom, 12)
             }
-            .padding(20)
+            .padding(isAppleWatchLarge ? 20 : 12)
             .edgesIgnoringSafeArea(.all)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(Color(red: 0.13, green: 0.13, blue: 0.13))
         }
     }
