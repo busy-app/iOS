@@ -9,71 +9,68 @@ extension BusyView.TimerView {
             VStack(alignment: .leading) {
                 Text("Stopping will reset BUSY progress. Are you sure?")
                     .font(.pragmaticaNextVF(size: 16))
-                    .minimumScaleFactor(0.75)
                     .lineSpacing(16 * 0.3)
                     .foregroundStyle(.white)
-                    .padding(.top, 24)
 
                 Spacer()
 
-                HStack(alignment: .bottom) {
-                    Spacer()
-                    VStack(spacing: 4) {
-                        StopButton {
-                            onConfirm()
-                        }
+                VStack(spacing: 4) {
+                    StopButton(action: onConfirm)
 
-                        KeepButton {
-                            onCancel()
-                        }
-                    }
-                    Spacer()
+                    KeepButton(action: onCancel)
                 }
-                Spacer(minLength: 12)
+                .frame(maxWidth: .infinity)
             }
-            .padding(.horizontal, 20)
+            .padding(isAppleWatchLarge ? 20 : 12)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(.ultraThinMaterial)
             .clipShape(RoundedRectangle(cornerRadius: 32))
         }
+    }
 
-        struct StopButton: View {
-            var action: () -> Void
+    struct StopButton: View {
+        var action: () -> Void
 
-            var body: some View {
-                Button(action: action) {
-                    HStack {
-                        Image(.stopIcon)
-                            .renderingMode(.template)
-                        Text("Stop")
-                            .font(.pragmaticaNextVF(size: 16))
-                    }
-                    .frame(width: 125)
-                    .padding(.vertical, 15)
-                    .foregroundStyle(.black)
-                    .background(.white)
-                    .clipShape(RoundedRectangle(cornerRadius: 112))
+        var body: some View {
+            Button(action: action) {
+                HStack {
+                    Image(.stopIcon)
+                        .renderingMode(.template)
+                    Text("Stop")
+                        .font(.pragmaticaNextVF(size: 16))
                 }
-                .buttonStyle(.borderless)
+                .frame(width: 125)
+                .padding(.vertical, 12)
+                .foregroundStyle(.black)
+                .background(.white)
+                .clipShape(RoundedRectangle(cornerRadius: 112))
             }
-        }
-
-        struct KeepButton: View {
-            var action: () -> Void
-
-            var body: some View {
-                Button(action: action) {
-                    HStack {
-                        Text("Keep BUSY")
-                            .font(.pragmaticaNextVF(size: 16))
-                    }
-                    .frame(width: 125)
-                    .padding(.vertical, 15)
-                    .foregroundStyle(.black)
-                    .background(.white.opacity(0.5))
-                    .clipShape(RoundedRectangle(cornerRadius: 112))
-                }
-                .buttonStyle(.borderless)
-            }
+            .buttonStyle(.borderless)
         }
     }
+
+    struct KeepButton: View {
+        var action: () -> Void
+
+        var body: some View {
+            Button(action: action) {
+                HStack {
+                    Text("Keep BUSY")
+                        .font(.pragmaticaNextVF(size: 16))
+                }
+                .frame(width: 125)
+                .padding(.vertical, 12)
+                .foregroundStyle(.black)
+                .background(.white.opacity(0.5))
+                .clipShape(RoundedRectangle(cornerRadius: 112))
+            }
+            .buttonStyle(.borderless)
+        }
+    }
+}
+
+#Preview {
+    BusyView.TimerView.ConfirmationDialog(onConfirm: {}, onCancel: {})
+        .edgesIgnoringSafeArea(.all)
+        .colorScheme(.light)
 }

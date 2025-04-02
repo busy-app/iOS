@@ -76,7 +76,7 @@ extension BusyApp {
                 HStack(spacing: 10) {
                     label()
                 }
-                .padding(.vertical, 15)
+                .padding(.vertical, 12)
                 .padding(.horizontal, 26)
                 .foregroundStyle(.black)
                 .background(.white)
@@ -97,7 +97,7 @@ extension BusyApp {
                 HStack(spacing: 10) {
                     label()
                 }
-                .padding(.vertical, 15)
+                .padding(.vertical, 12)
                 .padding(.horizontal, 26)
                 .foregroundStyle(.black)
                 .background(.white.opacity(0.05))

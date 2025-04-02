@@ -9,15 +9,19 @@ extension BusyApp {
         var body: some View {
             VStack(spacing: 0) {
                 Spacer()
+                    .frame(maxHeight: .infinity)
 
                 BusyCard(settings: $settings)
 
-                StartButton {
-                    appState.wrappedValue = .busy
+                VStack(spacing: 0) {
+                    Spacer()
+                    StartButton {
+                        appState.wrappedValue = .busy
+                    }
                 }
-                .padding(.top, 5)
+                .frame(maxHeight: .infinity)
             }
-            .padding(.bottom, 12)
+            .padding(.vertical, isAppleWatchLarge ? 20 : 12)
             .edgesIgnoringSafeArea(.all)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             // TODO: 1E1E1E

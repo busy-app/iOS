@@ -5,31 +5,30 @@ extension BusyView {
         var action: () -> Void
 
         var body: some View {
-            VStack {
-                StartButton {
-                    action()
-                }
-                .padding(.top, 12)
-                .opacity(0)
-
+            VStack(spacing: 0) {
                 Spacer()
+                    .frame(maxHeight: .infinity)
 
                 Button {
                     action()
                 } label: {
                     Image(.pauseIcon)
                         .resizable()
-                        .frame(width: 64, height: 64)
+                        .frame(width: 56, height: 56)
                 }
                 .buttonStyle(.borderless)
 
-                Spacer()
+                Spacer(minLength: 0)
 
-                StartButton {
-                    action()
+                VStack(spacing: 0) {
+                    Spacer()
+                    StartButton {
+                        action()
+                    }
                 }
-                .padding(.bottom, 12)
+                .frame(maxHeight: .infinity)
             }
+            .padding(isAppleWatchLarge ? 20 : 12)
             .ignoresSafeArea(.all)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(.ultraThinMaterial)
