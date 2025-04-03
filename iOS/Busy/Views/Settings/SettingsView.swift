@@ -7,12 +7,7 @@ extension BusyApp {
     struct SettingsView: View {
         typealias DurationPicker = ODurationPicker
 
-        @Binding var savedSettings: BusySettings
-        @State var settings: BusySettings = .init()
-
-        init(settings: Binding<BusySettings>) {
-            self._savedSettings = settings
-        }
+        @Binding var settings: BusySettings
 
         @Environment(\.dismiss) private var dismiss
 
@@ -47,27 +42,16 @@ extension BusyApp {
                         .disabled(!settings.intervals.isOn)
                         .opacity(settings.intervals.isOn ? 1 : 0.3)
 
+                    AppsSettingsControl(settings: $settings.blocker)
+                        .padding(.horizontal, 16)
+
                     SoundSettingsControl(soundSettings: $settings.sound)
                         .padding(.top, 24)
                         .padding(.horizontal, 16)
-
-                    AppsSettingsControl(settings: $settings.blocker)
-                        .padding(.top, 24)
-                        .padding(.horizontal, 16)
-
-                    SaveButton {
-                        savedSettings = settings
-                        dismiss()
-                    }
-                    .padding(.top, 24)
-                    .padding(.horizontal, 16)
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(.backgroundDark)
-            .onAppear {
-                settings = savedSettings
-            }
         }
     }
 }
@@ -91,29 +75,6 @@ extension BusyApp.SettingsView {
             .padding(.horizontal, 16)
             .background(.transparentBlackInvertSecondary)
             .clipShape(RoundedRectangle(cornerRadius: 12))
-        }
-    }
-
-    struct SaveButton: View {
-        var action: () -> Void
-
-        var body: some View {
-            VStack(alignment: .center) {
-                Button {
-                    action()
-                } label: {
-                    HStack {
-                        Text("Save")
-                            .font(.pragmaticaNextVF(size: 24))
-                            .foregroundStyle(.whiteInvert)
-                    }
-                    .padding(.vertical, 24)
-                    .padding(.horizontal, 80)
-                    .background(.transparentWhiteInvertTertiary)
-                    .clipShape(RoundedRectangle(cornerRadius: 112))
-                }
-            }
-            .frame(maxWidth: .infinity)
         }
     }
 }
