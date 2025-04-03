@@ -1,7 +1,6 @@
 import SwiftUI
 
 import ActivityKit
-import AVFoundation
 
 struct BusyView: View {
     @Binding var settings: BusySettings
@@ -10,9 +9,9 @@ struct BusyView: View {
 
     @State private var activity: Activity<BusyWidgetAttributes>?
 
-    @State private var player: AVAudioPlayer?
-
     @Environment(\.appState) var appState
+
+    var sounds: Sounds { .shared }
 
     var body: some View {
         Group {
@@ -115,35 +114,15 @@ struct BusyView: View {
            interval.remaining >= .seconds(0),
            interval.remaining <= .seconds(3)
         {
-            var name = interval.kind == .work ? "work" : "rest"
-            name.append(
-                interval.remaining == .seconds(0)
-                    ? "_finished"
-                    : "_countdown"
-            )
-            print(name)
-            play(name)
+            switch (interval.kind, interval.remaining) {
+            case (.work, .seconds(0)): sounds.play(.workFinished)
+            case (.work, _): sounds.play(.workCountdown)
+            case (.rest, .seconds(0)): sounds.play(.restFinished)
+            case (.rest, _): sounds.play(.restCountdown)
+            default: break
+            }
         } else if settings.sound.metronome {
-            play("tick")
-        }
-    }
-
-    func play(_ name: String, onType type: String = "mp3") {
-        guard let path = Bundle.main.path(
-            forResource: name,
-            ofType: type
-        ) else {
-            return
-        }
-
-        let url = URL(fileURLWithPath: path)
-
-        do {
-            player?.stop()
-            player = try AVAudioPlayer(contentsOf: url)
-            player?.play()
-        } catch let error {
-            print(error.localizedDescription)
+            sounds.play(.metronome)
         }
     }
 
