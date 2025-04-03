@@ -30,27 +30,27 @@ extension BusyApp.SettingsView {
         }
 
         var body: some View {
-            HStack(spacing: 0) {
-                Text("Block apps")
-                    .font(.pragmaticaNextVF(size: 18))
-                    .foregroundStyle(.whiteInvert)
-
-                Spacer()
-
+            Button(action: onSelect) {
                 HStack(spacing: 0) {
-                    Button(action: onSelect) {
+                    Text("Block apps")
+                        .font(.pragmaticaNextVF(size: 18))
+                        .foregroundStyle(.whiteInvert)
+
+                    Spacer()
+
+                    HStack(spacing: 0) {
                         Text(blockedApps)
                             .font(.pragmaticaNextVF(size: 16))
                             .foregroundStyle(.transparentWhiteInvertPrimary)
-                    }
 
-                    Image(.arrowIcon)
-                        .opacity(0.3)
+                        Image(.arrowIcon)
+                            .opacity(0.3)
+                    }
                 }
+                .padding(12)
+                .background(.transparentWhiteInvertQuinary)
+                .clipShape(RoundedRectangle(cornerRadius: 12))
             }
-            .padding(12)
-            .background(.transparentWhiteInvertQuinary)
-            .clipShape(RoundedRectangle(cornerRadius: 12))
             .task {
                 let status = AuthorizationCenter.shared.authorizationStatus
                 isAuthorized = status == .approved
