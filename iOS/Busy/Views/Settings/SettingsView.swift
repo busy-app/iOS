@@ -48,12 +48,6 @@ extension BusyApp {
                     SoundSettingsControl(soundSettings: $settings.sound)
                         .padding(.top, 24)
                         .padding(.horizontal, 16)
-
-                    SaveButton {
-                        dismiss()
-                    }
-                    .padding(.top, 24)
-                    .padding(.horizontal, 16)
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -81,29 +75,6 @@ extension BusyApp.SettingsView {
             .padding(.horizontal, 16)
             .background(.transparentBlackInvertSecondary)
             .clipShape(RoundedRectangle(cornerRadius: 12))
-        }
-    }
-
-    struct SaveButton: View {
-        var action: () -> Void
-
-        var body: some View {
-            VStack(alignment: .center) {
-                Button {
-                    action()
-                } label: {
-                    HStack {
-                        Text("Save")
-                            .font(.pragmaticaNextVF(size: 24))
-                            .foregroundStyle(.whiteInvert)
-                    }
-                    .padding(.vertical, 24)
-                    .padding(.horizontal, 80)
-                    .background(.transparentWhiteInvertTertiary)
-                    .clipShape(RoundedRectangle(cornerRadius: 112))
-                }
-            }
-            .frame(maxWidth: .infinity)
         }
     }
 }

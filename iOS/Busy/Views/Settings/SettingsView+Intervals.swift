@@ -191,13 +191,8 @@ extension BusyApp.SettingsView {
                         "without manual confirmation",
                     isOn: $interval.autostart
                 )
-                .padding(.top, 16)
-                .padding(.horizontal, 16)
-
-                SaveButton {
-                    dismiss()
-                }
                 .padding(.vertical, 16)
+                .padding(.horizontal, 16)
             }
         }
     }
