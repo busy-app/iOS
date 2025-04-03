@@ -121,7 +121,7 @@ struct BusyView: View {
             case (.rest, _): sounds.play(.restCountdown)
             default: break
             }
-        } else if settings.sound.metronome {
+        } else if settings.sound.metronome, interval.elapsed > .seconds(0) {
             sounds.play(.metronome)
         }
     }
