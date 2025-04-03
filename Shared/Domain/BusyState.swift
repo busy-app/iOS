@@ -102,15 +102,14 @@ class BusyState {
             return
         }
 
-        ticker = Stopwatch(initialValue: interval.elapsed) { [weak self] in
-            guard let self else { return }
-            self.onTick($0)
-        }
-
         state = .running
 
         Task {
             try? await Task.sleep(for: .seconds(0.5))
+            ticker = Stopwatch(initialValue: interval.elapsed) { [weak self] in
+                guard let self else { return }
+                self.onTick($0)
+            }
             ticker?.start()
         }
     }
