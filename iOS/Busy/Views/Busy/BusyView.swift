@@ -85,9 +85,7 @@ struct BusyView: View {
     }
 
     func startBusy() {
-        if settings.blocker.isOn {
-            BusyShield.enable(settings.blocker)
-        }
+        BusyShield.enable(settings.blocker)
 
         busy = .init(settings)
         BusyState.Holder.shared.set(busy)

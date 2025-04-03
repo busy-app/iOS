@@ -47,11 +47,10 @@ extension BusyApp {
                         .disabled(!settings.intervals.isOn)
                         .opacity(settings.intervals.isOn ? 1 : 0.3)
 
-                    SoundSettingsControl(soundSettings: $settings.sound)
-                        .padding(.top, 24)
+                    AppsSettingsControl(settings: $settings.blocker)
                         .padding(.horizontal, 16)
 
-                    AppsSettingsControl(settings: $settings.blocker)
+                    SoundSettingsControl(soundSettings: $settings.sound)
                         .padding(.top, 24)
                         .padding(.horizontal, 16)
 

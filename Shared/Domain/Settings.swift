@@ -45,8 +45,6 @@ struct SoundSettings: Codable {
 }
 
 struct BlockerSettings: Codable {
-    var isOn: Bool = false
-
     #if os(iOS)
     var applicationTokens: Set<ApplicationToken> = .init()
     var categoryTokens: Set<ActivityCategoryToken> = []
@@ -58,7 +56,6 @@ struct BlockerSettings: Codable {
 
     init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.isOn = try container.decode(Bool.self, forKey: .isOn)
         self.applicationTokens = []
         self.categoryTokens = []
         self.domainTokens = []
