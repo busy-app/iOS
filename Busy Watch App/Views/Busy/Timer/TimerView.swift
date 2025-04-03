@@ -30,8 +30,7 @@ extension BusyView {
         var colors: [Color] {
             switch interval.kind {
             case .work: [.backgroundBusyStart, .backgroundBusyStop]
-            case .rest: [.backgroundRestStart, .backgroundRestStop]
-            case .longRest: [.backgroundLongRestStart, .backgroundLongRestStop]
+            case .rest, .longRest: [.backgroundRestStart, .backgroundRestStop]
             }
         }
 
