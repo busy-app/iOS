@@ -42,6 +42,9 @@ struct BusyView: View {
                     appState.wrappedValue = .cards
                     sendState()
                 }
+                .task {
+                    BusyShield.disable()
+                }
             }
         }
         .onChange(of: busy.state) {
