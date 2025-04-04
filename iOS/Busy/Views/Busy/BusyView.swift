@@ -168,6 +168,11 @@ extension BusyView {
                 .init(
                     state: contentState,
                     staleDate: deadline
+                ),
+                alertConfiguration: .init(
+                    title: "Time is out",
+                    body: "Let's move on!",
+                    sound: .default
                 )
             )
         }
