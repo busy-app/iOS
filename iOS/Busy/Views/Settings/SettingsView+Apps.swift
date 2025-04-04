@@ -55,10 +55,16 @@ extension BusyApp.SettingsView {
                 let status = AuthorizationCenter.shared.authorizationStatus
                 isAuthorized = status == .approved
             }
-            .familyActivityPicker(
-                isPresented: $showPicker,
-                selection: $selection
-            )
+            .sheet(isPresented: $showPicker) {
+                FamilyActivityPicker(selection: $selection)
+                    .overlay(alignment: .topTrailing) {
+                        Button("Done") {
+                            showPicker = false
+                        }
+                        .padding(18)
+                        .fontWeight(.medium)
+                    }
+            }
             .onChange(of: selection) {
                 settings.applicationTokens = selection.applicationTokens
                 settings.categoryTokens = selection.categoryTokens
