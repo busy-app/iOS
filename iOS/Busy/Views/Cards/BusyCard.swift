@@ -40,6 +40,9 @@ extension BusyApp {
 
                             if settings.intervals.isOn {
                                 IntervalsCard(settings: settings.intervals)
+                                    .onLongPressGesture {
+                                        settings.setDebugIntervals()
+                                    }
                             }
                         }
 

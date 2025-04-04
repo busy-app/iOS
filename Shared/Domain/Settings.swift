@@ -94,3 +94,15 @@ struct Interval: Codable {
         Int(duration.seconds)
     }
 }
+
+// MARK: Debug
+
+extension BusySettings {
+    mutating func setDebugIntervals() {
+        self.duration = .seconds(30)
+
+        self.intervals.busy.duration = .seconds(5)
+        self.intervals.rest.duration = .seconds(5)
+        self.intervals.longRest.duration = .seconds(5)
+    }
+}
