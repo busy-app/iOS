@@ -7,8 +7,6 @@ struct BusyView: View {
 
     @State private var busy: BusyState = .init(.init())
 
-    @State private var activity: Activity<BusyWidgetAttributes>?
-
     @Environment(\.appState) var appState
 
     var sounds: Sounds { .shared }
@@ -152,19 +150,35 @@ extension BusyView {
     }
 
     func startActivity() {
-        self.activity = try? Activity<BusyWidgetAttributes>.request(
-            attributes: .init(),
-            content: .init(
-                state: contentState,
-                staleDate: deadline
+        do {
+            _ = try Activity<BusyWidgetAttributes>.request(
+                attributes: .init(),
+                content: .init(
+                    state: contentState,
+                    staleDate: deadline
+                )
             )
-        )
+        } catch {
+            print("can't request an activity: \(error)")
+        }
     }
 
     func updateActivity() {
-        let activity = self.activity
         Task {
-            await activity?.update(
+            if Activity<BusyWidgetAttributes>.activities.count != 1 {
+                print("unexpected number of activities, restarting")
+                stopActivity()
+                startActivity()
+            }
+
+            guard
+                let activity = Activity<BusyWidgetAttributes>.activities.first
+            else {
+                print("unexpected number of activities, skipping update")
+                return
+            }
+
+            await activity.update(
                 .init(
                     state: contentState,
                     staleDate: deadline
@@ -174,10 +188,10 @@ extension BusyView {
     }
 
     func stopActivity() {
-        let activity = self.activity
-        self.activity = nil
         Task {
-            await activity?.end(.none, dismissalPolicy: .immediate)
+            for activity in Activity<BusyWidgetAttributes>.activities {
+                await activity.end(.none, dismissalPolicy: .immediate)
+            }
         }
     }
 }
