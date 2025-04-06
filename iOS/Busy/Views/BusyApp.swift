@@ -25,7 +25,6 @@ struct BusyApp: View {
             #if !targetEnvironment(simulator)
             notifications.authorize()
             #endif
-            disableShieldOnTerminate()
             disableActivitiesOnTerminate()
         }
         .onReceive(Connectivity.shared.$appState) { appState in
@@ -41,18 +40,6 @@ struct BusyApp: View {
             appState: appState,
             busyState: nil
         )
-    }
-
-    func disableShieldOnTerminate() {
-        NotificationCenter.default.addObserver(
-            forName: UIApplication.willTerminateNotification,
-            object: nil,
-            queue: .main
-        ) { _ in
-            MainActor.assumeIsolated {
-                BusyShield.disable()
-            }
-        }
     }
 
     func disableActivitiesOnTerminate() {
