@@ -14,20 +14,6 @@ extension BusyView.TimerView {
                 : interval.duration - interval.elapsed
         }
 
-        var video: String {
-            switch interval.kind {
-            case .work: "Fire.mp4"
-            case .rest, .longRest: "Smoke.mp4"
-            }
-        }
-
-        var videoOpacity: Double {
-            switch interval.kind {
-            case .work: 0.2
-            case .rest, .longRest: 0.3
-            }
-        }
-
         var body: some View {
             VStack(spacing: 47) {
                 HStack {
@@ -50,14 +36,13 @@ extension BusyView.TimerView {
             .padding(24)
             .background {
                 #if DISABLE_VIDEO
-                switch kind {
+                switch interval.kind {
                 case .work: Color.red.opacity(0.8)
                 case .rest: Color.green.opacity(0.8)
                 case .longRest: Color.blue.opacity(0.8)
                 }
                 #else
-                LoopingVideoPlayer(video)
-                    .opacity(videoOpacity)
+                LoopingVideoPlayer(interval.kind)
                     .disabled(true)
                     .scaledToFill()
                     .scaleEffect(1.3)

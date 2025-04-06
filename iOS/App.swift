@@ -7,6 +7,9 @@ struct App: SwiftUI.App {
             BusyApp()
                 .preferredColorScheme(.dark)
                 .colorScheme(.light)
+                .task {
+                    CachedVideoPlayer.touch()
+                }
         }
     }
 }
