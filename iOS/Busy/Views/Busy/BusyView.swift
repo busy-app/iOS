@@ -152,6 +152,7 @@ extension BusyView {
     }
 
     func startActivity() {
+        stopActivity()
         self.activity = try? Activity<BusyWidgetAttributes>.request(
             attributes: .init(),
             content: .init(
@@ -174,10 +175,10 @@ extension BusyView {
     }
 
     func stopActivity() {
-        let activity = self.activity
+        guard let activity = self.activity else { return }
         self.activity = nil
         Task {
-            await activity?.end(.none, dismissalPolicy: .immediate)
+            await activity.end(.none, dismissalPolicy: .immediate)
         }
     }
 }
