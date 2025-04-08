@@ -20,7 +20,7 @@ class BusyState {
         settings.intervals.isOn && settings.duration == .infinity
     }
 
-    var autostart: Bool {
+    private var autostart: Bool {
         guard settings.intervals.isOn else { return false }
         return switch interval?.kind {
         case .work: settings.intervals.busy.autostart

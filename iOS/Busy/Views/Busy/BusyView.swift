@@ -189,15 +189,14 @@ extension BusyView {
     }
 
     func syncActivity() {
-        if let _  = activity {
-            if (busy.state == .finished && busy.autostart) || appState.wrappedValue != .busy {
-                stopActivity()
-            } else {
+        if busy.interval != nil {
+            if activity != nil {
                 updateActivity()
+            } else {
+                startActivity()
             }
-
-        } else if busy.state == .running || busy.state == .paused || (busy.state == .finished && !busy.autostart) {
-            startActivity()
+        } else {
+            stopActivity()
         }
     }
 }
