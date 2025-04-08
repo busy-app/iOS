@@ -3,12 +3,10 @@ import FamilyControls
 
 struct BusySettings: Codable, Equatable, RawRepresentable {
     var name: String = "BUSY"
-    var duration: Duration = .minutes(90)
+    var duration: Duration = .minutes(120)
     var intervals: IntervalsSettings = .init()
     var blocker: BlockerSettings = .init()
     var sound: SoundSettings = .init()
-
-    var workIntervalCount: Int { intervals.isOn ? 1 : 3 }
 
     enum CodingKeys: CodingKey {
         case name
@@ -55,7 +53,6 @@ struct BlockerSettings: Codable {
     var domainTokens: Set<String> = []
 
     init(from decoder: any Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
         self.applicationTokens = []
         self.categoryTokens = []
         self.domainTokens = []
@@ -72,9 +69,9 @@ struct BlockerSettings: Codable {
 
 struct IntervalsSettings: Codable {
     var isOn: Bool = true
-    var busy: Interval = .init(.minutes(25), autostart: true)
-    var rest: Interval = .init(.minutes(5), autostart: true)
-    var longRest: Interval = .init(.minutes(15), autostart: true)
+    var busy: Interval = .init(.minutes(20), autostart: false)
+    var rest: Interval = .init(.minutes(5), autostart: false)
+    var longRest: Interval = .init(.minutes(15), autostart: false)
 }
 
 struct Interval: Codable {
