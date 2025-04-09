@@ -10,6 +10,7 @@ struct BusyView: View {
     @State private var activity: Activity<BusyWidgetAttributes>?
 
     @Environment(\.appState) var appState
+    @Environment(\.scenePhase) var scenePhase
 
     var sounds: Sounds { .shared }
 
@@ -82,6 +83,11 @@ struct BusyView: View {
                 if busyState.timerState == .running {
                     busy.start()
                 }
+            }
+        }
+        .onChange(of: scenePhase) { _, phase in
+            if phase == .active {
+                syncActivity()
             }
         }
     }
@@ -179,6 +185,18 @@ extension BusyView {
         self.activity = nil
         Task {
             await activity.end(.none, dismissalPolicy: .immediate)
+        }
+    }
+
+    func syncActivity() {
+        if busy.interval != nil {
+            if activity != nil {
+                updateActivity()
+            } else {
+                startActivity()
+            }
+        } else {
+            stopActivity()
         }
     }
 }
