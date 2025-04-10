@@ -107,7 +107,6 @@
 		8B9457EF2D848193009DDEEC /* Busy Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Busy Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B9457FE2D848194009DDEEC /* Busy Watch AppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Busy Watch AppTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B9458082D848194009DDEEC /* Busy Watch AppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Busy Watch AppUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8BFFA7FE2D8AF37D00E0F7CE /* Shared */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Shared; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -319,9 +318,8 @@
 		8B638DC52C610E9400C3458C = {
 			isa = PBXGroup;
 			children = (
-				8BFFA7FE2D8AF37D00E0F7CE /* Shared */,
-				8B638DD02C610E9400C3458C /* iOS */,
 				8B3C7F0B2D7AF4510088CC48 /* Shared */,
+				8B638DD02C610E9400C3458C /* iOS */,
 				8B638DE12C610E9500C3458C /* Tests */,
 				8B638DEB2C610E9500C3458C /* UITests */,
 				8B5AB1452CEC085200211DA5 /* BusyShield */,
