@@ -22,7 +22,7 @@ extension BusyView {
                     .frame(width: 56, height: 56)
 
                 Text("BUSY \(busy.intervalNumber)/\(busy.intervalTotal) done!")
-                    .font(.pragmaticaNextVF(size: 20))
+                    .font(.pragmaticaNextVF(size: isAppleWatchLarge ? 20 : 16))
                     .foregroundStyle(.white)
 
                 Text("It’s time to have a rest")
