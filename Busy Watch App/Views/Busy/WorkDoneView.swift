@@ -21,7 +21,7 @@ extension BusyView {
                     .resizable()
                     .frame(width: 56, height: 56)
 
-                Text("BUSY 1/3 done")
+                Text("BUSY \(busy.intervalNumber)/\(busy.intervalTotal) done!")
                     .font(.pragmaticaNextVF(size: 20))
                     .foregroundStyle(.white)
 
